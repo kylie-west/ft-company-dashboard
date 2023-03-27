@@ -7,7 +7,7 @@ export const userState = atom({
   key: "userState",
   default: {
     isLoggedIn: true,
-    isAdmin: true,
+    isAdmin: false,
   },
   effects_UNSTABLE: [persistAtom],
 });
