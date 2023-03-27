@@ -20,6 +20,8 @@ import {
 	useTheme
 } from "@mui/material";
 
+import logo from "../Assets/logo.png";
+
 const NavBar = () => {
 	const [user, setUser] = useRecoilState(userState);
 	const [state, setState] = React.useState({
@@ -108,16 +110,23 @@ const NavBar = () => {
 						background: "#051622",
 						padding: "0 1rem 0 2rem"
 					}}>
-					{user.isAdmin ? (
-						<h1
-							style={{
-								color: "#F24E1E",
-								fontSize: "2rem",
-								fontWeight: "400"
-							}}>
-							ACTING AS ADMIN
-						</h1>
-					) : null}
+					<div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+						<img
+							src={logo}
+							alt="logo"
+							style={{ display: "block", width: "40px", height: "40px" }}
+						/>
+						{user.isAdmin ? (
+							<h1
+								style={{
+									color: "#F24E1E",
+									fontSize: "2rem",
+									fontWeight: "400"
+								}}>
+								ADMIN
+							</h1>
+						) : null}
+					</div>
 					{toggled ? (
 						<Button onClick={toggleDrawer(anchor, true)}>
 							<MenuIcon style={{ height: "5vh", width: "5vw" }} />
@@ -150,17 +159,29 @@ const NavBar = () => {
 							height: "90px",
 							padding: "0"
 						}}>
-						{user.isAdmin ? (
-							<h1
-								style={{
-									color: "#F24E1E",
-									fontSize: "2rem",
-									fontWeight: "400",
-									marginLeft: "2rem"
-								}}>
-								ACTING AS ADMIN
-							</h1>
-						) : null}
+						<div
+							style={{
+								display: "flex",
+								alignItems: "center",
+								gap: "2rem",
+								marginLeft: "2rem"
+							}}>
+							<img
+								src={logo}
+								alt="logo"
+								style={{ display: "block", width: "40px", height: "40px" }}
+							/>
+							{user.isAdmin ? (
+								<h1
+									style={{
+										color: "#F24E1E",
+										fontSize: "2rem",
+										fontWeight: "400"
+									}}>
+									ACTING AS ADMIN
+								</h1>
+							) : null}
+						</div>
 						<List
 							style={{ textAlign: "center", background: "#051622" }}
 							sx={{
