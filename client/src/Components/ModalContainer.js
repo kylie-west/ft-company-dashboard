@@ -1,18 +1,15 @@
 import React, { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { AddUserModal } from "./Modals/AddUserModal";
-import { CreateAnnounceModal } from "./Modals/CreateAnnounceModal";
-import { CreateProjectModal } from "./Modals/CreateProjectModal";
-import { CreateTeamModal } from "./Modals/CreateTeamModal";
-import { EditProjectModal } from "./Modals/EditProjectModal";
+import AddUserModal from "./Modals/AddUserModal";
+import CreateAnnounceModal from "./Modals/CreateAnnounceModal";
+import CreateProjectModal from "./Modals/CreateProjectModal";
+import CreateTeamModal from "./Modals/CreateTeamModal";
+import EditProjectModal from "./Modals/EditProjectModal";
 
-const ModalContainer = () => {
-  const [modal] = useRecoilState(modalState);
-
+const ModalContainer = ({ isOpen, type, closeModal }) => {
   let currentModal;
 
   function setModal() {
-    switch (modal.type) {
+    switch (type) {
       case "add-user":
         currentModal = <AddUserModal />;
         break;
@@ -31,13 +28,21 @@ const ModalContainer = () => {
       default:
         currentModal = <>Invalid or empty modal type</>;
     }
+    console.log(`Modal: ${type}`);
   }
 
+  useEffect(() => setModal(), []);
   useEffect(() => {
-    modal.isOpen ? setModal() : (currentModal = <></>);
-  }, [modal.type]);
+    isOpen ? setModal() : (currentModal = <></>);
+  }, [type]);
 
-  return <div className="modal-container">{currentModal}</div>;
+  return (
+    <div className="modal-container">
+      <h1>🔥 My Cool Modal 🔥</h1>
+      {currentModal}
+      <button onClick={closeModal}>Close</button>
+    </div>
+  );
 };
 
 export default ModalContainer;

@@ -38,8 +38,8 @@ export const errorState = atom({
 export const modalState = atom({
   key: "modalState",
   default: {
-    isOpen: false,
-    type: "", // refer to ModalContainer.js for list of types
+    isOpen: true,
+    type: "create-project", // refer to ModalContainer.js for list of types
     data: {}, // do whatever you want with this
   },
 });

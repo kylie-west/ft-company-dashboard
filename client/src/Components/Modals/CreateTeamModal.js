@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 
 const CreateTeamModal = () => {
-  return <></>;
+  return <div className="modal-body">create team</div>;
 };
 
 export default CreateTeamModal;
