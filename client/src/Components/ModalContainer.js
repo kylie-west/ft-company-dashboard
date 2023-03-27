@@ -6,35 +6,27 @@ import CreateTeamModal from "./Modals/CreateTeamModal";
 import EditProjectModal from "./Modals/EditProjectModal";
 
 const ModalContainer = ({ isOpen, type, closeModal }) => {
-  let currentModal;
-
-  function setModal() {
+  function getModal() {
     switch (type) {
       case "add-user":
-        currentModal = <AddUserModal />;
-        break;
+        return <AddUserModal />;
       case "create-announcement":
-        currentModal = <CreateAnnounceModal />;
-        break;
+        return <CreateAnnounceModal />;
       case "create-project":
-        currentModal = <CreateProjectModal />;
-        break;
+        return <CreateProjectModal />;
       case "edit-project":
-        currentModal = <EditProjectModal />;
-        break;
+        return <EditProjectModal />;
       case "create-team":
-        currentModal = <CreateTeamModal />;
-        break;
+        return <CreateTeamModal />;
       default:
-        currentModal = <>Invalid or empty modal type</>;
+        return <>Invalid or empty modal type</>;
     }
-    console.log(`Modal: ${type}`);
   }
+  let currentModal = getModal();
 
-  useEffect(() => setModal(), []);
   useEffect(() => {
-    isOpen ? setModal() : (currentModal = <></>);
-  }, [type]);
+    isOpen ? (currentModal = getModal()) : (currentModal = <></>);
+  }, [isOpen]);
 
   return (
     <div className="modal-container">
