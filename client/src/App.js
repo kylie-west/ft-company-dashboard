@@ -15,21 +15,28 @@ import ModalContainer from "./Components/ModalContainer";
 function App() {
   const [modal, setModal] = useRecoilState(modalState);
 
+  function openModal(type) {
+    setModal({ isOpen: true, type });
+  }
+
   function closeModal(e) {
     e.stopPropagation();
-    setModal({ isOpen: false, type: "", data: {} });
+    setModal({ isOpen: false, type: "" });
   }
 
   return (
     <div>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/announcements" element={<Announcements />} />
+        <Route
+          path="/announcements"
+          element={<Announcements openModal={openModal} />}
+        />
         <Route path="/company" element={<CompanyScreen />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/teams" element={<Teams />} />
-        <Route path="/project" element={<Project />} />
+        <Route path="/projects" element={<Projects openModal={openModal} />} />
+        <Route path="/users" element={<Users openModal={openModal} />} />
+        <Route path="/teams" element={<Teams openModal={openModal} />} />
+        <Route path="/project" element={<Project openModal={openModal} />} />
       </Routes>
       {modal.isOpen &&
         createPortal(
