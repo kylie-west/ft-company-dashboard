@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.cooksys.groupfinal.dtos.BasicUserDto;
 import com.cooksys.groupfinal.dtos.CredentialsDto;
 import com.cooksys.groupfinal.dtos.FullUserDto;
 import com.cooksys.groupfinal.dtos.UserAddRequestDto;
@@ -95,6 +96,12 @@ public class UserServiceImpl implements UserService {
 		}
         
 		return fullUserMapper.entityToFullUserDto(userRepository.saveAndFlush(userToEdit));
+	}
+
+	@Override
+	public BasicUserDto createUser(UserAddRequestDto userAddRequestDto, Long companyId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

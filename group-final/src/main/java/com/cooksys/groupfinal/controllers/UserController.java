@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cooksys.groupfinal.dtos.BasicUserDto;
 import com.cooksys.groupfinal.dtos.CredentialsDto;
 import com.cooksys.groupfinal.dtos.FullUserDto;
 import com.cooksys.groupfinal.dtos.UserAddRequestDto;
@@ -31,5 +32,10 @@ public class UserController {
 	@PatchMapping("/{id}")
 	public FullUserDto editUser(@RequestBody UserAddRequestDto userAddRequestDto, @PathVariable long id) {
 		return userService.editUser(userAddRequestDto, id);
+	}
+	
+	@PostMapping("/{companyId}")
+	public BasicUserDto createUser(@RequestBody UserAddRequestDto userAddRequestDto, @PathVariable Long companyId) {
+		return userService.createUser(userAddRequestDto, companyId);
 	}
 }
