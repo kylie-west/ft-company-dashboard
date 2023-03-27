@@ -23,20 +23,18 @@ const Announcements = () => {
 				<div style={wrapperStyle}>
 					<h1 style={h1Style}>Announcements</h1>
 					{announcements.map(announcement => (
-						<article key={announcement.id}>
-							<Paper style={paperStyle}>
-								<header style={{ width: "100%", textAlign: "center" }}>
-									<h2 style={{ fontSize: "2rem", fontWeight: 300 }}>
-										{announcement.title}
-									</h2>
-									<div style={infoStyle}>
-										<div>{announcement.author}</div>
-										<div>{getDate(announcement.date)}</div>
-									</div>
-								</header>
-								<p>{announcement.message}</p>
-							</Paper>
-						</article>
+						<Paper key={announcement.id} style={paperStyle} component="article">
+							<header style={{ width: "100%", textAlign: "center" }}>
+								<h2 style={{ fontSize: "2rem", fontWeight: 300 }}>
+									{announcement.title}
+								</h2>
+								<div style={infoStyle}>
+									<div>{announcement.author}</div>
+									<div>{getDate(announcement.date)}</div>
+								</div>
+							</header>
+							<p>{announcement.message}</p>
+						</Paper>
 					))}
 				</div>
 			</div>
@@ -58,7 +56,8 @@ const h1Style = {
 	position: "relative",
 	display: "inline-block",
 	width: "100%",
-	padding: "2.5rem",
+	padding: "3rem",
+	margin: "0",
 	textAlign: "center",
 	fontSize: "3rem",
 	fontWeight: "400",
