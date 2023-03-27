@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class AnnouncementRequestDto {
 	
-	UserRequestDto userRequest;
+	UserRequestDto author;
 	
 	String title;
 	
