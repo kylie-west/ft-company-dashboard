@@ -32,26 +32,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.page-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-h1 {
-  color: var(--main-accent);
-  font-size: 3.5rem;
-  margin: 2rem;
-}
-
-.modal-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  width: fit-content;
-  background-color: var(--card-body);
-  border-radius: 6px;
-}

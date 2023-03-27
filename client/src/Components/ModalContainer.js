@@ -29,10 +29,17 @@ const ModalContainer = ({ isOpen, type, closeModal }) => {
   }, [isOpen]);
 
   return (
-    <div className="modal-container">
-      <h1>🔥 My Cool Modal 🔥</h1>
-      {currentModal}
-      <button onClick={closeModal}>Close</button>
+    <div className="modal">
+      <div className="modal-overlay" onClick={(e) => closeModal(e)}></div>
+      <div className="modal-container">
+        <span className="close-btn-wrapper">
+          <button className="close-modal-btn" onClick={(e) => closeModal(e)}>
+            ×
+          </button>
+        </span>
+        <h1>🔥 My Cool Modal 🔥</h1>
+        {currentModal}
+      </div>
     </div>
   );
 };

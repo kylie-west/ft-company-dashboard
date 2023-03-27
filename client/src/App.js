@@ -14,7 +14,9 @@ import ModalContainer from "./Components/ModalContainer";
 
 function App() {
   const [modal, setModal] = useRecoilState(modalState);
-  function closeModal() {
+
+  function closeModal(e) {
+    e.stopPropagation();
     setModal({ isOpen: false, type: "", data: {} });
   }
 
@@ -34,7 +36,7 @@ function App() {
           <ModalContainer
             isOpen={modal.isOpen}
             type={modal.type}
-            closeModal={closeModal}
+            closeModal={(e) => closeModal(e)}
           />,
           document.body
         )}
