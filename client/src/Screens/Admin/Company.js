@@ -11,9 +11,11 @@ const CompanyScreen = () => {
     return <Navigate replace to="/announcements" />;
   } else {
     return (
-      <div>
+      <div className="page">
         <NavBar />
-        <h1>Company</h1>
+        <div className="page-body">
+          <h1>Company</h1>
+        </div>
       </div>
     );
   }

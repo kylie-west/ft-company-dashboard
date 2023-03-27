@@ -10,9 +10,9 @@ const Projects = () => {
     return <Navigate replace to="/" />;
   } else {
     return (
-      <div class="page">
+      <div className="page">
         <NavBar />
-        <div class="page-body">
+        <div className="page-body">
           <h1>Projects</h1>
         </div>
       </div>
