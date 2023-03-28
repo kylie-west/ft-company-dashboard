@@ -6,12 +6,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ProjectRequestDto {
+	
+	 private String name;
 
-  private String name;
+	  private String description;
 
-  private String description;
-
-  private boolean active;
-
-  private TeamDto Team;
+	  private boolean active;
+	  
+	  private CredentialsDto credentials;
+  
 }
