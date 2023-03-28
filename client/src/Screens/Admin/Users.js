@@ -1,11 +1,13 @@
 import {Navigate} from "react-router-dom";
 import {useRecoilState} from "recoil";
 import NavBar from "../../Components/NavBar";
-import {userState} from "../../globalstate";
+import {allUsersState, userState} from "../../globalstate";
 import "../../App.css"
+import UserCard from "../../Components/UserCard";
 
 const Users = ({openModal}) => {
     const [user, setUser] = useRecoilState(userState);
+    const [users, setUsers] = useRecoilState(allUsersState);
     const initialData = [
         {name: "Chris Purnell", email: "uliajkas@jhosk.com", active: "yes", admin: "yes", status: "joined"},
         {name: "Will Marttala", email: "uliajkas@jhosk.com", active: "yes", admin: "yes", status: "joined"},
@@ -15,6 +17,17 @@ const Users = ({openModal}) => {
     function openAddModal() {
         openModal("add-user");
     }
+
+    const showUsers = users.map(({name, email, active, admin, status}, index) => (
+        <UserCard
+            key={index}
+            name={name}
+            email={email}
+            active={active}
+            admin={admin}
+            status={status}
+        />
+    ));
 
     if (!user.isLoggedIn) {
         return <Navigate replace to="/"/>;
@@ -28,35 +41,19 @@ const Users = ({openModal}) => {
                         <h2>A general view of all your members in your organization</h2>
                     </div>
                     <div className="user-list">
-
+                        <div className="user-table">
+                            <div>
+                                <span>Name</span>
+                                <span>Email</span>
+                                <span>Active</span>
+                                <span>Admin</span>
+                                <span>Status</span>
+                            </div>
+                            {showUsers}
+                        </div>
                         {user.isAdmin && (
                             <button className="add-user-btn" onClick={openAddModal}>Add User</button>
                         )}
-                    </div>
-                    <div>
-                        <table className="table">
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Active</th>
-                                <th>Admin</th>
-                                <th>Status</th>
-                            </tr>
-                            {initialData.map((val, key) => {
-                                return (
-                                    <tr key={key}>
-                                        <td>{val.name}</td>
-                                        <td>{val.email}</td>
-                                        <td>{val.active}</td>
-                                        <td>{val.admin}</td>
-                                        <td>{val.status}</td>
-                                    </tr>
-                                )
-                            })
-                            }
-
-                        </table>
-                        <button className="add-user-btn">Add User</button>
                     </div>
                 </div>
             </div>

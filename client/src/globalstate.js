@@ -106,8 +106,30 @@ export const companyState = atom({
 });
 
 export const allUsersState = atom({
-  key: "allUsersState",
-  default: [],
+    key: "allUsersState",
+    default: [
+        {
+            name: "Chris Purnell",
+            email: "uliajkas@jhosk.com",
+            active: "yes",
+            admin: "yes",
+            status: "joined"
+        },
+        {
+            name: "Will Marttala",
+            email: "uliajkas@jhosk.com",
+            active: "yes",
+            admin: "yes",
+            status: "joined"
+        },
+        {
+            name: "Kenny Worth",
+            email: "uliajkas@jhosk.com",
+            active: "yes",
+            admin: "yes",
+            status: "joined"
+        }
+    ],
 });
 
 export const errorState = atom({

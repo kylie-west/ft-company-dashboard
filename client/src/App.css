@@ -151,6 +151,21 @@ h1 {
   width: min(800px, 100vw);
 }
 
+.user-table {
+  border: solid;
+  border-color: var(--secondary-accent);
+  width: 100%
+}
+
+.user-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-top: 1px solid var(--secondary-accent);
+  gap: 4rem;
+  padding: 2.5rem 0;
+}
+
 .active {
   color: var(--active);
 }
