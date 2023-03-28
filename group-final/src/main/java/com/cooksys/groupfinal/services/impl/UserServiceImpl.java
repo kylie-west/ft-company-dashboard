@@ -21,6 +21,7 @@ import com.cooksys.groupfinal.entities.User;
 import com.cooksys.groupfinal.exceptions.BadRequestException;
 import com.cooksys.groupfinal.exceptions.NotAuthorizedException;
 import com.cooksys.groupfinal.exceptions.NotFoundException;
+import com.cooksys.groupfinal.mappers.BasicUserMapper;
 import com.cooksys.groupfinal.mappers.CredentialsMapper;
 import com.cooksys.groupfinal.mappers.FullUserMapper;
 import com.cooksys.groupfinal.repositories.CompanyRepository;
@@ -222,6 +223,7 @@ public class UserServiceImpl implements UserService {
 		company.getEmployees().add(userToReturn);
 		companyRepository.saveAndFlush(company);
 		return basicUserMapper.entityToBasicUserDto(userToReturn);
+	}
 
 	/**
 	 * deleteUser method takes in credentials and an id. The credentials are verified along with admin status and the
