@@ -38,6 +38,7 @@ public class UserController {
 	@PostMapping("/{companyId}")
 	public BasicUserDto createUser(@RequestBody UserAddRequestDto userAddRequestDto, @PathVariable Long companyId) {
 		return userService.createUser(userAddRequestDto, companyId);
+	}
     
 	@DeleteMapping("/{id}")
 	public FullUserDto deleteUser(@RequestBody CredentialsDto credentialsDto, @PathVariable long id) {
