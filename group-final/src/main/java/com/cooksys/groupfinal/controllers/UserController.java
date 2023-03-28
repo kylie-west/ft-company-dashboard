@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cooksys.groupfinal.dtos.BasicUserDto;
 import com.cooksys.groupfinal.dtos.CredentialsDto;
 import com.cooksys.groupfinal.dtos.FullUserDto;
 import com.cooksys.groupfinal.dtos.UserAddRequestDto;
@@ -34,6 +35,10 @@ public class UserController {
 		return userService.editUser(userAddRequestDto, id);
 	}
 	
+	@PostMapping("/{companyId}")
+	public BasicUserDto createUser(@RequestBody UserAddRequestDto userAddRequestDto, @PathVariable Long companyId) {
+		return userService.createUser(userAddRequestDto, companyId);
+    
 	@DeleteMapping("/{id}")
 	public FullUserDto deleteUser(@RequestBody CredentialsDto credentialsDto, @PathVariable long id) {
 		return userService.deleteUser(credentialsDto, id);
