@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 public class AnnouncementRequestDto {
 	
-	CredentialsDto credentials;
+	private Long id;
 	
-	String title;
+	private CredentialsDto credentials;
 	
-	String message;
+	private String title;
 	
-	Long companyId;
+	private String message;
+	
+	private Long companyId;
 }
