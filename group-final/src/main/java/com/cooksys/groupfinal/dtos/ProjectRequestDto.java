@@ -14,7 +14,7 @@ public class ProjectRequestDto {
   private boolean active;
 
   private TeamDto Team;
-  
+
   private CredentialsDto credentials;
-  
+
 }

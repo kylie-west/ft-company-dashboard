@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class TeamRequestDto {
     private String name;
-
     private String description;
-
     private Set<BasicUserDto> teammates;
     private Set<ProjectRequestDto> projects;
     private CredentialsDto credentials;

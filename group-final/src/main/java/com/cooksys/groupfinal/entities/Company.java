@@ -17,23 +17,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Company {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String name;
-	
+
 	private String description;
-	
+
 	@OneToMany(mappedBy = "company")
 	@EqualsAndHashCode.Exclude
 	private Set<Announcement> announcements = new HashSet<>();
-	
+
 	@ManyToMany
 	@EqualsAndHashCode.Exclude
 	private Set<User> employees = new HashSet<>();
-	
+
 	@OneToMany(mappedBy = "company")
 	@EqualsAndHashCode.Exclude
 	private Set<Team> teams = new HashSet<>();

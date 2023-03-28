@@ -39,9 +39,10 @@ public class UserServiceImpl implements UserService {
 	private final BasicUserMapper basicUserMapper;
 	private final CredentialsMapper credentialsMapper;
 	private final CompanyRepository companyRepository;
-  
+
 	/**
-	 * findUser private overloaded method used to search the database for an active user with a matching username.
+	 * findUser private overloaded method used to search the database for an active
+	 * user with a matching username.
 	 * 
 	 * @param username string to search by
 	 * @return a user object if found
@@ -55,7 +56,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
-	 * findUser private overloaded method to search the database for an active user with a matching id.
+	 * findUser private overloaded method to search the database for an active user
+	 * with a matching id.
 	 * 
 	 * @param id long to find a user by
 	 * @return a user object if found
@@ -67,17 +69,20 @@ public class UserServiceImpl implements UserService {
 		}
 		return user.get();
 	}
-	
+
 	/**
-	 * verifyLogin private method checks that a credentialsDto with username and password values exists,
-	 * searches the database by for a matching user and returns the user if username and password match.
+	 * verifyLogin private method checks that a credentialsDto with username and
+	 * password values exists,
+	 * searches the database by for a matching user and returns the user if username
+	 * and password match.
 	 * Throws a NotAuthorizedException otherwise.
 	 * 
-	 * @param credentialsDto with a username and password to check against the database
+	 * @param credentialsDto with a username and password to check against the
+	 *                       database
 	 * @return a user object matching the username and password sent in
 	 */
 	private User verifyLogin(CredentialsDto credentialsDto) {
-		
+
 		if (credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
 			throw new BadRequestException("A username and password are required.");
 		}
@@ -88,13 +93,15 @@ public class UserServiceImpl implements UserService {
 		}
 		return userToValidate;
 	}
-	
+
 	/**
-	 * verifyAdmin private method calls other private methods to find a user and verify login credentials,
+	 * verifyAdmin private method calls other private methods to find a user and
+	 * verify login credentials,
 	 * then checks if the found user is an admin and returns the user.
 	 * If the user is not an admin a NotAuthorizedException is thrown.
 	 * 
-	 * @param credentialsDto with a username and password to check against the database
+	 * @param credentialsDto with a username and password to check against the
+	 *                       database
 	 * @return a user object matching the username and password sent in
 	 */
 	private User verifyAdmin(CredentialsDto credentialsDto) {
@@ -106,8 +113,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
-	 * login method takes in a credentialsDto, searches for a user with a matching username and compares the stored
-	 * user password the the passed in credential. If matching a user object is returned.
+	 * login method takes in a credentialsDto, searches for a user with a matching
+	 * username and compares the stored
+	 * user password the the passed in credential. If matching a user object is
+	 * returned.
 	 */
 	@Override
 	public FullUserDto login(CredentialsDto credentialsDto) {
@@ -120,8 +129,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
-	 * editUser method takes in a userAddRequestDto and an id. After verifying the user credentials and admin
-	 * privilege any existing fields are checked for validity and assigned as values to an user found by the passed in id.
+	 * editUser method takes in a userAddRequestDto and an id. After verifying the
+	 * user credentials and admin
+	 * privilege any existing fields are checked for validity and assigned as values
+	 * to an user found by the passed in id.
 	 */
 	@Override
 	public FullUserDto editUser(UserAddRequestDto userAddRequestDto, long id) {
@@ -183,39 +194,40 @@ public class UserServiceImpl implements UserService {
 
 		return fullUserMapper.entityToFullUserDto(userRepository.saveAndFlush(userToEdit));
 	}
-	
+
 	// check if credentials exist and correspond
 	private void validateAdminCredentials(CredentialsDto credentialsDto) {
-		if(credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
+		if (credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
 			throw new BadRequestException("User credentials must be supplied for this request.");
 		}
 		User associatedUser = findUser(credentialsDto.getUsername());
-		if(!associatedUser.getCredentials().getPassword().equals(credentialsDto.getPassword())) {
+		if (!associatedUser.getCredentials().getPassword().equals(credentialsDto.getPassword())) {
 			throw new NotAuthorizedException("User credentials are invalid.");
 		}
 		// check for is admin
 		// throws not authorized
-		if(!associatedUser.isAdmin()) {
+		if (!associatedUser.isAdmin()) {
 			throw new NotAuthorizedException("User is not authorized for this request.");
 		}
 	}
-	
-//	private void validateUser(CredentialsDto credentialsDto, BasicUserDto basicUserDto) {
-//		validateCredentials(credentialsDto);
-//		if(credentialsDto.getUsername() != findUser(basicUserDto.getId()).getCredentials().getUsername()) {
-//			throw new NotAuthorizedException("Invalid user credentials offered.");
-//		}
-//	}
+
+	// private void validateUser(CredentialsDto credentialsDto, BasicUserDto
+	// basicUserDto) {
+	// validateCredentials(credentialsDto);
+	// if(credentialsDto.getUsername() !=
+	// findUser(basicUserDto.getId()).getCredentials().getUsername()) {
+	// throw new NotAuthorizedException("Invalid user credentials offered.");
+	// }
+	// }
 
 	@Override
 	public BasicUserDto createUser(UserAddRequestDto userAddRequestDto, Long companyId) {
 		validateAdminCredentials(userAddRequestDto.getCredentials());
-		
-		
+
 		User userToAdd = fullUserMapper.requestDtoToEntity(userAddRequestDto.getUser());
 		userToAdd.setStatus("PENDING");
 		Optional<Company> optionalCompany = companyRepository.findById(companyId);
-		if(optionalCompany == null) {
+		if (optionalCompany == null) {
 			throw new NotFoundException("No company has id " + companyId + ".");
 		}
 		Company company = optionalCompany.get();
@@ -226,8 +238,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
-	 * deleteUser method takes in credentials and an id. The credentials are verified along with admin status and the
-	 * id is used to search for a user. If no active user is found an exception is thrown. If found the active boolean
+	 * deleteUser method takes in credentials and an id. The credentials are
+	 * verified along with admin status and the
+	 * id is used to search for a user. If no active user is found an exception is
+	 * thrown. If found the active boolean
 	 * is set to false and the user is returned.
 	 */
 	@Override

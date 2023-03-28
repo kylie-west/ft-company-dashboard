@@ -9,8 +9,8 @@ import com.cooksys.groupfinal.entities.Company;
 
 @Mapper(componentModel = "spring", uses = { TeamMapper.class, BasicUserMapper.class })
 public interface CompanyMapper {
-	
-	CompanyDto entityToDto(Company company);
+
+  CompanyDto entityToDto(Company company);
 
   Set<CompanyDto> entitiesToDtos(Set<Company> companies);
 

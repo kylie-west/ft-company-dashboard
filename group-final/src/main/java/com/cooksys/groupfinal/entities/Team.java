@@ -18,22 +18,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Team {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String name;
-	
+
 	private String description;
-	
+
 	@ManyToOne
 	private Company company;
-	
+
 	@ManyToMany
 	@EqualsAndHashCode.Exclude
 	private Set<User> teammates = new HashSet<>();
-	
+
 	@OneToMany(mappedBy = "team")
 	@EqualsAndHashCode.Exclude
 	private Set<Project> projects = new HashSet<>();
