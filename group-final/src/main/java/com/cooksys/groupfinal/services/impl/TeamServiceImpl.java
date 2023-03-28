@@ -14,7 +14,6 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public TeamDto editTeam(TeamRequestDto teamRequestDto, Long id) {
         // TODO Implement editTeam
-        throw new UnsupportedOperationException("Unimplemented method 'editTeam'");
     }
 
 }
