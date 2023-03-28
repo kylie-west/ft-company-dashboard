@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cooksys.groupfinal.dtos.AnnouncementDto;
 import com.cooksys.groupfinal.dtos.AnnouncementRequestDto;
+import com.cooksys.groupfinal.dtos.CredentialsDto;
 import com.cooksys.groupfinal.entities.Announcement;
 import com.cooksys.groupfinal.entities.Company;
 import com.cooksys.groupfinal.entities.User;
@@ -36,10 +37,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 	
     @Override
     public AnnouncementDto createAnnouncement(AnnouncementRequestDto announcementRequestDto) {
-        if (announcementRequestDto.getCredentials() == null) {
-            throw new BadRequestException("Credentials are required");
-        }
-    	
+
         User author = userRepository.findByCredentialsUsernameAndActiveTrue(announcementRequestDto.getCredentials().getUsername())
                 .orElseThrow(() -> new NotFoundException("User not found"));
 
@@ -57,5 +55,29 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         Announcement savedAnnouncement = announcementRepository.save(announcement);
         return announcementMapper.entityToDto(savedAnnouncement);
     }
+    
+    @Override
+    public AnnouncementDto deleteAnnouncement(Long id, CredentialsDto credentialsDto) {
+    	
+        User author = userRepository.findByCredentialsUsernameAndActiveTrue(credentialsDto.getUsername())
+                .orElseThrow(() -> new NotFoundException("User not found"));
+
+        if (!author.isAdmin() && !author.getCredentials().getPassword().equals(credentialsDto.getPassword())) {
+            throw new BadRequestException("Invalid credentials");
+        }
+
+        Announcement announcement = announcementRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Announcement not found"));
+
+        if (author.isAdmin() || author.getId().equals(announcement.getAuthor().getId())) {
+            announcement.setDeleted(true);
+            Announcement savedAnnouncement = announcementRepository.save(announcement);
+            return announcementMapper.entityToDto(savedAnnouncement);
+        } else {
+            throw new BadRequestException("You are not authorized to delete this announcement");
+        }
+    }
+
+    
 
 }
