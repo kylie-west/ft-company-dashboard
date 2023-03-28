@@ -93,6 +93,15 @@ h1 {
   width: 100%;
 }
 
+.header-w-subtitle-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .go-back {
   position: absolute;
   left: 0;
@@ -101,7 +110,6 @@ h1 {
 }
 
 .project-list {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -136,6 +144,13 @@ h1 {
   font-size: 1.8rem;
 }
 
+.user-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: min(800px, 100vw);
+}
+
 .active {
   color: var(--active);
 }
@@ -152,7 +167,8 @@ h1 {
 }
 
 .edit-btn,
-.new-project-btn {
+.new-project-btn,
+.add-user-btn {
   border: none;
   padding: 0.8rem 4rem;
   border-radius: 10px;
@@ -170,6 +186,13 @@ h1 {
   color: white;
   background-color: var(--main-accent);
   margin: 3rem 0;
+}
+
+.add-user-btn {
+  color: white;
+  background-color: var(--main-accent);
+  width: 15rem;
+  align-self: flex-start;
 }
 
 .team-body {
