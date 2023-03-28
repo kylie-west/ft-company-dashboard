@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Card } from "@mui/material";
+import {NavLink} from "react-router-dom";
 
 const TeamCard = ( {id, name, description, teammates }) => {
     
@@ -7,7 +8,7 @@ const TeamCard = ( {id, name, description, teammates }) => {
     return (
         <div className="team-card">
             <div className="team-header">
-                <Button>{name}</Button>
+                <Button component={NavLink} to="/projects">{name}</Button>
                 <span># of projects: {4}</span>
             </div>
             <div className="team-members">
