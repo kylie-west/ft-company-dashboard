@@ -170,3 +170,21 @@ h1 {
   background-color: var(--main-accent);
   margin: 3rem 0;
 }
+
+.team-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.team-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.team-members {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  
+  margin: 5px;
+}

@@ -8,7 +8,7 @@ import Login from "./Screens/Shared/Login";
 import CompanyScreen from "./Screens/Admin/Company";
 import Projects from "./Screens/Admin/Projects";
 import Users from "./Screens/Admin/Users";
-import Teams from "./Screens/Admin/Teams";
+import Teams from "./Screens/Shared/Teams";
 import Project from "./Screens/Worker/Project";
 import ModalContainer from "./Components/ModalContainer";
 

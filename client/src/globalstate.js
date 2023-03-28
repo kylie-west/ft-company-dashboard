@@ -159,3 +159,67 @@ export const projectsState = atom({
     },
   ],
 });
+
+export const teamState = atom({
+  key: "teamState",
+  default: [
+    {
+      id: 10,
+      name: "Team 1",
+      description: "C'est l'equipe un",
+      teammates: [
+        {
+          id: 1,
+          profile: {
+            firstname: "John",
+            lastname: "Smith",
+            email: "john.smith@gmail.com",
+            phone: "483-3278-3732",
+          },
+          active: true,
+          status: "joined",
+        },
+        {
+          id: 2,
+          profile: {
+            firstname: "Steve",
+            lastname: "Rogers",
+            email: "john.smith@gmail.com",
+            phone: "483-3278-3732",
+          },
+          active: true,
+          status: "joined",
+        }
+      ]
+    },
+    {
+      id: 20,
+      name: "Team 2",
+      description: "C'est l'equipe deux",
+      teammates: [
+        {
+          id: 1,
+          profile: {
+            firstname: "John",
+            lastname: "Smith",
+            email: "john.smith@gmail.com",
+            phone: "483-3278-3732",
+          },
+          active: true,
+          status: "joined",
+        },
+        {
+          id: 2,
+          profile: {
+            firstname: "Clark",
+            lastname: "Kent",
+            email: "john.smith@gmail.com",
+            phone: "483-3278-3732",
+          },
+          active: true,
+          status: "joined",
+        },
+      ]
+    }
+  ]
+})
