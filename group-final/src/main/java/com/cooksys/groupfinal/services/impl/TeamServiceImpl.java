@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cooksys.groupfinal.dtos.TeamDto;
 import com.cooksys.groupfinal.dtos.TeamRequestDto;
+
 import com.cooksys.groupfinal.entities.Company;
 import com.cooksys.groupfinal.entities.Team;
 import com.cooksys.groupfinal.entities.User;
@@ -26,9 +27,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TeamServiceImpl implements TeamService {
     @Override
-    public TeamDto editTeam(TeamDto team, Long id) {
+    public TeamDto editTeam(TeamRequestDto teamRequestDto, Long id) {
+
         // TODO Implement editTeam
-        throw new UnsupportedOperationException("Unimplemented method 'editTeam'");
     }
 
   private final TeamRepository teamRepository;

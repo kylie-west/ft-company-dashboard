@@ -28,8 +28,9 @@ public class TeamController {
   }
 
 	@PatchMapping("/{id}")
-	public TeamDto editTeam(@RequestBody TeamDto team, @PathVariable Long id) {
-		return teamService.editTeam(team, id);
+	public TeamDto editTeam(@RequestBody TeamRequestDto teamRequestDto, @PathVariable Long id) {
+		return teamService.editTeam(teamRequestDto, id);
+
 	}
 
 }
