@@ -17,6 +17,7 @@ import com.cooksys.groupfinal.mappers.TeamMapper;
 import com.cooksys.groupfinal.repositories.CompanyRepository;
 import com.cooksys.groupfinal.repositories.TeamRepository;
 import com.cooksys.groupfinal.repositories.UserRepository;
+
 import com.cooksys.groupfinal.services.TeamService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,11 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class TeamServiceImpl implements TeamService {
+    @Override
+    public TeamDto editTeam(TeamDto team, Long id) {
+        // TODO Implement editTeam
+        throw new UnsupportedOperationException("Unimplemented method 'editTeam'");
+    }
 
   private final TeamRepository teamRepository;
   private final UserRepository userRepository;

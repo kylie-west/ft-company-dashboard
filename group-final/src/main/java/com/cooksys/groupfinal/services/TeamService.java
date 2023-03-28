@@ -7,4 +7,8 @@ public interface TeamService {
 
   TeamDto createTeam(TeamRequestDto teamRequestDto, long companyId);
 
+
+    TeamDto editTeam(TeamDto team, Long id);
+
+
 }
