@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userState } from "../../globalstate";
 import { projectsState } from "../../globalstate";
+import { Link } from "react-router-dom";
 import NavBar from "../../Components/NavBar";
 import ProjectCard from "../../Components/ProjectCard";
 
@@ -35,7 +36,9 @@ const Projects = ({ openModal }) => {
         <NavBar />
         <div className="page-body">
           <div className="header-wrapper">
-            <span className="go-back">{"<"} Back</span>
+            <Link to="/teams" className="go-back">
+              {"<"} Back
+            </Link>
             <h1>Projects for Team dfsjgjks</h1>
           </div>
 

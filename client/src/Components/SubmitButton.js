@@ -1,8 +1,8 @@
 import React from "react";
 
-const SubmitButton = ({ handleSubmit }) => {
+const SubmitButton = ({ handleSubmit, disabled }) => {
   return (
-    <button className="submit-btn" onClick={handleSubmit}>
+    <button className="submit-btn" onClick={handleSubmit} disabled={disabled}>
       Submit
     </button>
   );
