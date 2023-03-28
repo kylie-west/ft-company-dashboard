@@ -7,12 +7,16 @@ const Announcements = ({ openModal }) => {
   const [user] = useRecoilState(userState);
   const [announcements] = useRecoilState(announcementsState);
 
-  const getDate = date =>
+  const formatDate = date =>
     date.toLocaleDateString("en-us", {
       month: "long",
       day: "numeric",
       year: "numeric"
     });
+
+  const getAuthorName = ({ firstname, lastname }) => {
+    return firstname + " " + lastname[0] + ".";
+  };
 
   const handleClick = e => {
     e.preventDefault();
@@ -37,8 +41,8 @@ const Announcements = ({ openModal }) => {
               <header>
                 <h2>{announcement.title}</h2>
                 <div className="announce-info">
-                  <div>{announcement.author}</div>
-                  <div>{getDate(announcement.date)}</div>
+                  <div>{getAuthorName(announcement.author.profile)}</div>
+                  <div>{formatDate(announcement.date)}</div>
                 </div>
               </header>
               <p>{announcement.message}</p>

@@ -3,23 +3,23 @@ import { useRecoilState } from "recoil";
 import FormControl from "@mui/material/FormControl";
 import StyledTextField from "../StyledTextField";
 import SubmitButton from "../SubmitButton";
-import { announcementsState } from "../../globalstate";
+import { announcementsState, userState } from "../../globalstate";
 
 /**
- * @todo Set current user as author
  * @todo Preserve newlines
  * @todo Use actual backend API data
  * @todo Form validation/error handling
  */
 const CreateAnnounceModal = ({ closeModal }) => {
   const [announcements, setAnnouncements] = useRecoilState(announcementsState);
+  const [user] = useRecoilState(userState);
   const [form, setForm] = useState({ title: "", message: "" });
 
   function handleChange(e) {
     setForm({ ...form, [e.target.id]: e.target.value });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (!form.title.length || !form.message.length) {
       return;
@@ -30,9 +30,10 @@ const CreateAnnounceModal = ({ closeModal }) => {
       date: new Date(),
       title: form.title,
       message: form.message,
-      author: "Chris, CEO"
+      author: user
     };
     setAnnouncements([...announcements, newAnnouncement]);
+    console.log("Announcements:", announcements);
 
     closeModal(e);
   }
