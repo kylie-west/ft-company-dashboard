@@ -29,6 +29,12 @@ public class UserServiceImpl implements UserService {
 	private final FullUserMapper fullUserMapper;
 	private final CredentialsMapper credentialsMapper;
 
+	/**
+	 * findUser private overloaded method used to search the database for an active user with a matching username.
+	 * 
+	 * @param username string to search by
+	 * @return a user object if found
+	 */
 	private User findUser(String username) {
 		Optional<User> user = userRepository.findByCredentialsUsernameAndActiveTrue(username);
 		if (user.isEmpty()) {
@@ -37,6 +43,12 @@ public class UserServiceImpl implements UserService {
 		return user.get();
 	}
 
+	/**
+	 * findUser private overloaded method to search the database for an active user with a matching id.
+	 * 
+	 * @param id long to find a user by
+	 * @return a user object if found
+	 */
 	private User findUser(long id) {
 		Optional<User> user = userRepository.findByIdAndActiveTrue(id);
 		if (user.isEmpty()) {
@@ -44,9 +56,17 @@ public class UserServiceImpl implements UserService {
 		}
 		return user.get();
 	}
-
-	@Override
-	public FullUserDto login(CredentialsDto credentialsDto) {
+	
+	/**
+	 * verifyLogin private method checks that a credentialsDto with username and password values exists,
+	 * searches the database by for a matching user and returns the user if username and password match.
+	 * Throws a NotAuthorizedException otherwise.
+	 * 
+	 * @param credentialsDto with a username and password to check against the database
+	 * @return a user object matching the username and password sent in
+	 */
+	private User verifyLogin(CredentialsDto credentialsDto) {
+		
 		if (credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
 			throw new BadRequestException("A username and password are required.");
 		}
@@ -55,6 +75,32 @@ public class UserServiceImpl implements UserService {
 		if (!userToValidate.getCredentials().equals(credentialsToValidate)) {
 			throw new NotAuthorizedException("The provided credentials are invalid.");
 		}
+		return userToValidate;
+	}
+	
+	/**
+	 * verifyAdmin private method calls other private methods to find a user and verify login credentials,
+	 * then checks if the found user is an admin and returns the user.
+	 * If the user is not an admin a NotAuthorizedException is thrown.
+	 * 
+	 * @param credentialsDto with a username and password to check against the database
+	 * @return a user object matching the username and password sent in
+	 */
+	private User verifyAdmin(CredentialsDto credentialsDto) {
+		User user = verifyLogin(credentialsDto);
+		if (!user.isAdmin()) {
+			throw new NotAuthorizedException("Admin credentials are required for this request.");
+		}
+		return user;
+	}
+
+	/**
+	 * login method takes in a credentialsDto, searches for a user with a matching username and compares the stored
+	 * user password the the passed in credential. If matching a user object is returned.
+	 */
+	@Override
+	public FullUserDto login(CredentialsDto credentialsDto) {
+		User userToValidate = verifyLogin(credentialsDto);
 		if (userToValidate.getStatus().equals("PENDING")) {
 			userToValidate.setStatus("JOINED");
 			userRepository.saveAndFlush(userToValidate);
@@ -62,21 +108,14 @@ public class UserServiceImpl implements UserService {
 		return fullUserMapper.entityToFullUserDto(userToValidate);
 	}
 
+	/**
+	 * editUser method takes in a userAddRequestDto and an id. After verifying the user credentials and admin
+	 * privilege any existing fields are checked for validity and assigned as values to an user found by the passed in id.
+	 */
 	@Override
 	public FullUserDto editUser(UserAddRequestDto userAddRequestDto, long id) {
-		if (userAddRequestDto == null || userAddRequestDto.getCredentials() == null
-				|| userAddRequestDto.getCredentials().getUsername() == null
-				|| userAddRequestDto.getCredentials().getPassword() == null || userAddRequestDto.getUser() == null) {
-			throw new BadRequestException("A username and password are required.");
-		}
-		Credentials credentialsToValidate = credentialsMapper.dtoToEntity(userAddRequestDto.getCredentials());
-		User userToValidate = findUser(userAddRequestDto.getCredentials().getUsername());
-		if (!userToValidate.getCredentials().equals(credentialsToValidate)) {
-			throw new NotAuthorizedException("The provided credentials are invalid.");
-		}
-		if (!userToValidate.isAdmin()) {
-			throw new NotAuthorizedException("Admin credentials are required for this request.");
-		}
+
+		verifyAdmin(userAddRequestDto.getCredentials());
 		User userToEdit = findUser(id);
 
 		// Check that the request has a username to change to
@@ -132,5 +171,22 @@ public class UserServiceImpl implements UserService {
 		}
 
 		return fullUserMapper.entityToFullUserDto(userRepository.saveAndFlush(userToEdit));
+	}
+
+	/**
+	 * deleteUser method takes in credentials and an id. The credentials are verified along with admin status and the
+	 * id is used to search for a user. If no active user is found an exception is thrown. If found the active boolean
+	 * is set to false and the user is returned.
+	 */
+	@Override
+	public FullUserDto deleteUser(CredentialsDto credentialsDto, long id) {
+
+		verifyAdmin(credentialsDto);
+
+		User userToDelete = findUser(id);
+
+		userToDelete.setActive(false);
+
+		return fullUserMapper.entityToFullUserDto(userRepository.saveAndFlush(userToDelete));
 	}
 }
