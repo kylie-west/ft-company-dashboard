@@ -22,14 +22,14 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/announcements")
 @RequiredArgsConstructor
 public class AnnouncementController {
-	
+
 	private final AnnouncementService announcementService;
 
 	@GetMapping
 	public Set<AnnouncementDto> getAllAnnouncements() {
 		return announcementService.getAllAnnouncements();
 	}
-	
+
 	@PostMapping("/create")
 	public AnnouncementDto createAnnouncement(@RequestBody AnnouncementRequestDto announcementRequestDto) {
 		return announcementService.createAnnouncement(announcementRequestDto);
