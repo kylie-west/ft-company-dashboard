@@ -9,6 +9,6 @@ public interface AnnouncementService {
 
     Set<AnnouncementDto> getAllAnnouncements();
 
-	AnnouncementDto createAnnouncement(AnnouncementRequestDto announcementRequestDto);
+    AnnouncementDto createAnnouncement(AnnouncementRequestDto announcementRequestDto);
 
 }
