@@ -136,7 +136,23 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public FullUserDto deleteUser(CredentialsDto credentialsDto, long id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
+			throw new BadRequestException("A username and password are required.");
+		}
+		Credentials credentialsToValidate = credentialsMapper.dtoToEntity(credentialsDto);
+		User userToValidate = findUser(credentialsDto.getUsername());
+		if (!userToValidate.getCredentials().equals(credentialsToValidate)) {
+			throw new NotAuthorizedException("The provided credentials are invalid.");
+		}
+
+		if (!userToValidate.isAdmin()) {
+			throw new NotAuthorizedException("Admin credentials are required for this request.");
+		}
+
+		User userToDelete = findUser(id);
+
+		userToDelete.setActive(false);
+
+		return fullUserMapper.entityToFullUserDto(userRepository.saveAndFlush(userToDelete));
 	}
 }
