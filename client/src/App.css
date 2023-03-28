@@ -191,3 +191,81 @@ h1 {
 
   margin: 5px;
 }
+
+/* Announcements */
+
+.announce-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: center;
+  width: clamp(40vw, 600px, 90vw);
+  margin: 0 auto 50px auto;
+}
+
+.announce-top {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  padding: 3rem;
+  text-align: center;
+  border-bottom: 1px solid var(--secondary-accent);
+}
+
+.announce-top h1 {
+  font-size: 3rem;
+  font-weight: 400;
+  margin: 0;
+  grid-column: 2 / 3;
+}
+
+.announce-btn {
+  grid-column: 3 / 4;
+  align-self: end;
+  justify-self: end;
+  width: fit-content;
+  height: fit-content;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background: var(--main-accent);
+  color: white;
+  cursor: pointer;
+}
+
+.announce-btn:hover {
+  background: white;
+  color: var(--main-accent);
+}
+
+.announce-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  height: fit-content;
+  width: clamp(25vw, 600px, 90vw);
+  padding: 30px 50px;
+  border-radius: 10px;
+  font-size: 1.6rem;
+  color: white;
+  background: var(--card-body);
+}
+
+.announce-card header {
+  width: 100%;
+}
+
+.announce-card header h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+.announce-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
+}
