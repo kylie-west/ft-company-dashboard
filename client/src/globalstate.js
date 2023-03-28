@@ -6,6 +6,7 @@ const { persistAtom } = recoilPersist();
 export const appState = atom({
   key: "appState",
   default: {
+    viewCompanyId: null,
     viewTeamId: null,
   },
 });
@@ -15,6 +16,8 @@ export const userState = atom({
   default: {
     isLoggedIn: true,
     isAdmin: true,
+    username: "",
+    password: "",
     // TO BE DELETED IN FINAL!!!!!!!
     id: 1,
     profile: {

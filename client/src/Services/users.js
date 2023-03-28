@@ -8,6 +8,10 @@ export const login = async (username, password) => {
   return response.data;
 };
 
+export const getProjects = async (companyId, teamId) => {
+  return api.get(`/company/${companyId}/teams/${teamId}/projects`);
+};
+
 export const postProject = async (
   name,
   description,
