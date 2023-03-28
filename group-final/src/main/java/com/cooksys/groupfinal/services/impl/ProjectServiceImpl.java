@@ -10,6 +10,7 @@ import com.cooksys.groupfinal.entities.Project;
 import com.cooksys.groupfinal.entities.Team;
 import com.cooksys.groupfinal.entities.User;
 import com.cooksys.groupfinal.exceptions.BadRequestException;
+import com.cooksys.groupfinal.exceptions.NotAuthorizedException;
 import com.cooksys.groupfinal.exceptions.NotFoundException;
 import com.cooksys.groupfinal.mappers.ProjectMapper;
 import com.cooksys.groupfinal.repositories.ProjectRepository;
@@ -78,5 +79,37 @@ public class ProjectServiceImpl implements ProjectService {
 		projectToEdit.setActive(projectRequestDto.isActive());
 
 		return projectMapper.entityToDto(projectRepository.saveAndFlush(projectToEdit));
+	}
+	
+	private void validateAdminCredentials(CredentialsDto credentialsDto) {
+		if(credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
+			throw new BadRequestException("User credentials must be supplied for this request.");
+		}
+		Optional<User> optionalUser = userRepository.findByCredentialsUsernameAndActiveTrue(credentialsDto.getUsername());
+		if(optionalUser == null) {
+			throw new NotAuthorizedException("No user exists with the given username.");
+		}
+		User associatedUser = optionalUser.get();
+		if(!associatedUser.getCredentials().getPassword().equals(credentialsDto.getPassword())) {
+			throw new NotAuthorizedException("User credentials are invalid.");
+		}
+		// check for is admin
+		// throws not authorized
+		if(!associatedUser.isAdmin()) {
+			throw new NotAuthorizedException("User is not authorized for this request.");
+		}
+	}
+
+	@Override
+	public ProjectResponseDto deleteProject(Long projectId, CredentialsDto credentials) {
+		validateAdminCredentials(credentials);
+		
+		Project projectToDelete = projectRepository.findByIdAndActiveTrue(projectId);
+		if(projectToDelete == null) {
+			throw new NotFoundException("Project with id " + projectId + " does not exist.");
+		}
+		projectToDelete.setActive(false);
+		projectRepository.saveAndFlush(projectToDelete);
+		return projectMapper.entityToDto(projectToDelete);
 	}
 }
