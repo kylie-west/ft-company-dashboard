@@ -34,10 +34,11 @@ public class AnnouncementController {
 	public AnnouncementDto createAnnouncement(@RequestBody AnnouncementRequestDto announcementRequestDto) {
 		return announcementService.createAnnouncement(announcementRequestDto);
 	}
-	
-    @DeleteMapping("/{id}")
-    public ResponseEntity<AnnouncementDto> deleteAnnouncement(@PathVariable Long id, @RequestBody CredentialsDto credentialsDto) {
-        return ResponseEntity.ok(announcementService.deleteAnnouncement(id, credentialsDto)); 
-    }
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<AnnouncementDto> deleteAnnouncement(@PathVariable Long id,
+			@RequestBody CredentialsDto credentialsDto) {
+		return ResponseEntity.ok(announcementService.deleteAnnouncement(id, credentialsDto));
+	}
 
 }

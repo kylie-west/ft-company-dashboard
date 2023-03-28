@@ -12,8 +12,7 @@ public interface UserService {
 	FullUserDto editUser(UserAddRequestDto userAddRequestDto, long id);
 
 	BasicUserDto createUser(UserAddRequestDto userAddRequestDto, Long companyId);
-  
+
 	FullUserDto deleteUser(CredentialsDto credentialsDto, long id);
 
-   
 }

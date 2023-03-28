@@ -12,5 +12,5 @@ public interface AnnouncementService {
 
     AnnouncementDto createAnnouncement(AnnouncementRequestDto announcementRequestDto);
 
-	  AnnouncementDto deleteAnnouncement(Long id, CredentialsDto credentialsDto);
+    AnnouncementDto deleteAnnouncement(Long id, CredentialsDto credentialsDto);
 }

@@ -34,12 +34,12 @@ public class UserController {
 	public FullUserDto editUser(@RequestBody UserAddRequestDto userAddRequestDto, @PathVariable long id) {
 		return userService.editUser(userAddRequestDto, id);
 	}
-	
+
 	@PostMapping("/{companyId}")
 	public BasicUserDto createUser(@RequestBody UserAddRequestDto userAddRequestDto, @PathVariable Long companyId) {
 		return userService.createUser(userAddRequestDto, companyId);
 	}
-    
+
 	@DeleteMapping("/{id}")
 	public FullUserDto deleteUser(@RequestBody CredentialsDto credentialsDto, @PathVariable long id) {
 		return userService.deleteUser(credentialsDto, id);

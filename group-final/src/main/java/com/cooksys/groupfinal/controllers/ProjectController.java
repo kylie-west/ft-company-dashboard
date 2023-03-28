@@ -21,17 +21,19 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/projects")
 @RequiredArgsConstructor
 public class ProjectController {
-	
+
 	private final ProjectService projectService;
-	
+
 	@PostMapping("/{teamId}")
 	@ResponseStatus(HttpStatus.CREATED)
-    public ProjectResponseDto createProject (@PathVariable Long teamId, @RequestBody ProjectRequestDto projectRequestDto) {
-        return projectService.createProject(teamId, projectRequestDto);
-    }
-	
+	public ProjectResponseDto createProject(@PathVariable Long teamId,
+			@RequestBody ProjectRequestDto projectRequestDto) {
+		return projectService.createProject(teamId, projectRequestDto);
+	}
+
 	@PatchMapping("/{projectId}")
-	public ProjectResponseDto editProject (@PathVariable Long projectId, @RequestBody ProjectRequestDto projectRequestDto) {
+	public ProjectResponseDto editProject(@PathVariable Long projectId,
+			@RequestBody ProjectRequestDto projectRequestDto) {
 		return projectService.editProject(projectId, projectRequestDto);
 	}
 	
