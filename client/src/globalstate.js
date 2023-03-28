@@ -123,6 +123,7 @@ export const modalState = atom({
   default: {
     isOpen: false,
     type: "", // refer to ModalContainer.js for list of types
+    data: {}, // do whatever you want with this
   },
 });
 

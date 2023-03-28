@@ -37,7 +37,6 @@ const ModalContainer = ({ isOpen, type, closeModal }) => {
             ×
           </button>
         </span>
-        <h1>🔥 My Cool Modal 🔥</h1>
         {currentModal}
       </div>
     </div>

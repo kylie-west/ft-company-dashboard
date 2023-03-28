@@ -15,13 +15,14 @@ import ModalContainer from "./Components/ModalContainer";
 function App() {
   const [modal, setModal] = useRecoilState(modalState);
 
-  function openModal(type) {
-    setModal({ isOpen: true, type });
+  function openModal(type, data = {}) {
+    setModal({ isOpen: true, type, data });
+    console.table(`Modal: ${type}`, data);
   }
 
   function closeModal(e) {
     e.stopPropagation();
-    setModal({ isOpen: false, type: "" });
+    setModal({ isOpen: false, type: "", data: {} });
   }
 
   return (
