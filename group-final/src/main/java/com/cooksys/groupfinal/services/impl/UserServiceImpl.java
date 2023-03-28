@@ -23,31 +23,31 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-	
-	private final UserRepository userRepository;
-  private final FullUserMapper fullUserMapper;
-  private final BasicUserMapper basicUserMapper;
-	private final CredentialsMapper credentialsMapper;
-	
-	private User findUser(String username) {
+
+    private final UserRepository userRepository;
+    private final FullUserMapper fullUserMapper;
+    private final BasicUserMapper basicUserMapper;
+    private final CredentialsMapper credentialsMapper;
+
+    private User findUser(String username) {
         Optional<User> user = userRepository.findByCredentialsUsernameAndActiveTrue(username);
         if (user.isEmpty()) {
             throw new NotFoundException("The username provided does not belong to an active user.");
         }
         return user.get();
     }
-	
-	private User findUser(long id) {
+
+    private User findUser(long id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isEmpty()) {
             throw new NotFoundException("The user id provided does not belong to an active user.");
         }
         return user.get();
     }
-	
-	@Override
-	public FullUserDto login(CredentialsDto credentialsDto) {
-		if (credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
+
+    @Override
+    public FullUserDto login(CredentialsDto credentialsDto) {
+        if (credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
             throw new BadRequestException("A username and password are required.");
         }
         Credentials credentialsToValidate = credentialsMapper.dtoToEntity(credentialsDto);
@@ -56,15 +56,17 @@ public class UserServiceImpl implements UserService {
             throw new NotAuthorizedException("The provided credentials are invalid.");
         }
         if (userToValidate.getStatus().equals("PENDING")) {
-        	userToValidate.setStatus("JOINED");
-        	userRepository.saveAndFlush(userToValidate);
+            userToValidate.setStatus("JOINED");
+            userRepository.saveAndFlush(userToValidate);
         }
         return fullUserMapper.entityToFullUserDto(userToValidate);
-	}
+    }
 
-	@Override
-	public FullUserDto editUser(UserAddRequestDto userAddRequestDto, long id) {
-		if (userAddRequestDto == null || userAddRequestDto.getCredentials() == null || userAddRequestDto.getCredentials().getUsername() == null || userAddRequestDto.getCredentials().getPassword() == null || userAddRequestDto.getUser() == null) {
+    @Override
+    public FullUserDto editUser(UserAddRequestDto userAddRequestDto, long id) {
+        if (userAddRequestDto == null || userAddRequestDto.getCredentials() == null
+                || userAddRequestDto.getCredentials().getUsername() == null
+                || userAddRequestDto.getCredentials().getPassword() == null || userAddRequestDto.getUser() == null) {
             throw new BadRequestException("A username and password are required.");
         }
         Credentials credentialsToValidate = credentialsMapper.dtoToEntity(userAddRequestDto.getCredentials());
@@ -74,33 +76,27 @@ public class UserServiceImpl implements UserService {
         }
         User userToEdit = findUser(id);
         User newUserInfo = basicUserMapper.requestDtoToEntity(userAddRequestDto.getUser());
-        
+
         if (newUserInfo.getCredentials().getUsername() != null) {
-        	userToEdit.getCredentials().setUsername(newUserInfo.getCredentials().getUsername());
-		}
+            userToEdit.getCredentials().setUsername(newUserInfo.getCredentials().getUsername());
+        }
         if (newUserInfo.getCredentials().getPassword() != null) {
-        	userToEdit.getCredentials().setPassword(newUserInfo.getCredentials().getPassword());
-		}
+            userToEdit.getCredentials().setPassword(newUserInfo.getCredentials().getPassword());
+        }
         if (newUserInfo.getProfile().getFirstName() != null) {
-        	userToEdit.getProfile().setFirstName(newUserInfo.getProfile().getFirstName());
-		}
-		if (newUserInfo.getProfile().getLastName() != null) {
-			userToEdit.getProfile().setLastName(newUserInfo.getProfile().getLastName());
-		}
-		if (newUserInfo.getProfile().getEmail() != null) {
-			userToEdit.getProfile().setEmail(newUserInfo.getProfile().getEmail());
-		}
-		if (newUserInfo.getProfile().getPhone() != null) {
-			userToEdit.getProfile().setPhone(newUserInfo.getProfile().getPhone());
-		}
-        
-		return fullUserMapper.entityToFullUserDto(userRepository.saveAndFlush(userToEdit));
-	}
-	
-	
-	
-	
-	
-	
+            userToEdit.getProfile().setFirstName(newUserInfo.getProfile().getFirstName());
+        }
+        if (newUserInfo.getProfile().getLastName() != null) {
+            userToEdit.getProfile().setLastName(newUserInfo.getProfile().getLastName());
+        }
+        if (newUserInfo.getProfile().getEmail() != null) {
+            userToEdit.getProfile().setEmail(newUserInfo.getProfile().getEmail());
+        }
+        if (newUserInfo.getProfile().getPhone() != null) {
+            userToEdit.getProfile().setPhone(newUserInfo.getProfile().getPhone());
+        }
+
+        return fullUserMapper.entityToFullUserDto(userRepository.saveAndFlush(userToEdit));
+    }
 
 }

@@ -10,9 +10,8 @@ public class ProjectRequestDto {
 	 private String name;
 
 	  private String description;
-
+    
 	  private boolean active;
 	  
 	  private CredentialsDto credentials;
-  
 }
