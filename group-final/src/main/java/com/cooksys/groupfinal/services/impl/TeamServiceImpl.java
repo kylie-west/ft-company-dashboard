@@ -62,7 +62,7 @@ public class TeamServiceImpl implements TeamService {
 
     Set<User> members = new HashSet<>();
     teamRequestDto.getTeammates().forEach(member -> {
-      final User tempUser = userRepository.getByProfileFirstNameAndActiveTrue(member.getProfile().getFirstName());
+      final User tempUser = userRepository.findByProfileFirstNameAndActiveTrue(member.getProfile().getFirstName());
       if (tempUser != null)
         members.add(tempUser);
     });
