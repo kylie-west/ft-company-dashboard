@@ -133,4 +133,10 @@ public class UserServiceImpl implements UserService {
 
 		return fullUserMapper.entityToFullUserDto(userRepository.saveAndFlush(userToEdit));
 	}
+
+	@Override
+	public FullUserDto deleteUser(CredentialsDto credentialsDto, long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
