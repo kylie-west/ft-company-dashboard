@@ -1,6 +1,7 @@
 package com.cooksys.groupfinal.controllers;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,14 +21,14 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
-	
+
 	private final UserService userService;
-	
+
 	@PostMapping("/login")
-	@CrossOrigin(origins="*")
-    public FullUserDto login(@RequestBody CredentialsDto credentialsDto) {
-        return userService.login(credentialsDto);
-    }
+	@CrossOrigin(origins = "*")
+	public FullUserDto login(@RequestBody CredentialsDto credentialsDto) {
+		return userService.login(credentialsDto);
+	}
 
 	@PatchMapping("/{id}")
 	public FullUserDto editUser(@RequestBody UserAddRequestDto userAddRequestDto, @PathVariable long id) {
@@ -37,5 +38,9 @@ public class UserController {
 	@PostMapping("/{companyId}")
 	public BasicUserDto createUser(@RequestBody UserAddRequestDto userAddRequestDto, @PathVariable Long companyId) {
 		return userService.createUser(userAddRequestDto, companyId);
+    
+	@DeleteMapping("/{id}")
+	public FullUserDto deleteUser(@RequestBody CredentialsDto credentialsDto, @PathVariable long id) {
+		return userService.deleteUser(credentialsDto, id);
 	}
 }
