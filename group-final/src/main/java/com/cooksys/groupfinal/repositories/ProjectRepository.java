@@ -8,6 +8,8 @@ import com.cooksys.groupfinal.entities.Project;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
+	Project findByIdAndActiveTrue(Long projectId);
+
     Project findByNameAndActiveTrue(String name);
 
 }
