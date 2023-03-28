@@ -30,7 +30,7 @@ public class AnnouncementController {
 		return announcementService.getAllAnnouncements();
 	}
 
-	@PostMapping("/create")
+	@PostMapping("/{companyId}")
 	public AnnouncementDto createAnnouncement(@RequestBody AnnouncementRequestDto announcementRequestDto) {
 		return announcementService.createAnnouncement(announcementRequestDto);
 	}
