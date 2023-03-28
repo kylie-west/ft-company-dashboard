@@ -123,6 +123,7 @@ export const modalState = atom({
   default: {
     isOpen: false,
     type: "", // refer to ModalContainer.js for list of types
+    data: {}, // do whatever you want with this
   },
 });
 
@@ -132,9 +133,23 @@ export const projectsState = atom({
   default: [
     {
       id: 4,
-      name: "cool project",
-      description: "Lorem ipsums",
+      name: "Cool Project",
+      description:
+        "Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim sit amet venenatis urna cursus",
       active: true,
+      team: {
+        id: 3,
+        name: "Awesome",
+        description: "Among us",
+        users: [{ id: 1 }],
+      },
+    },
+    {
+      id: 5,
+      name: "Lorem Ipsum",
+      description:
+        "Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim sit amet venenatis urna cursus",
+      active: false,
       team: {
         id: 3,
         name: "Awesome",
@@ -144,3 +159,67 @@ export const projectsState = atom({
     },
   ],
 });
+
+export const teamState = atom({
+  key: "teamState",
+  default: [
+    {
+      id: 10,
+      name: "Team 1",
+      description: "C'est l'equipe un",
+      teammates: [
+        {
+          id: 1,
+          profile: {
+            firstname: "John",
+            lastname: "Smith",
+            email: "john.smith@gmail.com",
+            phone: "483-3278-3732",
+          },
+          active: true,
+          status: "joined",
+        },
+        {
+          id: 2,
+          profile: {
+            firstname: "Steve",
+            lastname: "Rogers",
+            email: "john.smith@gmail.com",
+            phone: "483-3278-3732",
+          },
+          active: true,
+          status: "joined",
+        }
+      ]
+    },
+    {
+      id: 20,
+      name: "Team 2",
+      description: "C'est l'equipe deux",
+      teammates: [
+        {
+          id: 1,
+          profile: {
+            firstname: "John",
+            lastname: "Smith",
+            email: "john.smith@gmail.com",
+            phone: "483-3278-3732",
+          },
+          active: true,
+          status: "joined",
+        },
+        {
+          id: 2,
+          profile: {
+            firstname: "Clark",
+            lastname: "Kent",
+            email: "john.smith@gmail.com",
+            phone: "483-3278-3732",
+          },
+          active: true,
+          status: "joined",
+        },
+      ]
+    }
+  ]
+})

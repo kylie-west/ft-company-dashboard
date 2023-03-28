@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProjectCard = ({ name, description, active }) => {
+const ProjectCard = ({ name, description, active, openEditModal }) => {
   const activity = active ? (
     <span className="active">Active</span>
   ) : (
@@ -16,7 +16,11 @@ const ProjectCard = ({ name, description, active }) => {
         </span>
         <span className="project-description">{description}</span>
       </div>
-      <button className="edit-btn">Edit</button>
+      <div className="edit-btn-wrapper">
+        <button className="edit-btn" onClick={openEditModal}>
+          Edit
+        </button>
+      </div>
     </div>
   );
 };
