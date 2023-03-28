@@ -34,7 +34,6 @@ public class TeamServiceImpl implements TeamService {
     private final CompanyRepository companyRepository;
     private final ProjectRepository projectRepository;
     private final TeamMapper teamMapper;
-    private final BasicUserMapper basicUserMapper;
 
     @Override
     public TeamDto createTeam(TeamRequestDto teamRequestDto, long companyId) {
