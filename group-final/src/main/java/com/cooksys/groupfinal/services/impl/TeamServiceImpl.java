@@ -74,8 +74,29 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public TeamDto editTeam(TeamRequestDto teamRequestDto, Long id) {
-
-        // TODO Implement editTeam
+        if (teamRequestDto == null || teamRequestDto.getName() == null || teamRequestDto.getDescription() == null) {
+            throw new BadRequestException("Name and description are required.");
+        }
+        Team team = teamRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Team not found"));
+        Team existingTeam = teamRepository.findByName(teamRequestDto.getName());
+        if (existingTeam != null && existingTeam.getId() != id) {
+            throw new BadRequestException("Another team already exists with this name");
+        }
+        team.setName(teamRequestDto.getName());
+        team.setDescription(teamRequestDto.getDescription());
+        Set<User> members = new HashSet<>();
+        if (teamRequestDto.getTeammates() != null) {
+            teamRequestDto.getTeammates().forEach(member -> {
+                final User tempUser = userRepository
+                        .findByProfileFirstNameAndActiveTrue(member.getProfile().getFirstName());
+                if (tempUser != null)
+                    members.add(tempUser);
+            });
+        }
+        team.setCompany(team.getCompany());
+        team.setTeammates(members);
+        return teamMapper.entityToDto(teamRepository.saveAndFlush(team));
     }
 
 }
