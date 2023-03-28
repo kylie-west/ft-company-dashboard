@@ -4,11 +4,21 @@ import {NavLink} from "react-router-dom";
 
 const TeamCard = ( {id, name, description, teammates }) => {
     
+    const projects = [
+        {
+            id:0,
+        },
+        {
+            id:1,
+        }
+    ];
     
     return (
         <div className="team-card">
             <div className="team-header">
-                <Button component={NavLink} to="/projects">{name}</Button>
+                <NavLink to={{pathname:"/projects"}} state={{projects}}>
+                    {name}
+                </NavLink>
                 <span># of projects: {4}</span>
             </div>
             <div className="team-members">
