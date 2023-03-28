@@ -13,17 +13,17 @@ const Projects = ({ openModal }) => {
     openModal("create-project");
   }
 
-  function openEditModal(proj) {
-    openModal("edit-project", proj);
+  function openEditModal(projectId) {
+    openModal("edit-project", projectId);
   }
 
-  const projs = projects.map(({ name, description, active }, index) => (
+  const projs = projects.map((p) => (
     <ProjectCard
-      key={index}
-      name={name}
-      description={description}
-      active={active}
-      openEditModal={() => openEditModal({ name, description, active })}
+      key={p.id}
+      name={p.name}
+      description={p.description}
+      active={p.active}
+      openEditModal={() => openEditModal({ id: p.id })}
     />
   ));
 
