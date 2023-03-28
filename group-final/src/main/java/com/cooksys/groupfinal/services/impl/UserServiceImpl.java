@@ -1,13 +1,19 @@
 package com.cooksys.groupfinal.services.impl;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
 import com.cooksys.groupfinal.dtos.BasicUserDto;
+import com.cooksys.groupfinal.dtos.CompanyDto;
 import com.cooksys.groupfinal.dtos.CredentialsDto;
 import com.cooksys.groupfinal.dtos.FullUserDto;
 import com.cooksys.groupfinal.dtos.UserAddRequestDto;
+import com.cooksys.groupfinal.entities.Company;
 import com.cooksys.groupfinal.entities.Credentials;
 import com.cooksys.groupfinal.entities.User;
 import com.cooksys.groupfinal.exceptions.BadRequestException;
@@ -16,6 +22,7 @@ import com.cooksys.groupfinal.exceptions.NotFoundException;
 import com.cooksys.groupfinal.mappers.BasicUserMapper;
 import com.cooksys.groupfinal.mappers.CredentialsMapper;
 import com.cooksys.groupfinal.mappers.FullUserMapper;
+import com.cooksys.groupfinal.repositories.CompanyRepository;
 import com.cooksys.groupfinal.repositories.UserRepository;
 import com.cooksys.groupfinal.services.UserService;
 
@@ -29,6 +36,7 @@ public class UserServiceImpl implements UserService {
 	private final FullUserMapper fullUserMapper;
 	private final BasicUserMapper basicUserMapper;
 	private final CredentialsMapper credentialsMapper;
+	private final CompanyRepository companyRepository;
 
 	private User findUser(String username) {
 		Optional<User> user = userRepository.findByCredentialsUsernameAndActiveTrue(username);
@@ -99,15 +107,45 @@ public class UserServiceImpl implements UserService {
 
 		return fullUserMapper.entityToFullUserDto(userRepository.saveAndFlush(userToEdit));
 	}
+	
+	// check if credentials exist and correspond
+	private void validateAdminCredentials(CredentialsDto credentialsDto) {
+		if(credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
+			throw new BadRequestException("User credentials must be supplied for this request.");
+		}
+		User associatedUser = findUser(credentialsDto.getUsername());
+		if(!associatedUser.getCredentials().getPassword().equals(credentialsDto.getPassword())) {
+			throw new NotAuthorizedException("User credentials are invalid.");
+		}
+		// check for is admin
+		// throws not authorized
+		if(!associatedUser.isAdmin()) {
+			throw new NotAuthorizedException("User is not authorized for this request.");
+		}
+	}
+	
+//	private void validateUser(CredentialsDto credentialsDto, BasicUserDto basicUserDto) {
+//		validateCredentials(credentialsDto);
+//		if(credentialsDto.getUsername() != findUser(basicUserDto.getId()).getCredentials().getUsername()) {
+//			throw new NotAuthorizedException("Invalid user credentials offered.");
+//		}
+//	}
 
 	@Override
 	public BasicUserDto createUser(UserAddRequestDto userAddRequestDto, Long companyId) {
-		// check if credentials are existing
-		CredentialsDto credentialsDto = userAddRequestDto.getCredentials();
-		if(credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
-			throw new NotFoundException("Valid credentials are required.");
+		validateAdminCredentials(userAddRequestDto.getCredentials());
+		
+		
+		User userToAdd = fullUserMapper.requestDtoToEntity(userAddRequestDto.getUser());
+		userToAdd.setStatus("PENDING");
+		Optional<Company> optionalCompany = companyRepository.findById(companyId);
+		if(optionalCompany == null) {
+			throw new NotFoundException("No company has id " + companyId + ".");
 		}
-				
-		return null;
+		Company company = optionalCompany.get();
+		User userToReturn = userRepository.saveAndFlush(userToAdd);
+		company.getEmployees().add(userToReturn);
+		companyRepository.saveAndFlush(company);
+		return basicUserMapper.entityToBasicUserDto(userToReturn);
 	}
 }
