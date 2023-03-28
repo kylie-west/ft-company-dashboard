@@ -30,7 +30,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 
 	@Override
-	public ProjectResponseDto createProject(ProjectRequestDto projectRequestDto, Long id) {	
+	public ProjectResponseDto createProject(Long teamId, ProjectRequestDto projectRequestDto) {	
 		CredentialsDto credentialsRequestDto = projectRequestDto.getCredentials();
 		if (credentialsRequestDto.getUsername() == null || credentialsRequestDto.getPassword() == null) {
 			throw new BadRequestException("Must provide username and password");
@@ -39,12 +39,45 @@ public class ProjectServiceImpl implements ProjectService {
 		if (user.isEmpty()) {
 			throw new NotFoundException("Could not find user");	
 		}
+		if (projectRequestDto.getName() == null || projectRequestDto.getDescription() == null) {
+			throw new BadRequestException("Must provide a name and description to create a new project.");
+		}
 		Project projectToSave = projectMapper.dtoToEntity(projectRequestDto);
-		Optional<Team> team = teamRepository.findById(id);
+		Optional<Team> team = teamRepository.findById(teamId);
 		if (team.isEmpty()) {
             throw new NotFoundException("A team with the provided id does not exist.");
         }
 		projectToSave.setTeam(team.get());
 		return projectMapper.entityToDto(projectRepository.saveAndFlush(projectToSave));
+	}
+
+
+	@Override
+	public ProjectResponseDto editProject(Long projectId, ProjectRequestDto projectRequestDto) {
+		CredentialsDto credentialsRequestDto = projectRequestDto.getCredentials();
+		if (credentialsRequestDto.getUsername() == null || credentialsRequestDto.getPassword() == null) {
+			throw new BadRequestException("Must provide username and password");
+		}
+		Optional<User> user = userRepository.findByCredentialsUsernameAndActiveTrue(credentialsRequestDto.getUsername());
+		if (user.isEmpty()) {
+			throw new NotFoundException("Could not find user");	
+		}
+		
+		Optional<Project> project = projectRepository.findById(projectId);
+		if (project.isEmpty()) {
+			throw new NotFoundException("A project with the provided id does not exist.");
+		}
+		Project projectToEdit = project.get();
+		
+		// Updates the name and description if they provide values
+		if (projectRequestDto.getName() != null) {
+			projectToEdit.setName(projectRequestDto.getName());
+		}
+		if (projectRequestDto.getDescription() != null) {
+			projectToEdit.setDescription(projectRequestDto.getDescription());
+		}
+		projectToEdit.setActive(projectRequestDto.isActive());
+		
+		return projectMapper.entityToDto(projectRepository.saveAndFlush(projectToEdit));
 	}
 }
