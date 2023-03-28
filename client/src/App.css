@@ -1,268 +1,274 @@
 .page-body {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 1rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 4rem;
 }
 
 h1 {
-	color: var(--main-accent);
-	font-size: 3.5rem;
-	margin: 3rem;
+  color: var(--main-accent);
+  font-size: 3.5rem;
+  margin: 3rem;
 }
 
 .modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-overlay {
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 .modal-container {
-	position: absolute;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width: fit-content;
-	background-color: var(--card-body);
-	border-radius: 6px;
-	padding: 1rem;
-	margin: 0 auto;
-	font-size: 1.6rem;
-	z-index: 2;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  background-color: var(--card-body);
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 0 auto;
+  font-size: 1.6rem;
+  z-index: 2;
 }
 
 .close-btn-wrapper {
-	width: 100%;
-	display: flex;
-	justify-content: flex-end;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .close-modal-btn {
-	color: var(--tertiary-accent);
-	border: 3px solid var(--tertiary-accent);
-	border-radius: 50%;
-	width: 3rem;
-	height: 3rem;
-	background-color: transparent;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 2rem;
-	cursor: pointer;
+  color: var(--tertiary-accent);
+  border: 3px solid var(--tertiary-accent);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  background-color: transparent;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  cursor: pointer;
 }
 
 .modal-body {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .submit-btn {
-	background-color: var(--main-accent);
-	padding: 1rem 6rem;
-	border: none;
-	border-radius: 6px;
-	font-size: 1.6rem;
-	color: white;
-	margin-top: 2.5rem;
-	cursor: pointer;
+  background-color: var(--main-accent);
+  padding: 1rem 6rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.6rem;
+  color: white;
+  margin-top: 2.5rem;
+  cursor: pointer;
 }
 
 .header-wrapper {
-	position: relative;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .go-back {
-	position: absolute;
-	left: 0;
-	color: var(--main-accent);
-	font-size: 2rem;
+  position: absolute;
+  left: 0;
+  color: var(--main-accent);
+  font-size: 2rem;
 }
 
 .project-list {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	width: min(800px, 100vw);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: min(800px, 100vw);
 }
 
 .project-card {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	border-top: 1px solid var(--secondary-accent);
-	gap: 4rem;
-	padding: 2.5rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-top: 1px solid var(--secondary-accent);
+  gap: 4rem;
+  padding: 2.5rem 0;
 }
 
 .project-name {
-	font-size: 2.5rem;
-	width: max(200px, 25%);
+  font-size: 2.5rem;
+  width: max(200px, 25%);
 }
 
 .activity-wrapper {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .project-details {
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	gap: 2rem;
-	font-size: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 2rem;
+  font-size: 1.8rem;
 }
 
 .active {
-	color: var(--active);
+  color: var(--active);
 }
 
 .inactive {
-	color: var(--inactive);
+  color: var(--inactive);
 }
 
 .edit-btn-wrapper {
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	width: min-content;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: min-content;
 }
 
 .edit-btn,
 .new-project-btn {
-	border: none;
-	padding: 0.8rem 4rem;
-	border-radius: 10px;
-	font-size: 1.6rem;
-	width: 110px;
-	cursor: pointer;
+  border: none;
+  padding: 0.8rem 4rem;
+  border-radius: 10px;
+  font-size: 1.6rem;
+  width: 110px;
+  cursor: pointer;
 }
 
 .edit-btn {
-	color: black;
-	background-color: var(--secondary-accent);
+  color: black;
+  background-color: var(--secondary-accent);
 }
 
 .new-project-btn {
-	color: white;
-	background-color: var(--main-accent);
-	margin: 3rem 0;
+  color: white;
+  background-color: var(--main-accent);
+  margin: 3rem 0;
 }
 
 .team-body {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .team-header {
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .team-members {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
-	margin: 5px;
+  margin: 5px;
 }
 
 /* Announcements */
 
 .announce-wrapper {
-	display: flex;
-	flex-direction: column;
-	gap: 4rem;
-	align-items: center;
-	width: clamp(40vw, 600px, 90vw);
-	margin: 0 auto 50px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: center;
+  width: clamp(40vw, 600px, 90vw);
+  margin: 0 auto 50px auto;
 }
 
 .announce-top {
-	position: relative;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	width: 100%;
-	padding: 3rem;
-	text-align: center;
-	border-bottom: 1px solid var(--secondary-accent);
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  padding: 3rem;
+  border-bottom: 1px solid var(--secondary-accent);
 }
 
 .announce-top h1 {
-	font-size: 3rem;
-	font-weight: 400;
-	margin: 0;
-	grid-column: 2 / 3;
+  grid-column: 2 / 3;
+  margin: 0;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 400;
 }
 
 .announce-btn {
-	grid-column: 3 / 4;
-	align-self: end;
-	justify-self: end;
-	width: fit-content;
-	height: fit-content;
-	padding: 8px 16px;
-	border: none;
-	border-radius: 5px;
-	background: var(--main-accent);
-	color: white;
-	cursor: pointer;
+  grid-column: 3 / 4;
+  align-self: end;
+  justify-self: end;
+  width: fit-content;
+  height: fit-content;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background: var(--main-accent);
+  color: white;
+  cursor: pointer;
 }
 
 .announce-btn:hover {
-	background: white;
-	color: var(--main-accent);
+  background: white;
+  color: var(--main-accent);
 }
 
 .announce-card {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	gap: 2rem;
-	height: fit-content;
-	width: clamp(25vw, 600px, 90vw);
-	padding: 30px 50px;
-	border-radius: 10px;
-	font-size: 1.6rem;
-	color: white;
-	background: var(--card-body);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  height: fit-content;
+  width: clamp(25vw, 600px, 90vw);
+  padding: 30px 50px;
+  border-radius: 10px;
+  font-size: 1.6rem;
+  color: white;
+  background: var(--card-body);
 }
 
 .announce-card header {
-	width: 100%;
+  width: 100%;
 }
 
 .announce-card header h2 {
-	text-align: center;
-	font-size: 2rem;
-	font-weight: 300;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 300;
 }
 
 .announce-info {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 0.5rem;
-	color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-device-width: 750px) {
+  .announce-top h1 {
+    grid-column: 1 / 2;
+  }
 }
