@@ -1,6 +1,7 @@
 package com.cooksys.groupfinal.controllers;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +22,15 @@ public class ProjectController {
 	
 	private final ProjectService projectService;
 	
-	@PostMapping("/{id}")
+	@PostMapping("/{teamId}")
 	@ResponseStatus(HttpStatus.CREATED)
-    public ProjectResponseDto createProject (@RequestBody ProjectRequestDto projectRequestDto, @PathVariable Long id) {
-        return projectService.createProject(projectRequestDto, id);
+    public ProjectResponseDto createProject (@PathVariable Long teamId, @RequestBody ProjectRequestDto projectRequestDto) {
+        return projectService.createProject(teamId, projectRequestDto);
     }
+	
+	@PatchMapping("/{projectId}")
+	public ProjectResponseDto editProject (@PathVariable Long projectId, @RequestBody ProjectRequestDto projectRequestDto) {
+		return projectService.editProject(projectId, projectRequestDto);
+	}
 
 }
