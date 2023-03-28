@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     }
 	
 	private User findUser(long id) {
-        Optional<User> user = userRepository.findById(id);
+        Optional<User> user = userRepository.findByIdAndActiveTrue(id);
         if (user.isEmpty()) {
             throw new NotFoundException("The user id provided does not belong to an active user.");
         }
@@ -72,26 +72,41 @@ public class UserServiceImpl implements UserService {
         if (!userToValidate.getCredentials().equals(credentialsToValidate)) {
             throw new NotAuthorizedException("The provided credentials are invalid.");
         }
+        if(!userToValidate.isAdmin()) {
+        	throw new NotAuthorizedException("Admin credentials are required for this request.");
+        }
         User userToEdit = findUser(id);
-        User newUserInfo = basicUserMapper.requestDtoToEntity(userAddRequestDto.getUser());
-        
-        if (newUserInfo.getCredentials().getUsername() != null) {
-        	userToEdit.getCredentials().setUsername(newUserInfo.getCredentials().getUsername());
+
+        // Check that the request has a username to change to
+        if (userAddRequestDto.getUser().getCredentials().getUsername() != null) {
+        	
+        	// Check the given username doesn't not equal the current username
+        	if(!userAddRequestDto.getUser().getCredentials().getUsername().equals(userToEdit.getCredentials().getUsername())) {
+        		
+        		// Check the given username doesn't exist is the database
+        		if(userRepository.findByCredentialsUsername(userAddRequestDto.getUser().getCredentials().getUsername()).isEmpty()) {
+        			userToEdit.getCredentials().setUsername(userAddRequestDto.getUser().getCredentials().getUsername());
+        		}
+        		else {
+            		throw new BadRequestException("Given Username is already in use.");
+                }
+        	}   	
 		}
-        if (newUserInfo.getCredentials().getPassword() != null) {
-        	userToEdit.getCredentials().setPassword(newUserInfo.getCredentials().getPassword());
+       
+        if (userAddRequestDto.getUser().getCredentials().getPassword() != null) {
+        	userToEdit.getCredentials().setPassword(userAddRequestDto.getUser().getCredentials().getPassword());
 		}
-        if (newUserInfo.getProfile().getFirstName() != null) {
-        	userToEdit.getProfile().setFirstName(newUserInfo.getProfile().getFirstName());
+        if (userAddRequestDto.getUser().getProfile().getFirstName() != null) {
+        	userToEdit.getProfile().setFirstName(userAddRequestDto.getUser().getProfile().getFirstName());
 		}
-		if (newUserInfo.getProfile().getLastName() != null) {
-			userToEdit.getProfile().setLastName(newUserInfo.getProfile().getLastName());
+		if (userAddRequestDto.getUser().getProfile().getLastName() != null) {
+			userToEdit.getProfile().setLastName(userAddRequestDto.getUser().getProfile().getLastName());
 		}
-		if (newUserInfo.getProfile().getEmail() != null) {
-			userToEdit.getProfile().setEmail(newUserInfo.getProfile().getEmail());
+		if (userAddRequestDto.getUser().getProfile().getEmail() != null) {
+			userToEdit.getProfile().setEmail(userAddRequestDto.getUser().getProfile().getEmail());
 		}
-		if (newUserInfo.getProfile().getPhone() != null) {
-			userToEdit.getProfile().setPhone(newUserInfo.getProfile().getPhone());
+		if (userAddRequestDto.getUser().getProfile().getPhone() != null) {
+			userToEdit.getProfile().setPhone(userAddRequestDto.getUser().getProfile().getPhone());
 		}
         
 		return fullUserMapper.entityToFullUserDto(userRepository.saveAndFlush(userToEdit));
