@@ -8,11 +8,6 @@ import UserCard from "../../Components/UserCard";
 const Users = ({openModal}) => {
     const [user, setUser] = useRecoilState(userState);
     const [users, setUsers] = useRecoilState(allUsersState);
-    const initialData = [
-        {name: "Chris Purnell", email: "uliajkas@jhosk.com", active: "yes", admin: "yes", status: "joined"},
-        {name: "Will Marttala", email: "uliajkas@jhosk.com", active: "yes", admin: "yes", status: "joined"},
-        {name: "Kenny Worth", email: "uliajkas@jhosk.com", active: "yes", admin: "yes", status: "joined"}
-    ]
 
     function openAddModal() {
         openModal("add-user");
@@ -42,7 +37,7 @@ const Users = ({openModal}) => {
                     </div>
                     <div className="user-list">
                         <div className="user-table">
-                            <div>
+                            <div className="row-with-5-columns user-header-card">
                                 <span>Name</span>
                                 <span>Email</span>
                                 <span>Active</span>

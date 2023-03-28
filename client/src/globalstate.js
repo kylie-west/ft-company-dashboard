@@ -111,22 +111,22 @@ export const allUsersState = atom({
         {
             name: "Chris Purnell",
             email: "uliajkas@jhosk.com",
-            active: "yes",
-            admin: "yes",
-            status: "joined"
+            active: false,
+            admin: true,
+            status: "pending"
         },
         {
             name: "Will Marttala",
             email: "uliajkas@jhosk.com",
-            active: "yes",
-            admin: "yes",
+            active: true,
+            admin: true,
             status: "joined"
         },
         {
             name: "Kenny Worth",
             email: "uliajkas@jhosk.com",
-            active: "yes",
-            admin: "yes",
+            active: false,
+            admin: false,
             status: "joined"
         }
     ],

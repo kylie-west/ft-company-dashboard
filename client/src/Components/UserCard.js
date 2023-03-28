@@ -1,15 +1,24 @@
 import React from "react";
 
 const UserCard = ({name, email, active, admin, status}) => {
+    const isActive = active ? (
+        <span className="active">YES</span>
+    ) : (
+        <span className="inactive">NO</span>
+    );
+    const isAdmin = admin ? (
+        <span className="active">YES</span>
+    ) : (
+        <span className="inactive">NO</span>
+    );
+
     return (
-        <div className="user-card">
-            <div className="user-details">
-                <span className="user-name">{name}</span>
-                <span className="user-email">{email}</span>
-                <span className="user-active">{active}</span>
-                <span className="user-admin">{admin}</span>
-                <span className="user-status">{status}</span>
-            </div>
+        <div className="user-details row-with-5-columns user-card">
+            <span className="user-name">{name}</span>
+            <span className="user-email">{email}</span>
+            {isActive}
+            {isAdmin}
+            <span style={{textTransform: "uppercase"}} className="user-status">{status}</span>
         </div>
     )
 };
