@@ -13,4 +13,6 @@ public class TeamRequestDto {
     private String description;
 
     private Set<BasicUserDto> teammates;
+    
+    private CredentialsDto credentials;
 }
