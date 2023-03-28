@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.cooksys.groupfinal.dtos.AnnouncementDto;
 import com.cooksys.groupfinal.dtos.AnnouncementRequestDto;
+import com.cooksys.groupfinal.dtos.CredentialsDto;
 
 public interface AnnouncementService {
 
@@ -11,4 +12,5 @@ public interface AnnouncementService {
 
     AnnouncementDto createAnnouncement(AnnouncementRequestDto announcementRequestDto);
 
+	  AnnouncementDto deleteAnnouncement(Long id, CredentialsDto credentialsDto);
 }
