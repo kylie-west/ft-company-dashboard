@@ -1,84 +1,160 @@
-
 .page-body {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-  }
-  
-  h1 {
-	color: var(--main-accent);
-	font-size: 3.5rem;
-	margin: 2rem;
-  }
-  
-  .modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 4rem;
+}
 
-  .modal-overlay {
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.25);
-  }
-  
-  .modal-container {
-	position: absolute;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width: fit-content;
-	background-color: var(--card-body);
-	border-radius: 6px;
-	padding: 1rem;
-	margin: 0 auto;
-	font-size: 1.6rem;
-	z-index: 2;
-  }
+h1 {
+  color: var(--main-accent);
+  font-size: 3.5rem;
+  margin: 3rem;
+}
 
-  .close-btn-wrapper {
-	width: 100%;
-	display: flex;
-	justify-content: flex-end;
-  }
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-  .close-modal-btn {
-	color: var(--tertiary-accent);
-	border: 3px solid var(--tertiary-accent);
-	border-radius: 50%;
-	width: 3rem;
-	height: 3rem;
-	background-color: transparent;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 2rem;
-	cursor: pointer;
-  }
+.modal-overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+}
 
-  .modal-body {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-  }
+.modal-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  background-color: var(--card-body);
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 0 auto;
+  font-size: 1.6rem;
+  z-index: 2;
+}
 
-  .submit-btn {
-	background-color: var(--main-accent);
-	padding: 1rem 6rem;
-	border: none;
-	border-radius: 6px;
-	font-size: 1.6rem;
-	color: white;
-	margin-top: 2.5rem;
-	cursor: pointer;
-  }
+.close-btn-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-modal-btn {
+  color: var(--tertiary-accent);
+  border: 3px solid var(--tertiary-accent);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  background-color: transparent;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit-btn {
+  background-color: var(--main-accent);
+  padding: 1rem 6rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.6rem;
+  color: white;
+  margin-top: 2.5rem;
+  cursor: pointer;
+}
+
+.header-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.go-back {
+  position: absolute;
+  left: 0;
+  color: var(--main-accent);
+  font-size: 2rem;
+}
+
+.project-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: min(800px, 100vw);
+}
+
+.project-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-top: 1px solid var(--secondary-accent);
+  gap: 4rem;
+  padding: 2.5rem 0;
+}
+
+.project-name {
+  font-size: 2.5rem;
+  width: max(200px, 25%);
+}
+
+.activity-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.project-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 2rem;
+  font-size: 1.8rem;
+}
+
+.active {
+  color: var(--active);
+}
+
+.inactive {
+  color: var(--inactive);
+}
+
+.edit-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: min-content;
+}
+
+.edit-btn {
+  color: black;
+  background-color: var(--secondary-accent);
+  border: none;
+  padding: 0.8rem 4rem;
+  border-radius: 10px;
+  font-size: 1.6rem;
+  cursor: pointer;
+}

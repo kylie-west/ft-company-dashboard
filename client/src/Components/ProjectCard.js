@@ -16,7 +16,9 @@ const ProjectCard = ({ name, description, active }) => {
         </span>
         <span className="project-description">{description}</span>
       </div>
-      <button className="edit-btn">Edit</button>
+      <div className="edit-btn-wrapper">
+        <button className="edit-btn">Edit</button>
+      </div>
     </div>
   );
 };

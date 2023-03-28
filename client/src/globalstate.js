@@ -132,9 +132,23 @@ export const projectsState = atom({
   default: [
     {
       id: 4,
-      name: "cool project",
-      description: "Lorem ipsums",
+      name: "Cool Project",
+      description:
+        "Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim sit amet venenatis urna cursus",
       active: true,
+      team: {
+        id: 3,
+        name: "Awesome",
+        description: "Among us",
+        users: [{ id: 1 }],
+      },
+    },
+    {
+      id: 5,
+      name: "Lorem Ipsum",
+      description:
+        "Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim sit amet venenatis urna cursus",
+      active: false,
       team: {
         id: 3,
         name: "Awesome",

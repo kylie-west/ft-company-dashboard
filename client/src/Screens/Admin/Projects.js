@@ -28,9 +28,8 @@ const Projects = () => {
           <div className="header-wrapper">
             <span className="go-back">{"<"} Back</span>
             <h1>Projects for Team dfsjgjks</h1>
-
-            <div className="project-list">{projs}</div>
           </div>
+          <div className="project-list">{projs}</div>
         </div>
       </div>
     );
