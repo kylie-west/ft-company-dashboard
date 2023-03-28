@@ -24,66 +24,68 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-	
+
 	private final UserRepository userRepository;
-  private final FullUserMapper fullUserMapper;
-  private final BasicUserMapper basicUserMapper;
+	private final FullUserMapper fullUserMapper;
+	private final BasicUserMapper basicUserMapper;
 	private final CredentialsMapper credentialsMapper;
-	
+
 	private User findUser(String username) {
-        Optional<User> user = userRepository.findByCredentialsUsernameAndActiveTrue(username);
-        if (user.isEmpty()) {
-            throw new NotFoundException("The username provided does not belong to an active user.");
-        }
-        return user.get();
-    }
-	
+		Optional<User> user = userRepository.findByCredentialsUsernameAndActiveTrue(username);
+		if (user.isEmpty()) {
+			throw new NotFoundException("The username provided does not belong to an active user.");
+		}
+		return user.get();
+	}
+
 	private User findUser(long id) {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isEmpty()) {
-            throw new NotFoundException("The user id provided does not belong to an active user.");
-        }
-        return user.get();
-    }
-	
+		Optional<User> user = userRepository.findById(id);
+		if (user.isEmpty()) {
+			throw new NotFoundException("The user id provided does not belong to an active user.");
+		}
+		return user.get();
+	}
+
 	@Override
 	public FullUserDto login(CredentialsDto credentialsDto) {
 		if (credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
-            throw new BadRequestException("A username and password are required.");
-        }
-        Credentials credentialsToValidate = credentialsMapper.dtoToEntity(credentialsDto);
-        User userToValidate = findUser(credentialsDto.getUsername());
-        if (!userToValidate.getCredentials().equals(credentialsToValidate)) {
-            throw new NotAuthorizedException("The provided credentials are invalid.");
-        }
-        if (userToValidate.getStatus().equals("PENDING")) {
-        	userToValidate.setStatus("JOINED");
-        	userRepository.saveAndFlush(userToValidate);
-        }
-        return fullUserMapper.entityToFullUserDto(userToValidate);
+			throw new BadRequestException("A username and password are required.");
+		}
+		Credentials credentialsToValidate = credentialsMapper.dtoToEntity(credentialsDto);
+		User userToValidate = findUser(credentialsDto.getUsername());
+		if (!userToValidate.getCredentials().equals(credentialsToValidate)) {
+			throw new NotAuthorizedException("The provided credentials are invalid.");
+		}
+		if (userToValidate.getStatus().equals("PENDING")) {
+			userToValidate.setStatus("JOINED");
+			userRepository.saveAndFlush(userToValidate);
+		}
+		return fullUserMapper.entityToFullUserDto(userToValidate);
 	}
 
 	@Override
 	public FullUserDto editUser(UserAddRequestDto userAddRequestDto, long id) {
-		if (userAddRequestDto == null || userAddRequestDto.getCredentials() == null || userAddRequestDto.getCredentials().getUsername() == null || userAddRequestDto.getCredentials().getPassword() == null || userAddRequestDto.getUser() == null) {
-            throw new BadRequestException("A username and password are required.");
-        }
-        Credentials credentialsToValidate = credentialsMapper.dtoToEntity(userAddRequestDto.getCredentials());
-        User userToValidate = findUser(userAddRequestDto.getCredentials().getUsername());
-        if (!userToValidate.getCredentials().equals(credentialsToValidate)) {
-            throw new NotAuthorizedException("The provided credentials are invalid.");
-        }
-        User userToEdit = findUser(id);
-        User newUserInfo = basicUserMapper.requestDtoToEntity(userAddRequestDto.getUser());
-        
-        if (newUserInfo.getCredentials().getUsername() != null) {
-        	userToEdit.getCredentials().setUsername(newUserInfo.getCredentials().getUsername());
+		if (userAddRequestDto == null || userAddRequestDto.getCredentials() == null
+				|| userAddRequestDto.getCredentials().getUsername() == null
+				|| userAddRequestDto.getCredentials().getPassword() == null || userAddRequestDto.getUser() == null) {
+			throw new BadRequestException("A username and password are required.");
 		}
-        if (newUserInfo.getCredentials().getPassword() != null) {
-        	userToEdit.getCredentials().setPassword(newUserInfo.getCredentials().getPassword());
+		Credentials credentialsToValidate = credentialsMapper.dtoToEntity(userAddRequestDto.getCredentials());
+		User userToValidate = findUser(userAddRequestDto.getCredentials().getUsername());
+		if (!userToValidate.getCredentials().equals(credentialsToValidate)) {
+			throw new NotAuthorizedException("The provided credentials are invalid.");
 		}
-        if (newUserInfo.getProfile().getFirstName() != null) {
-        	userToEdit.getProfile().setFirstName(newUserInfo.getProfile().getFirstName());
+		User userToEdit = findUser(id);
+		User newUserInfo = basicUserMapper.requestDtoToEntity(userAddRequestDto.getUser());
+
+		if (newUserInfo.getCredentials().getUsername() != null) {
+			userToEdit.getCredentials().setUsername(newUserInfo.getCredentials().getUsername());
+		}
+		if (newUserInfo.getCredentials().getPassword() != null) {
+			userToEdit.getCredentials().setPassword(newUserInfo.getCredentials().getPassword());
+		}
+		if (newUserInfo.getProfile().getFirstName() != null) {
+			userToEdit.getProfile().setFirstName(newUserInfo.getProfile().getFirstName());
 		}
 		if (newUserInfo.getProfile().getLastName() != null) {
 			userToEdit.getProfile().setLastName(newUserInfo.getProfile().getLastName());
@@ -94,20 +96,18 @@ public class UserServiceImpl implements UserService {
 		if (newUserInfo.getProfile().getPhone() != null) {
 			userToEdit.getProfile().setPhone(newUserInfo.getProfile().getPhone());
 		}
-        
+
 		return fullUserMapper.entityToFullUserDto(userRepository.saveAndFlush(userToEdit));
 	}
 
 	@Override
 	public BasicUserDto createUser(UserAddRequestDto userAddRequestDto, Long companyId) {
-		// TODO Auto-generated method stub
+		// check if credentials are existing
+		CredentialsDto credentialsDto = userAddRequestDto.getCredentials();
+		if(credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
+			throw new NotFoundException("Valid credentials are required.");
+		}
+				
 		return null;
 	}
-	
-	
-	
-	
-	
-	
-
 }
