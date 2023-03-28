@@ -19,14 +19,14 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
-	
+
 	private final UserService userService;
-	
+
 	@PostMapping("/login")
-	@CrossOrigin(origins="*")
-    public FullUserDto login(@RequestBody CredentialsDto credentialsDto) {
-        return userService.login(credentialsDto);
-    }
+	@CrossOrigin(origins = "*")
+	public FullUserDto login(@RequestBody CredentialsDto credentialsDto) {
+		return userService.login(credentialsDto);
+	}
 
 	@PatchMapping("/{id}")
 	public FullUserDto editUser(@RequestBody UserAddRequestDto userAddRequestDto, @PathVariable long id) {

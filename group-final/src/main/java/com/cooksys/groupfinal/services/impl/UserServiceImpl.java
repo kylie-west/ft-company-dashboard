@@ -133,5 +133,4 @@ public class UserServiceImpl implements UserService {
 
 		return fullUserMapper.entityToFullUserDto(userRepository.saveAndFlush(userToEdit));
 	}
-
 }
