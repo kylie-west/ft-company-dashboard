@@ -4,6 +4,7 @@ import { userState } from "../../globalstate";
 import { projectsState } from "../../globalstate";
 import NavBar from "../../Components/NavBar";
 import ProjectCard from "../../Components/ProjectCard";
+import getModal from "../../Components/ModalContainer";
 
 const Projects = ({ openModal }) => {
   const [user, setUser] = useRecoilState(userState);
@@ -13,17 +14,17 @@ const Projects = ({ openModal }) => {
     openModal("create-project");
   }
 
-  function openEditModal(proj) {
-    openModal("edit-project", proj);
+  function openEditModal(projectId) {
+    openModal("edit-project", projectId);
   }
 
-  const projs = projects.map(({ name, description, active }, index) => (
+  const projs = projects.map((p) => (
     <ProjectCard
-      key={index}
-      name={name}
-      description={description}
-      active={active}
-      openEditModal={() => openEditModal({ name, description, active })}
+      key={p.id}
+      name={p.name}
+      description={p.description}
+      active={p.active}
+      openEditModal={() => openEditModal({ id: p.id })}
     />
   ));
 
@@ -39,16 +40,11 @@ const Projects = ({ openModal }) => {
             <h1>Projects for Team dfsjgjks</h1>
           </div>
 
-          <div className="project-list">
-            {user.isAdmin && (
-              <button className="new-project-btn" onClick={openAddModal}>
-                New
-              </button>
-            )}
-            {projs}
+            <div className="project-list">{projs}</div>
+            
           </div>
         </div>
-      </div>
+      
     );
   }
 };

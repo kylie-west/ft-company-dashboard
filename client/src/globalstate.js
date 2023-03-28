@@ -3,6 +3,13 @@ import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();
 
+export const appState = atom({
+  key: "appState",
+  default: {
+    viewTeamId: null
+  }
+});
+
 export const userState = atom({
   key: "userState",
   default: {
@@ -14,7 +21,7 @@ export const userState = atom({
       firstname: "John",
       lastname: "Smith",
       email: "john.smith@gmail.com",
-      phone: "483-3278-3732",
+      phone: "483-3278-3732"
     },
     active: true,
     status: "joined",
@@ -28,8 +35,8 @@ export const userState = atom({
             id: 3,
             name: "Awesome",
             description: "Among us",
-            users: [{ id: 1 }],
-          },
+            users: [{ id: 1 }]
+          }
         ],
         users: [
           {
@@ -38,13 +45,13 @@ export const userState = atom({
               firstname: "John",
               lastname: "Smith",
               email: "john.smith@gmail.com",
-              phone: "483-3278-3732",
+              phone: "483-3278-3732"
             },
             active: true,
-            status: "joined",
-          },
-        ],
-      },
+            status: "joined"
+          }
+        ]
+      }
     ],
     teams: [
       {
@@ -58,16 +65,16 @@ export const userState = atom({
               firstname: "John",
               lastname: "Smith",
               email: "john.smith@gmail.com",
-              phone: "483-3278-3732",
+              phone: "483-3278-3732"
             },
             active: true,
-            status: "joined",
-          },
-        ],
-      },
-    ],
+            status: "joined"
+          }
+        ]
+      }
+    ]
   },
-  effects_UNSTABLE: [persistAtom],
+  effects_UNSTABLE: [persistAtom]
 });
 
 export const announcementsState = atom({
@@ -79,7 +86,18 @@ export const announcementsState = atom({
       title: "Announcement 1",
       message:
         "Elementum sagittis vitae et leo duis ut diam quam nulla porttitor massa id neque aliquam vestibulum morbi blandit cursus risus at ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget gravida cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies leo integer malesuada nunc",
-      author: "Chris, CEO",
+      author: {
+        id: 1,
+        profile: {
+          firstname: "John",
+          lastname: "Smith",
+          email: "john.smith@gmail.com",
+          phone: "483-3278-3732"
+        },
+        isAdmin: true,
+        active: true,
+        status: "joined"
+      }
     },
     {
       id: 2,
@@ -87,7 +105,18 @@ export const announcementsState = atom({
       title: "Announcement 2",
       message:
         "Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim sit amet venenatis urna cursus",
-      author: "Chris, CEO",
+      author: {
+        id: 1,
+        profile: {
+          firstname: "John",
+          lastname: "Smith",
+          email: "john.smith@gmail.com",
+          phone: "483-3278-3732"
+        },
+        isAdmin: true,
+        active: true,
+        status: "joined"
+      }
     },
     {
       id: 3,
@@ -95,17 +124,29 @@ export const announcementsState = atom({
       title: "Announcement 3",
       message:
         "Magna sit amet purus gravida quis blandit turpis cursus in hac habitasse platea dictumst quisque sagittis purus sit amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus mauris a",
-      author: "Chris, CEO",
-    },
-  ],
+      author: {
+        id: 1,
+        profile: {
+          firstname: "John",
+          lastname: "Smith",
+          email: "john.smith@gmail.com",
+          phone: "483-3278-3732"
+        },
+        isAdmin: true,
+        active: true,
+        status: "joined"
+      }
+    }
+  ]
 });
 
 export const companyState = atom({
   key: "companyState",
-  default: [],
+  default: []
 });
 
 export const allUsersState = atom({
+user-screen
     key: "allUsersState",
     default: [
         {
@@ -136,8 +177,8 @@ export const errorState = atom({
   key: "errorState",
   default: {
     isError: false,
-    message: "",
-  },
+    message: ""
+  }
 });
 
 export const modalState = atom({
@@ -145,8 +186,8 @@ export const modalState = atom({
   default: {
     isOpen: false,
     type: "", // refer to ModalContainer.js for list of types
-    data: {}, // do whatever you want with this
-  },
+    data: {} // do whatever you want with this
+  }
 });
 
 // TO BE DELETED?
@@ -160,11 +201,11 @@ export const projectsState = atom({
         "Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim sit amet venenatis urna cursus",
       active: true,
       team: {
-        id: 3,
+        id: 10,
         name: "Awesome",
         description: "Among us",
-        users: [{ id: 1 }],
-      },
+        users: [{ id: 1 }]
+      }
     },
     {
       id: 5,
@@ -173,13 +214,13 @@ export const projectsState = atom({
         "Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim sit amet venenatis urna cursus",
       active: false,
       team: {
-        id: 3,
+        id: 20,
         name: "Awesome",
         description: "Among us",
-        users: [{ id: 1 }],
-      },
-    },
-  ],
+        users: [{ id: 1 }]
+      }
+    }
+  ]
 });
 
 export const teamState = atom({
@@ -196,10 +237,10 @@ export const teamState = atom({
             firstname: "John",
             lastname: "Smith",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732",
+            phone: "483-3278-3732"
           },
           active: true,
-          status: "joined",
+          status: "joined"
         },
         {
           id: 2,
@@ -207,10 +248,10 @@ export const teamState = atom({
             firstname: "Steve",
             lastname: "Rogers",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732",
+            phone: "483-3278-3732"
           },
           active: true,
-          status: "joined",
+          status: "joined"
         }
       ]
     },
@@ -225,10 +266,10 @@ export const teamState = atom({
             firstname: "John",
             lastname: "Smith",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732",
+            phone: "483-3278-3732"
           },
           active: true,
-          status: "joined",
+          status: "joined"
         },
         {
           id: 2,
@@ -236,12 +277,12 @@ export const teamState = atom({
             firstname: "Clark",
             lastname: "Kent",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732",
+            phone: "483-3278-3732"
           },
           active: true,
-          status: "joined",
-        },
+          status: "joined"
+        }
       ]
     }
   ]
-})
+});
