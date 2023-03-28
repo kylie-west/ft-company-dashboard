@@ -3,6 +3,13 @@ import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();
 
+export const appState = atom({
+  key: "appState",
+  default: {
+    viewTeamId: null,
+  },
+});
+
 export const userState = atom({
   key: "userState",
   default: {
@@ -138,7 +145,7 @@ export const projectsState = atom({
         "Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim sit amet venenatis urna cursus",
       active: true,
       team: {
-        id: 3,
+        id: 10,
         name: "Awesome",
         description: "Among us",
         users: [{ id: 1 }],
@@ -151,7 +158,7 @@ export const projectsState = atom({
         "Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim sit amet venenatis urna cursus",
       active: false,
       team: {
-        id: 3,
+        id: 20,
         name: "Awesome",
         description: "Among us",
         users: [{ id: 1 }],
@@ -189,8 +196,8 @@ export const teamState = atom({
           },
           active: true,
           status: "joined",
-        }
-      ]
+        },
+      ],
     },
     {
       id: 20,
@@ -219,7 +226,7 @@ export const teamState = atom({
           active: true,
           status: "joined",
         },
-      ]
-    }
-  ]
-})
+      ],
+    },
+  ],
+});
