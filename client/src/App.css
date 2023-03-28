@@ -83,6 +83,17 @@ h1 {
   cursor: pointer;
 }
 
+
+  .editForm{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: right;
+  }
+
+
+  
+
 .header-wrapper {
   position: relative;
   display: flex;
@@ -114,6 +125,7 @@ h1 {
   border-top: 1px solid var(--secondary-accent);
   gap: 4rem;
   padding: 2.5rem 0;
+  width: 100%
 }
 
 .project-name {

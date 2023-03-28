@@ -35,7 +35,7 @@ const CompanyScreen = () => {
            )} 
           
              </select>
-
+              
           </div>
         </div>
       </div>

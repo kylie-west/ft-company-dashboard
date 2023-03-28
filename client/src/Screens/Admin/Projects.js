@@ -4,6 +4,7 @@ import { userState } from "../../globalstate";
 import { projectsState } from "../../globalstate";
 import NavBar from "../../Components/NavBar";
 import ProjectCard from "../../Components/ProjectCard";
+import getModal from "../../Components/ModalContainer";
 
 const Projects = ({ openModal }) => {
   const [user, setUser] = useRecoilState(userState);
@@ -39,16 +40,11 @@ const Projects = ({ openModal }) => {
             <h1>Projects for Team dfsjgjks</h1>
           </div>
 
-          <div className="project-list">
-            {user.isAdmin && (
-              <button className="new-project-btn" onClick={openAddModal}>
-                New
-              </button>
-            )}
-            {projs}
+            <div className="project-list">{projs}</div>
+            
           </div>
         </div>
-      </div>
+      
     );
   }
 };
