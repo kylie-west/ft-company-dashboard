@@ -260,6 +260,10 @@ h1 {
   font-weight: 300;
 }
 
+.announce-card p {
+  white-space: pre-wrap;
+}
+
 .announce-info {
   display: flex;
   justify-content: space-between;

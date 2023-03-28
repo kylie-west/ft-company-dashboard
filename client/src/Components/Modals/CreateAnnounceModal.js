@@ -6,7 +6,6 @@ import SubmitButton from "../SubmitButton";
 import { announcementsState, userState } from "../../globalstate";
 
 /**
- * @todo Preserve newlines
  * @todo Use actual backend API data
  * @todo Form validation/error handling
  */
