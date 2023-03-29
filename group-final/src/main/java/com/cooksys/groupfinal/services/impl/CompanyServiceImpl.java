@@ -54,6 +54,9 @@ public class CompanyServiceImpl implements CompanyService {
 		if (team.isEmpty()) {
 			throw new NotFoundException("A team with the provided id does not exist.");
 		}
+		if(team.get().isActive() == false) {
+		  throw new NotFoundException("Team is no longer active.");
+		}
 		return team.get();
 	}
 
