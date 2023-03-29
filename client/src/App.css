@@ -264,8 +264,10 @@ h1 {
 /* Teams */
 
 .team-body {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  justify-content: center;
+  justify-items: center;
   gap: 50px;
   width: 70vw;
   margin: auto;
@@ -276,7 +278,6 @@ h1 {
   background-color: var(--card-body);
   border-radius: 10px;
   width: clamp(30%, 400px, 90vw);
-  min-height: 300px;
 }
 
 .team-header {
@@ -288,24 +289,32 @@ h1 {
 }
 
 .team-header a {
+  display: inline-block;
   text-decoration: none;
   color: white;
   font-size: 2rem;
+  height: 3rem;
+}
+
+.team-header a:hover {
+  border-bottom: 2px solid white;
 }
 
 .team-members {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+  min-height: 200px;
   padding: 20px 40px;
   margin: 5px;
 }
 
 .team-pill {
+  height: fit-content;
   padding: 10px 15px;
   text-align: center;
   background-color: var(--main-accent);
-  border-radius: 10px;
+  border-radius: 15px;
 }
 
 /* Announcements */
@@ -441,8 +450,27 @@ h1 {
 
 /* Media Queries */
 
-@media (max-device-width: 750px) {
+@media (max-width: 1860px) {
+  .team-body {
+    width: 60vw;
+  }
+}
+
+@media (max-width: 750px) {
   .announce-top h1 {
     grid-column: 1 / 2;
+  }
+
+  .page-body {
+    padding: 0;
+  }
+
+  .team-body {
+    width: 100%;
+    gap: 30px;
+  }
+
+  .team-pill {
+    font-size: 1.4rem;
   }
 }
