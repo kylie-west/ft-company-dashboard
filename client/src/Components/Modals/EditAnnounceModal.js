@@ -3,26 +3,22 @@ import { useRecoilState } from "recoil";
 import FormControl from "@mui/material/FormControl";
 import StyledTextField from "../StyledTextField";
 import SubmitButton from "../SubmitButton";
-import {
-  announcementsState,
-  appState,
-  modalState,
-  userState
-} from "../../globalstate";
+import { announcementsState, appState, modalState } from "../../globalstate";
 import { editAnnouncement } from "../../Services/announcements";
 
 /**
  * @todo Form validation/error handling
  */
-const CreateAnnounceModal = ({ closeModal }) => {
+const EditAnnounceModal = ({ closeModal }) => {
   const [announcements, setAnnouncements] = useRecoilState(announcementsState);
   const [app] = useRecoilState(appState);
   const [modal] = useRecoilState(modalState);
-  const [user] = useRecoilState(userState);
   const [form, setForm] = useState({ title: "", message: "" });
 
+  const { id, credentials, title, message } = modal.data;
+
   useEffect(() => {
-    setForm({ title: modal.data.title, message: modal.data.message });
+    setForm({ title, message });
   }, []);
 
   function handleChange(e) {
@@ -34,24 +30,24 @@ const CreateAnnounceModal = ({ closeModal }) => {
     if (
       !form.title.length ||
       !form.message.length ||
-      (form.title === modal.data.title && form.message === modal.data.message)
+      (form.title === title && form.message === message)
     ) {
       return;
     }
 
     const requestObj = {
-      credentials: { username: user.username, password: user.password },
+      credentials,
       title: form.title,
       message: form.message,
       companyId: app.viewCompanyId
     };
 
-    editAnnouncement(modal.data.id, requestObj).then(res => {
+    editAnnouncement(id, requestObj).then(res => {
       console.log("New announcement:", res);
 
       // Replace old version in announcement state array
       const filteredAnnouncements = announcements.filter(
-        announcement => announcement.id !== res.id
+        announcement => announcement.id !== id
       );
       setAnnouncements([...filteredAnnouncements, res]);
     });
@@ -84,7 +80,7 @@ const CreateAnnounceModal = ({ closeModal }) => {
   );
 };
 
-export default CreateAnnounceModal;
+export default EditAnnounceModal;
 
 const formStyle = {
   display: "flex",

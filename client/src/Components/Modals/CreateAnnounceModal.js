@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import FormControl from "@mui/material/FormControl";
 import StyledTextField from "../StyledTextField";
 import SubmitButton from "../SubmitButton";
-import { announcementsState, appState, userState } from "../../globalstate";
+import { announcementsState, modalState } from "../../globalstate";
 import { createAnnouncement } from "../../Services/announcements";
 
 /**
@@ -11,9 +11,10 @@ import { createAnnouncement } from "../../Services/announcements";
  */
 const CreateAnnounceModal = ({ closeModal }) => {
   const [announcements, setAnnouncements] = useRecoilState(announcementsState);
-  const [app] = useRecoilState(appState);
-  const [user] = useRecoilState(userState);
+  const [modal] = useRecoilState(modalState);
   const [form, setForm] = useState({ title: "", message: "" });
+
+  const { credentials, companyId } = modal.data;
 
   function handleChange(e) {
     setForm({ ...form, [e.target.id]: e.target.value });
@@ -26,10 +27,10 @@ const CreateAnnounceModal = ({ closeModal }) => {
     }
 
     const requestObj = {
-      credentials: { username: user.username, password: user.password },
+      credentials,
       title: form.title,
       message: form.message,
-      companyId: app.viewCompanyId
+      companyId
     };
 
     createAnnouncement(requestObj).then(res => {

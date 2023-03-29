@@ -73,6 +73,13 @@ h1 {
   width: 100%;
 }
 
+.modal-body.delete-announce {
+  gap: 30px;
+  min-height: 300px;
+  padding: 0 30px;
+  text-align: center;
+}
+
 .modal-form {
 }
 
@@ -410,6 +417,20 @@ h1 {
 
 .announce-icon.delete:hover {
   color: var(--tertiary-accent);
+}
+
+.announce-delete-btn {
+  padding: 10px 20px;
+  background: var(--main-accent);
+  font-size: 1.6rem;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.announce-delete-btn:hover {
+  background: var(--tertiary-accent);
 }
 
 /* Media Queries */

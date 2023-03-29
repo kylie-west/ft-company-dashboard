@@ -5,6 +5,7 @@ import EditAnnounceModal from "./Modals/EditAnnounceModal";
 import CreateProjectModal from "./Modals/CreateProjectModal";
 import CreateTeamModal from "./Modals/CreateTeamModal";
 import EditProjectModal from "./Modals/EditProjectModal";
+import DeleteAnnounceModal from "./Modals/DeleteAnnounceModal";
 
 const ModalContainer = ({ isOpen, type, closeModal }) => {
   function getModal() {
@@ -15,6 +16,8 @@ const ModalContainer = ({ isOpen, type, closeModal }) => {
         return <CreateAnnounceModal closeModal={closeModal} />;
       case "edit-announcement":
         return <EditAnnounceModal closeModal={closeModal} />;
+      case "delete-announcement":
+        return <DeleteAnnounceModal closeModal={closeModal} />;
       case "create-project":
         return <CreateProjectModal />;
       case "edit-project":

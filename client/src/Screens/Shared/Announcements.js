@@ -55,16 +55,29 @@ const Announcements = ({ openModal }) => {
 
   const handleClickNew = e => {
     e.preventDefault();
-    openModal("create-announcement");
+    const data = {
+      credentials: { username: user.username, password: user.password },
+      companyId: app.viewCompanyId
+    };
+    openModal("create-announcement", data);
   };
 
   const handleClickEdit = announcement => {
     const data = {
       id: announcement.id,
+      credentials: { username: user.username, password: user.password },
       title: announcement.title,
       message: announcement.message
     };
     openModal("edit-announcement", data);
+  };
+
+  const handleClickDelete = announcement => {
+    const data = {
+      id: announcement.id,
+      credentials: { username: user.username, password: user.password }
+    };
+    openModal("delete-announcement", data);
   };
 
   if (!user.isLoggedIn) {
@@ -97,6 +110,7 @@ const Announcements = ({ openModal }) => {
                     <DeleteForeverIcon
                       className="announce-icon delete"
                       role="button"
+                      onClick={() => handleClickDelete(announcement)}
                     />
                   </div>
                 ) : null}
