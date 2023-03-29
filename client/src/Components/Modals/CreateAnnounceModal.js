@@ -3,14 +3,15 @@ import { useRecoilState } from "recoil";
 import FormControl from "@mui/material/FormControl";
 import StyledTextField from "../StyledTextField";
 import SubmitButton from "../SubmitButton";
-import { announcementsState, userState } from "../../globalstate";
+import { announcementsState, appState, userState } from "../../globalstate";
+import { createAnnouncement } from "../../Services/announcements";
 
 /**
- * @todo Use actual backend API data
  * @todo Form validation/error handling
  */
 const CreateAnnounceModal = ({ closeModal }) => {
   const [announcements, setAnnouncements] = useRecoilState(announcementsState);
+  const [app] = useRecoilState(appState);
   const [user] = useRecoilState(userState);
   const [form, setForm] = useState({ title: "", message: "" });
 
@@ -18,21 +19,23 @@ const CreateAnnounceModal = ({ closeModal }) => {
     setForm({ ...form, [e.target.id]: e.target.value });
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     if (!form.title.length || !form.message.length) {
       return;
     }
 
-    const newAnnouncement = {
-      id: Math.floor(Math.random() * 500000),
-      date: new Date(),
+    const requestObj = {
+      credentials: { username: user.username, password: user.password },
       title: form.title,
       message: form.message,
-      author: user
+      companyId: app.viewCompanyId
     };
-    setAnnouncements([...announcements, newAnnouncement]);
-    console.log("Announcements:", announcements);
+
+    createAnnouncement(requestObj).then(res => {
+      console.log("New announcement:", res);
+      setAnnouncements([...announcements, res]);
+    });
 
     closeModal(e);
   }

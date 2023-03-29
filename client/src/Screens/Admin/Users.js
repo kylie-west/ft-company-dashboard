@@ -1,23 +1,38 @@
 import {Navigate} from "react-router-dom";
 import {useRecoilState} from "recoil";
 import NavBar from "../../Components/NavBar";
-import {allUsersState, userState} from "../../globalstate";
+import {allUsersState, appState, userState} from "../../globalstate";
 import "../../App.css"
 import UserCard from "../../Components/UserCard";
+import {getCompanyUsers} from "../../Services/users";
+import {useEffect} from "react";
 
 const Users = ({openModal}) => {
-    const [user, setUser] = useRecoilState(userState);
+    const [app] = useRecoilState(appState);
+    const [user] = useRecoilState(userState);
     const [users, setUsers] = useRecoilState(allUsersState);
+
+    useEffect(() => {
+        const getAllUsers = async () => {
+            const response = await getCompanyUsers(app.viewCompanyId);
+            setUsers(response.data);
+            console.log('users response');
+            console.log(response.data);
+        }
+        if (user.isAdmin) {
+            getAllUsers();
+        }
+    }, [app.viewCompanyId, user.isAdmin, setUsers])
 
     function openAddModal() {
         openModal("add-user");
     }
 
-    const showUsers = users.map(({name, email, active, admin, status}, index) => (
+    const showUsers = users.map(({id, profile = {}, admin, active, status}) => (
         <UserCard
-            key={index}
-            name={name}
-            email={email}
+            key={id}
+            name={profile.firstName + " " + profile.lastName}
+            email={profile.email}
             active={active}
             admin={admin}
             status={status}
@@ -26,6 +41,8 @@ const Users = ({openModal}) => {
 
     if (!user.isLoggedIn) {
         return <Navigate replace to="/"/>;
+    } else if (app.viewCompanyId === undefined) {
+        return <Navigate replace to="/company"/>
     } else {
         return (
             <div className="page">
