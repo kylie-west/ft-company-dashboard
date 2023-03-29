@@ -239,22 +239,51 @@ h1 {
   align-self: flex-start;
 }
 
+/* Teams */
+
 .team-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  width: 70vw;
+  margin: auto;
+}
+
+.team-card {
+  font-size: 1.6rem;
+  background-color: var(--card-body);
+  border-radius: 10px;
+  width: clamp(30%, 400px, 90vw);
+  min-height: 300px;
 }
 
 .team-header {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: space-between;
+  align-items: end;
+  padding: 20px 40px;
+  border-bottom: 1px solid var(--secondary-accent);
+}
+
+.team-header a {
+  text-decoration: none;
+  color: white;
+  font-size: 2rem;
 }
 
 .team-members {
   display: grid;
   grid-template-columns: 1fr 1fr;
-
+  gap: 30px;
+  padding: 20px 40px;
   margin: 5px;
+}
+
+.team-pill {
+  padding: 10px 15px;
+  text-align: center;
+  background-color: var(--main-accent);
+  border-radius: 10px;
 }
 
 /* Announcements */
