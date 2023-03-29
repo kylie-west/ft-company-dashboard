@@ -24,7 +24,7 @@ export const userState = atom({
       firstname: "John",
       lastname: "Smith",
       email: "john.smith@gmail.com",
-      phone: "483-3278-3732"
+      phone: "483-3278-3732",
     },
     active: true,
     status: "joined",
@@ -38,8 +38,8 @@ export const userState = atom({
             id: 3,
             name: "Awesome",
             description: "Among us",
-            users: [{ id: 1 }]
-          }
+            users: [{ id: 1 }],
+          },
         ],
         users: [
           {
@@ -48,13 +48,13 @@ export const userState = atom({
               firstname: "John",
               lastname: "Smith",
               email: "john.smith@gmail.com",
-              phone: "483-3278-3732"
+              phone: "483-3278-3732",
             },
             active: true,
-            status: "joined"
-          }
-        ]
-      }
+            status: "joined",
+          },
+        ],
+      },
     ],
     teams: [
       {
@@ -68,16 +68,16 @@ export const userState = atom({
               firstname: "John",
               lastname: "Smith",
               email: "john.smith@gmail.com",
-              phone: "483-3278-3732"
+              phone: "483-3278-3732",
             },
             active: true,
-            status: "joined"
-          }
-        ]
-      }
-    ]
+            status: "joined",
+          },
+        ],
+      },
+    ],
   },
-  effects_UNSTABLE: [persistAtom]
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const announcementsState = atom({
@@ -95,12 +95,12 @@ export const announcementsState = atom({
           firstname: "John",
           lastname: "Smith",
           email: "john.smith@gmail.com",
-          phone: "483-3278-3732"
+          phone: "483-3278-3732",
         },
         isAdmin: true,
         active: true,
-        status: "joined"
-      }
+        status: "joined",
+      },
     },
     {
       id: 2,
@@ -114,12 +114,12 @@ export const announcementsState = atom({
           firstname: "John",
           lastname: "Smith",
           email: "john.smith@gmail.com",
-          phone: "483-3278-3732"
+          phone: "483-3278-3732",
         },
         isAdmin: true,
         active: true,
-        status: "joined"
-      }
+        status: "joined",
+      },
     },
     {
       id: 3,
@@ -133,55 +133,54 @@ export const announcementsState = atom({
           firstname: "John",
           lastname: "Smith",
           email: "john.smith@gmail.com",
-          phone: "483-3278-3732"
+          phone: "483-3278-3732",
         },
         isAdmin: true,
         active: true,
-        status: "joined"
-      }
-    }
-  ]
+        status: "joined",
+      },
+    },
+  ],
 });
 
 export const companyState = atom({
   key: "companyState",
-  default: []
+  default: [],
 });
 
 export const allUsersState = atom({
-user-screen
-    key: "allUsersState",
-    default: [
-        {
-            name: "Chris Purnell",
-            email: "uliajkas@jhosk.com",
-            active: false,
-            admin: true,
-            status: "pending"
-        },
-        {
-            name: "Will Marttala",
-            email: "uliajkas@jhosk.com",
-            active: true,
-            admin: true,
-            status: "joined"
-        },
-        {
-            name: "Kenny Worth",
-            email: "uliajkas@jhosk.com",
-            active: false,
-            admin: false,
-            status: "joined"
-        }
-    ],
+  key: "allUsersState",
+  default: [
+    {
+      name: "Chris Purnell",
+      email: "uliajkas@jhosk.com",
+      active: false,
+      admin: true,
+      status: "pending",
+    },
+    {
+      name: "Will Marttala",
+      email: "uliajkas@jhosk.com",
+      active: true,
+      admin: true,
+      status: "joined",
+    },
+    {
+      name: "Kenny Worth",
+      email: "uliajkas@jhosk.com",
+      active: false,
+      admin: false,
+      status: "joined",
+    },
+  ],
 });
 
 export const errorState = atom({
   key: "errorState",
   default: {
     isError: false,
-    message: ""
-  }
+    message: "",
+  },
 });
 
 export const modalState = atom({
@@ -189,8 +188,8 @@ export const modalState = atom({
   default: {
     isOpen: false,
     type: "", // refer to ModalContainer.js for list of types
-    data: {} // do whatever you want with this
-  }
+    data: {}, // do whatever you want with this
+  },
 });
 
 // TO BE DELETED?
@@ -207,8 +206,8 @@ export const projectsState = atom({
         id: 10,
         name: "Awesome",
         description: "Among us",
-        users: [{ id: 1 }]
-      }
+        users: [{ id: 1 }],
+      },
     },
     {
       id: 5,
@@ -220,10 +219,10 @@ export const projectsState = atom({
         id: 20,
         name: "Awesome",
         description: "Among us",
-        users: [{ id: 1 }]
-      }
-    }
-  ]
+        users: [{ id: 1 }],
+      },
+    },
+  ],
 });
 
 export const teamState = atom({
@@ -240,10 +239,10 @@ export const teamState = atom({
             firstname: "John",
             lastname: "Smith",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732"
+            phone: "483-3278-3732",
           },
           active: true,
-          status: "joined"
+          status: "joined",
         },
         {
           id: 2,
@@ -251,12 +250,12 @@ export const teamState = atom({
             firstname: "Steve",
             lastname: "Rogers",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732"
+            phone: "483-3278-3732",
           },
           active: true,
-          status: "joined"
-        }
-      ]
+          status: "joined",
+        },
+      ],
     },
     {
       id: 20,
@@ -269,10 +268,10 @@ export const teamState = atom({
             firstname: "John",
             lastname: "Smith",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732"
+            phone: "483-3278-3732",
           },
           active: true,
-          status: "joined"
+          status: "joined",
         },
         {
           id: 2,
@@ -280,12 +279,12 @@ export const teamState = atom({
             firstname: "Clark",
             lastname: "Kent",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732"
+            phone: "483-3278-3732",
           },
           active: true,
-          status: "joined"
-        }
-      ]
-    }
-  ]
+          status: "joined",
+        },
+      ],
+    },
+  ],
 });
