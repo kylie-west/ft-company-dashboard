@@ -5,24 +5,30 @@ import {allUsersState, appState, userState} from "../../globalstate";
 import "../../App.css"
 import UserCard from "../../Components/UserCard";
 import {getCompanyUsers} from "../../Services/users";
+import {useEffect} from "react";
 
 const Users = ({openModal}) => {
     const [app] = useRecoilState(appState);
     const [user] = useRecoilState(userState);
     const [users, setUsers] = useRecoilState(allUsersState);
 
-    const getAllUsers = async () => {
-        const response = await getCompanyUsers(app.viewCompanyId);
-        setUsers(response.data);
-        console.log('users response');
-        console.log(response.data);
-    }
+    useEffect(() => {
+        const getAllUsers = async () => {
+            const response = await getCompanyUsers(app.viewCompanyId);
+            setUsers(response.data);
+            console.log('users response');
+            console.log(response.data);
+        }
+        if (user.isAdmin) {
+            getAllUsers();
+        }
+    }, [app.viewCompanyId, user.isAdmin, setUsers])
 
     function openAddModal() {
         openModal("add-user");
     }
 
-    const showUsers = users.map(({ id, profile = {}, admin, active, status}) => (
+    const showUsers = users.map(({id, profile = {}, admin, active, status}) => (
         <UserCard
             key={id}
             name={profile.firstName + " " + profile.lastName}
@@ -38,9 +44,6 @@ const Users = ({openModal}) => {
     } else if (app.viewCompanyId === undefined) {
         return <Navigate replace to="/company"/>
     } else {
-        if (user.isAdmin) {
-            getAllUsers();
-        }
         return (
             <div className="page">
                 <NavBar/>
