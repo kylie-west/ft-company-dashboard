@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { appState, userState, modalState } from "../../globalstate";
+import { appState, userState, modalState, teamState } from "../../globalstate";
 import SubmitButton from "../SubmitButton";
 import { getCompanyUsers } from "../../Services/users";
 import { postTeams } from "../../Services/teams";
