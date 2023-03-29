@@ -182,7 +182,21 @@ const NavBar = () => {
                 alt="logo"
                 style={{ display: "block", width: "40px", height: "40px" }}
               />
-              {user.isAdmin ? (
+              <h1
+                style={{
+                  color: "#F24E1E",
+                  fontSize: "2rem",
+                  fontWeight: "400",
+                }}
+              >
+                {user.isAdmin
+                  ? "ACTING AS ADMIN"
+                  : user.profile.firstName +
+                    " " +
+                    user.profile.lastName.slice(0, 1) +
+                    "."}
+              </h1>
+              {/* {user.isAdmin ? (
                 <h1
                   style={{
                     color: "#F24E1E",
@@ -192,7 +206,7 @@ const NavBar = () => {
                 >
                   ACTING AS ADMIN
                 </h1>
-              ) : null}
+              ) : null} */}
             </div>
             <List
               style={{ textAlign: "center", background: "#051622" }}
@@ -205,7 +219,7 @@ const NavBar = () => {
             >
               {(user.isAdmin
                 ? ["Home", "Company", "Teams", "Users"]
-                : ["Home", "Teams", "Users"]
+                : ["Home", "Teams"]
               ).map((text, index) => (
                 <ListItem key={text} style={{ width: "fit-content" }}>
                   <Link
