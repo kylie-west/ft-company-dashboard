@@ -2,6 +2,8 @@ import api from "./api";
 
 // FUNCTIONS
 
+const parseDate = obj => ({ ...obj, date: new Date(obj.date) });
+
 /**
  * Retrieves all of a company's announcements from the database
  * @param {number} companyId
@@ -9,7 +11,7 @@ import api from "./api";
  */
 export const getAnnouncements = async companyId => {
   const response = await api.get(`/company/${companyId}/announcements`);
-  return response.data.map(obj => ({ ...obj, date: new Date(obj.date) }));
+  return response.data.map(parseDate);
 };
 
 /**
@@ -22,7 +24,7 @@ export const createAnnouncement = async requestObj => {
     `/announcements/${requestObj.companyId}`,
     requestObj
   );
-  return response.data;
+  return parseDate(response.data);
 };
 
 /**
@@ -33,7 +35,7 @@ export const createAnnouncement = async requestObj => {
  */
 export const deleteAnnouncement = async (id, credentialsObj) => {
   const response = await api.delete(`/announcements/${id}`, credentialsObj);
-  return response.data;
+  return parseDate(response.data);
 };
 
 /**
@@ -44,7 +46,7 @@ export const deleteAnnouncement = async (id, credentialsObj) => {
  */
 export const editAnnouncement = async (id, requestObj) => {
   const response = await api.patch(`/announcements/${id}`, requestObj);
-  return response.data;
+  return parseDate(response.data);
 };
 
 // TYPE DEFINITIONS

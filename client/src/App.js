@@ -7,7 +7,7 @@ import {
   modalState,
   userState,
   companyState,
-  teamState,
+  teamState
 } from "./globalstate";
 import "./App.css";
 import Announcements from "./Screens/Shared/Announcements";
@@ -39,6 +39,7 @@ function App() {
   // initialize
   useEffect(() => {
     if (user) {
+      console.log("User:", user);
       setCompanies(user.companies);
       setTeams(user.teams);
       console.log(user.teams);
@@ -68,7 +69,7 @@ function App() {
           <ModalContainer
             isOpen={modal.isOpen}
             type={modal.type}
-            closeModal={(e) => closeModal(e)}
+            closeModal={e => closeModal(e)}
           />,
           document.body
         )}

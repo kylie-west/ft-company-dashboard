@@ -303,13 +303,18 @@ h1 {
 
 /* Announcements */
 
-.announce-wrapper {
+.announce-wrapper,
+.announce-list {
   display: flex;
   flex-direction: column;
   gap: 4rem;
   align-items: center;
   width: clamp(40vw, 600px, 90vw);
   margin: 0 auto 50px auto;
+}
+
+.announce-list {
+  flex-direction: column-reverse;
 }
 
 .announce-top {
