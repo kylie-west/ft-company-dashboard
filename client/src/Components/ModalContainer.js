@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import AddUserModal from "./Modals/AddUserModal";
 import CreateAnnounceModal from "./Modals/CreateAnnounceModal";
+import EditAnnounceModal from "./Modals/EditAnnounceModal";
 import CreateProjectModal from "./Modals/CreateProjectModal";
 import CreateTeamModal from "./Modals/CreateTeamModal";
 import EditProjectModal from "./Modals/EditProjectModal";
@@ -12,6 +13,8 @@ const ModalContainer = ({ isOpen, type, closeModal }) => {
         return <AddUserModal />;
       case "create-announcement":
         return <CreateAnnounceModal closeModal={closeModal} />;
+      case "edit-announcement":
+        return <EditAnnounceModal closeModal={closeModal} />;
       case "create-project":
         return <CreateProjectModal />;
       case "edit-project":
