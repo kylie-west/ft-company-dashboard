@@ -15,7 +15,6 @@ export const postProject = async (
     .post(`/projects/${teamId}`, {
       name,
       description,
-      active: false,
       credentials: {
         username,
         password,

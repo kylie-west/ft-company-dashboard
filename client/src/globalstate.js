@@ -153,22 +153,37 @@ export const allUsersState = atom({
   key: "allUsersState",
   default: [
     {
-      name: "Chris Purnell",
-      email: "uliajkas@jhosk.com",
+      id: 68,
+      profile: {
+        firstName: "Chris",
+        lastName: "Purnell",
+        email: "uliajkas@jhosk.com",
+        phone: "(686) 868-6868"
+      },
       active: false,
       admin: true,
       status: "pending"
     },
     {
-      name: "Will Marttala",
-      email: "uliajkas@jhosk.com",
+      id: 69,
+      profile: {
+        firstName: "Will",
+        lastName: "Marttala",
+        email: "uliajkas@jhosk.com",
+        phone: "(696) 969-6969"
+      },
       active: true,
       admin: true,
       status: "joined"
     },
     {
-      name: "Kenny Worth",
-      email: "uliajkas@jhosk.com",
+      id: 70,
+      profile: {
+        firstName: "Kenny",
+        lastName: "Worth",
+        email: "uliajkas@jhosk.com",
+        phone: "(707) 070-7070"
+      },
       active: false,
       admin: false,
       status: "joined"
