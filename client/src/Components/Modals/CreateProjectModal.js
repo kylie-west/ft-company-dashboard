@@ -25,14 +25,15 @@ const CreateProjectModal = () => {
       : setIsEmpty(false);
   }, [name, description]);
 
-  function handleSubmit() {
-    postProject(
+  async function handleSubmit() {
+    const response = await postProject(
       name,
       description,
       app.viewTeamId,
       user.username,
       user.password
     );
+    setProjects([...projects, response]);
     setModal({ isOpen: false, type: "", data: {} });
   }
 

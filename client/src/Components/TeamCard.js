@@ -32,11 +32,11 @@ const TeamCard = ({ id, name, description, teammates }) => {
   }
 
   const setTeamId = () =>
-  setApp(
-    Object.assign({}, app, {
-      viewTeamId: id,
-    })
-  );
+    setApp(
+      Object.assign({}, app, {
+        viewTeamId: id,
+      })
+    );
 
   return (
     <div className="team-card">
