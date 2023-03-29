@@ -160,7 +160,7 @@ public class UserServiceImpl implements UserService {
 		}
 		if (userAddRequestDto.getUser().getProfile().getEmail() != null) {
 
-			String regex = "^(.+)@(.+)$";
+			String regex = "^.+@.+\\..+$";
 			Pattern pattern = Pattern.compile(regex);
 			Matcher matcher = pattern.matcher((CharSequence) userAddRequestDto.getUser().getProfile().getEmail());
 
