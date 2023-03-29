@@ -34,7 +34,9 @@ export const createAnnouncement = async requestObj => {
  * @returns {AnnouncementResponse} The deleted announcement
  */
 export const deleteAnnouncement = async (id, credentialsObj) => {
-  const response = await api.delete(`/announcements/${id}`, credentialsObj);
+  const response = await api.delete(`/announcements/${id}`, {
+    data: credentialsObj
+  });
   return parseDate(response.data);
 };
 
