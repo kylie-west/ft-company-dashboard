@@ -7,7 +7,7 @@ import {
   modalState,
   userState,
   companyState,
-  teamState
+  teamState,
 } from "./globalstate";
 import "./App.css";
 import Announcements from "./Screens/Shared/Announcements";
@@ -62,14 +62,14 @@ function App() {
         <Route path="/projects" element={<Projects openModal={openModal} />} />
         <Route path="/users" element={<Users openModal={openModal} />} />
         <Route path="/teams" element={<Teams openModal={openModal} />} />
-        <Route path="/project" element={<Project openModal={openModal} />} />
+        {/* <Route path="/project" element={<Project openModal={openModal} />} /> */}
       </Routes>
       {modal.isOpen &&
         createPortal(
           <ModalContainer
             isOpen={modal.isOpen}
             type={modal.type}
-            closeModal={e => closeModal(e)}
+            closeModal={(e) => closeModal(e)}
           />,
           document.body
         )}

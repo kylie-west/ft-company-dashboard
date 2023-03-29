@@ -44,6 +44,7 @@ const TeamCard = ({ id, name, description, teammates }) => {
             setTeamId();
             updateProjects();
           }}
+          state={{ name }}
         >
           {name}
         </NavLink>

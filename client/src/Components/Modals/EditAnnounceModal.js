@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import FormControl from "@mui/material/FormControl";
 import StyledTextField from "../StyledTextField";
 import SubmitButton from "../SubmitButton";
-import { announcementsState, modalState } from "../../globalstate";
-import { createAnnouncement } from "../../Services/announcements";
+import { announcementsState, appState, modalState } from "../../globalstate";
+import { editAnnouncement } from "../../Services/announcements";
 
 /**
  * @todo Form validation/error handling
  */
-const CreateAnnounceModal = ({ closeModal }) => {
+const EditAnnounceModal = ({ closeModal }) => {
   const [announcements, setAnnouncements] = useRecoilState(announcementsState);
+  const [app] = useRecoilState(appState);
   const [modal] = useRecoilState(modalState);
   const [form, setForm] = useState({ title: "", message: "" });
 
-  const { credentials, companyId } = modal.data;
+  const { id, credentials, title, message } = modal.data;
+
+  useEffect(() => {
+    setForm({ title, message });
+  }, []);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.id]: e.target.value });
@@ -22,7 +27,11 @@ const CreateAnnounceModal = ({ closeModal }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!form.title.length || !form.message.length) {
+    if (
+      !form.title.length ||
+      !form.message.length ||
+      (form.title === title && form.message === message)
+    ) {
       return;
     }
 
@@ -30,12 +39,17 @@ const CreateAnnounceModal = ({ closeModal }) => {
       credentials,
       title: form.title,
       message: form.message,
-      companyId
+      companyId: app.viewCompanyId
     };
 
-    createAnnouncement(requestObj).then(res => {
+    editAnnouncement(id, requestObj).then(res => {
       console.log("New announcement:", res);
-      setAnnouncements([...announcements, res]);
+
+      // Replace old version in announcement state array
+      const filteredAnnouncements = announcements.filter(
+        announcement => announcement.id !== id
+      );
+      setAnnouncements([...filteredAnnouncements, res]);
     });
 
     closeModal(e);
@@ -43,7 +57,7 @@ const CreateAnnounceModal = ({ closeModal }) => {
 
   return (
     <div className="modal-body">
-      <h2 style={{ fontWeight: 300 }}>Create new announcement</h2>
+      <h2 style={{ fontWeight: 300 }}>Edit announcement</h2>
       <FormControl style={formStyle}>
         <StyledTextField
           id="title"
@@ -66,7 +80,7 @@ const CreateAnnounceModal = ({ closeModal }) => {
   );
 };
 
-export default CreateAnnounceModal;
+export default EditAnnounceModal;
 
 const formStyle = {
   display: "flex",
