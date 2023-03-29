@@ -19,27 +19,27 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/company")
 @RequiredArgsConstructor
 public class CompanyController {
-	
-	private final CompanyService companyService;
-	
-	@GetMapping("/{id}/users")
+
+    private final CompanyService companyService;
+
+    @GetMapping("/{id}/users")
     public Set<FullUserDto> getAllUsers(@PathVariable Long id) {
         return companyService.getAllUsers(id);
     }
-	
-	@GetMapping("/{id}/announcements")
+
+    @GetMapping("/{id}/announcements")
     public Set<AnnouncementDto> getAllAnnouncements(@PathVariable Long id) {
         return companyService.getAllAnnouncements(id);
     }
-	
-	@GetMapping("/{id}/teams")
+
+    @GetMapping("/{id}/teams")
     public Set<TeamDto> getAllTeams(@PathVariable Long id) {
         return companyService.getAllTeams(id);
     }
-	
-	@GetMapping("/{companyId}/teams/{teamId}/projects") 
-	public Set<ProjectResponseDto> getAllProjects(@PathVariable Long companyId, @PathVariable Long teamId) {
-		return companyService.getAllProjects(companyId, teamId);
-	}
+
+    @GetMapping("/{companyId}/teams/{teamId}/projects")
+    public Set<ProjectResponseDto> getAllProjects(@PathVariable Long companyId, @PathVariable Long teamId) {
+        return companyService.getAllProjects(companyId, teamId);
+    }
 
 }

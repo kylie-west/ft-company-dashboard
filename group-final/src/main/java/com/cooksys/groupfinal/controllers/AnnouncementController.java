@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,10 +35,18 @@ public class AnnouncementController {
 	public AnnouncementDto createAnnouncement(@RequestBody AnnouncementRequestDto announcementRequestDto) {
 		return announcementService.createAnnouncement(announcementRequestDto);
 	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<AnnouncementDto> deleteAnnouncement(@PathVariable Long id,
+			@RequestBody CredentialsDto credentialsDto) {
+		return ResponseEntity.ok(announcementService.deleteAnnouncement(id, credentialsDto));
+	}
 	
-    @DeleteMapping("/{id}")
-    public ResponseEntity<AnnouncementDto> deleteAnnouncement(@PathVariable Long id, @RequestBody CredentialsDto credentialsDto) {
-        return ResponseEntity.ok(announcementService.deleteAnnouncement(id, credentialsDto)); 
-    }
+	@PatchMapping("/{id}")
+	public ResponseEntity<AnnouncementDto> editAnnouncement(@PathVariable Long id, @RequestBody AnnouncementRequestDto announcementRequestDto) {
+	    return ResponseEntity.ok(announcementService.editAnnouncement(id, announcementRequestDto));
+	}
+
+
 
 }

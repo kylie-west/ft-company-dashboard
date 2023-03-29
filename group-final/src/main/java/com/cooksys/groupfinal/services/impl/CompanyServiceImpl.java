@@ -33,30 +33,30 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
-	
+
 	private final CompanyRepository companyRepository;
 	private final TeamRepository teamRepository;
 	private final FullUserMapper fullUserMapper;
 	private final AnnouncementMapper announcementMapper;
 	private final TeamMapper teamMapper;
 	private final ProjectMapper projectMapper;
-	
+
 	private Company findCompany(Long id) {
-        Optional<Company> company = companyRepository.findById(id);
-        if (company.isEmpty()) {
-            throw new NotFoundException("A company with the provided id does not exist.");
-        }
-        return company.get();
-    }
-	
+		Optional<Company> company = companyRepository.findById(id);
+		if (company.isEmpty()) {
+			throw new NotFoundException("A company with the provided id does not exist.");
+		}
+		return company.get();
+	}
+
 	private Team findTeam(Long id) {
-        Optional<Team> team = teamRepository.findById(id);
-        if (team.isEmpty()) {
-            throw new NotFoundException("A team with the provided id does not exist.");
-        }
-        return team.get();
-    }
-	
+		Optional<Team> team = teamRepository.findById(id);
+		if (team.isEmpty()) {
+			throw new NotFoundException("A team with the provided id does not exist.");
+		}
+		return team.get();
+	}
+
 	@Override
 	public Set<FullUserDto> getAllUsers(Long id) {
 		Company company = findCompany(id);
@@ -86,7 +86,8 @@ public class CompanyServiceImpl implements CompanyService {
 		Company company = findCompany(companyId);
 		Team team = findTeam(teamId);
 		if (!company.getTeams().contains(team)) {
-			throw new NotFoundException("A team with id " + teamId + " does not exist at company with id " + companyId + ".");
+			throw new NotFoundException(
+					"A team with id " + teamId + " does not exist at company with id " + companyId + ".");
 		}
 		Set<Project> filteredProjects = new HashSet<>();
 		team.getProjects().forEach(filteredProjects::add);

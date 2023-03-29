@@ -12,9 +12,9 @@ import org.mapstruct.Mapper;
 public interface BasicUserMapper {
 
     BasicUserDto entityToBasicUserDto(User user);
-    
+
     Set<BasicUserDto> entitiesToBasicUserDtos(Set<User> users);
-    
+
     User requestDtoToEntity(UserRequestDto userRequestDto);
 
 }

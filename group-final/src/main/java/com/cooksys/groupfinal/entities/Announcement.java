@@ -17,24 +17,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Announcement {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@CreatedDate
-    private Timestamp date = Timestamp.valueOf(LocalDateTime.now());
-	
+	private Timestamp date = Timestamp.valueOf(LocalDateTime.now());
+
 	private String title;
-	
+
 	private String message;
-	
+
 	@ManyToOne
 	private Company company;
-	
+
 	@ManyToOne
 	private User author;
-	
+
 	private boolean deleted;
 
 }
