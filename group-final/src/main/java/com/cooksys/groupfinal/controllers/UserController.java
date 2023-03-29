@@ -20,12 +20,12 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class UserController {
 
 	private final UserService userService;
 
 	@PostMapping("/login")
-	@CrossOrigin(origins = "*")
 	public FullUserDto login(@RequestBody CredentialsDto credentialsDto) {
 		return userService.login(credentialsDto);
 	}
