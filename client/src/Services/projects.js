@@ -11,15 +11,17 @@ export const postProject = async (
   username,
   password
 ) => {
-  const response = await api.post(`/projects/${teamId}`, {
-    name,
-    description,
-    active: false,
-    credentials: {
-      username,
-      password,
-    },
-  });
+  const response = await api
+    .post(`/projects/${teamId}`, {
+      name,
+      description,
+      active: false,
+      credentials: {
+        username,
+        password,
+      },
+    })
+    .catch((err) => console.log(err));
   return response.data;
 };
 
@@ -32,15 +34,17 @@ export const patchProject = async (
   username,
   password
 ) => {
-  const response = await api.patch(`/projects/${projectId}`, {
-    name,
-    description,
-    active,
-    team: teamObj,
-    credentials: {
-      username,
-      password,
-    },
-  });
+  const response = await api
+    .patch(`/projects/${projectId}`, {
+      name,
+      description,
+      active,
+      team: teamObj,
+      credentials: {
+        username,
+        password,
+      },
+    })
+    .catch((err) => console.log(err));
   return response.data;
 };

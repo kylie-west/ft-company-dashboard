@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { appState } from "../../globalstate";
-import { userState } from "../../globalstate";
-import { projectsState } from "../../globalstate";
-import { modalState } from "../../globalstate";
+import {
+  appState,
+  userState,
+  projectsState,
+  modalState,
+} from "../../globalstate";
 import SubmitButton from "../SubmitButton";
 import StyledTextField from "../StyledTextField";
-import { postProject } from "../../Services/users";
+import { postProject } from "../../Services/projects";
 
 const CreateProjectModal = () => {
   const [app] = useRecoilState(appState);
@@ -24,23 +26,13 @@ const CreateProjectModal = () => {
   }, [name, description]);
 
   function handleSubmit() {
-    // const response = postProject(
-    //   name,
-    //   description,
-    //   app.viewTeamId,
-    //   user.username,
-    //   user.password
-    // ).catch((err) => {
-    //   setError({ isError: true, message: err });
-    // });
-    // if (response) {
-    //   setError({ isError: false, message: "" });
-    //   setProjects([...projects, project]);
-    // }
-    setProjects([
-      ...projects,
-      { id: 99, name, description, active: false, teams: [app.viewTeamId] },
-    ]);
+    postProject(
+      name,
+      description,
+      app.viewTeamId,
+      user.username,
+      user.password
+    );
     setModal({ isOpen: false, type: "", data: {} });
   }
 

@@ -38,7 +38,7 @@ const TeamCard = ({ id, name, description, teammates }) => {
 
   const setTeamId = () =>
     setApp({
-      viewTeamId: { id },
+      viewTeamId: id,
     });
 
   return (
