@@ -53,9 +53,31 @@ const Announcements = ({ openModal }) => {
     return firstName + " " + lastName[0] + ".";
   };
 
-  const handleClick = e => {
+  const handleClickNew = e => {
     e.preventDefault();
-    openModal("create-announcement");
+    const data = {
+      credentials: { username: user.username, password: user.password },
+      companyId: app.viewCompanyId
+    };
+    openModal("create-announcement", data);
+  };
+
+  const handleClickEdit = announcement => {
+    const data = {
+      id: announcement.id,
+      credentials: { username: user.username, password: user.password },
+      title: announcement.title,
+      message: announcement.message
+    };
+    openModal("edit-announcement", data);
+  };
+
+  const handleClickDelete = announcement => {
+    const data = {
+      id: announcement.id,
+      credentials: { username: user.username, password: user.password }
+    };
+    openModal("delete-announcement", data);
   };
 
   if (!user.isLoggedIn) {
@@ -67,7 +89,7 @@ const Announcements = ({ openModal }) => {
         <div className="announce-wrapper">
           <div className="announce-top">
             <h1>Announcements</h1>
-            <button onClick={handleClick} className="announce-btn">
+            <button onClick={handleClickNew} className="announce-btn">
               New
             </button>
           </div>
@@ -80,8 +102,16 @@ const Announcements = ({ openModal }) => {
                 }`}>
                 {user.id === announcement.author.id ? (
                   <div className="announce-options">
-                    <EditIcon className="announce-icon edit" />
-                    <DeleteForeverIcon className="announce-icon delete" />
+                    <EditIcon
+                      className="announce-icon edit"
+                      role="button"
+                      onClick={() => handleClickEdit(announcement)}
+                    />
+                    <DeleteForeverIcon
+                      className="announce-icon delete"
+                      role="button"
+                      onClick={() => handleClickDelete(announcement)}
+                    />
                   </div>
                 ) : null}
                 <div className="content">
