@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import {
-  appState,
-  userState,
-  projectsState,
-  modalState,
-} from "../../globalstate";
+import { appState, userState, projectsState } from "../../globalstate";
 import SubmitButton from "../SubmitButton";
 import StyledTextField from "../StyledTextField";
 import { postProject } from "../../Services/projects";
 
-const CreateProjectModal = () => {
+const CreateProjectModal = ({ closeModal }) => {
   const [app] = useRecoilState(appState);
   const [user] = useRecoilState(userState);
-  const [modal, setModal] = useRecoilState(modalState);
   const [projects, setProjects] = useRecoilState(projectsState);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -26,7 +20,8 @@ const CreateProjectModal = () => {
       : setIsEmpty(false);
   }, [name, description]);
 
-  async function handleSubmit() {
+  async function handleSubmit(e) {
+    closeModal(e);
     setAttemptedSubmit(true);
     if (isEmpty) return;
     const response = await postProject(
@@ -37,7 +32,6 @@ const CreateProjectModal = () => {
       user.password
     );
     setProjects([...projects, response]);
-    setModal({ isOpen: false, type: "", data: {} });
   }
 
   return (
@@ -60,7 +54,7 @@ const CreateProjectModal = () => {
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>
-      <SubmitButton handleSubmit={handleSubmit} />
+      <SubmitButton handleSubmit={(e) => handleSubmit(e)} />
     </div>
   );
 };

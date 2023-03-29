@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
+import { appState, userState, modalState } from "../../globalstate";
 import SubmitButton from "../SubmitButton";
-import { getUsers } from "../../Services/users"
+import { getUsers } from "../../Services/users";
 
 const CreateTeamModal = () => {
   const [app] = useRecoilState(appState);
   const [user] = useRecoilState(userState);
   const [modal, setModal] = useRecoilState(modalState);
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("")
+  const [description, setDescription] = useState("");
   const [isEmpty, setIsEmpty] = useState(true);
 
   useEffect(() => {
@@ -23,8 +24,6 @@ const CreateTeamModal = () => {
   //   }
   // })
   function handleSubmit() {}
-
-
 
   return (
     <div className="modal-body">
