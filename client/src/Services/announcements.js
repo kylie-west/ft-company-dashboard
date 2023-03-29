@@ -25,11 +25,22 @@ export const createAnnouncement = async requestObj => {
   return response.data;
 };
 
+/**
+ * Sets an announcement as deleted in the database
+ * @param {number} id - The ID of the announcement
+ * @param {Credentials} credentialsObj - User credentials
+ * @returns {AnnouncementResponse} The deleted announcement
+ */
+export const deleteAnnouncement = async (id, credentialsObj) => {
+  const response = await api.delete(`/announcements/${id}`, credentialsObj);
+  return response.data;
+};
+
 // TYPE DEFINITIONS
 
 /**
  * @typedef {Object} AnnouncementRequest
- * @property {Object} credentials - A username and password
+ * @property {Credentials} credentials - User credentials
  * @property {string} title - The title of the announcement
  * @property {string} message - The message of the announcement
  * @property {number} companyId - The ID of the selected company at announcement creation time
@@ -42,4 +53,10 @@ export const createAnnouncement = async requestObj => {
  * @property {string} title - The title of the announcement
  * @property {string} message - The message of the announcement
  * @property {Object} author - The user who created the announcement
+ */
+
+/**
+ * @typedef {Object} Credentials
+ * @property {string} username
+ * @property {string} password
  */
