@@ -4,7 +4,6 @@ import { appState, userState, modalState } from "../../globalstate";
 import SubmitButton from "../SubmitButton";
 import { getCompanyUsers } from "../../Services/users";
 import { postTeams } from "../../Services/teams";
-import { appState, userState, modalState, teamState } from "../../globalstate";
 import { FormControl, Select, MenuItem } from "@mui/material";
 import StyledTextField from "../StyledTextField";
 
