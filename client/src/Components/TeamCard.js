@@ -11,19 +11,20 @@ const TeamCard = ({ id, name, description, teammates }) => {
 
   const companyId = 5;
 
-
   const updateProjects = async () => {
-    console.log(app.viewCompanyId)
-    console.log(app.viewTeamId)
+    console.log(app.viewCompanyId);
+    console.log(app.viewTeamId);
     const response = await getProjects(app.viewCompanyId, app.viewTeamId);
-    setProjects(response.data)
-    console.log(response.data)
-  }
+    setProjects(response.data);
+    console.log(response.data);
+  };
 
   const setTeamId = () =>
-    setApp({
-      viewTeamId: id,
-    });
+    setApp(
+      Object.assign({}, app, {
+        viewTeamId: id,
+      })
+    );
 
   return (
     <div className="team-card">
