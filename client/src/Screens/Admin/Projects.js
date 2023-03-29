@@ -57,7 +57,7 @@ const Projects = ({ openModal }) => {
             <Link to="/teams" className="go-back">
               {"<"} Back
             </Link>
-            <h1>Projects for Team {team}</h1>
+            <h1>Projects for {team}</h1>
           </div>
 
           <div className="project-list">
