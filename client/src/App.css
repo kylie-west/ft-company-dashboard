@@ -305,17 +305,32 @@ h1 {
 }
 
 .announce-card {
+  padding-top: 50px;
+  border-radius: 10px;
+  font-size: 1.6rem;
+  color: white;
+  background: var(--card-body);
+}
+
+.announce-card.isAuthor {
+  padding: 0;
+}
+
+.announce-options {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+  padding: 20px 20px 10px 20px;
+}
+
+.announce-card .content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 2rem;
   height: fit-content;
   width: clamp(25vw, 600px, 90vw);
-  padding: 30px 50px;
-  border-radius: 10px;
-  font-size: 1.6rem;
-  color: white;
-  background: var(--card-body);
+  padding: 0px 50px 50px 50px;
 }
 
 .announce-card header {
@@ -328,16 +343,33 @@ h1 {
   font-weight: 300;
 }
 
+.announce-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
 .announce-card p {
   white-space: pre-wrap;
 }
 
-.announce-info {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0.5rem;
-  color: rgba(255, 255, 255, 0.6);
+.announce-icon {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  cursor: pointer;
+  color: var(--main-accent);
 }
+
+.announce-icon.edit:hover {
+  color: white;
+}
+
+.announce-icon.delete:hover {
+  color: var(--tertiary-accent);
+}
+
+/* Media Queries */
 
 @media (max-device-width: 750px) {
   .announce-top h1 {
