@@ -73,6 +73,16 @@ h1 {
   width: 100%;
 }
 
+.modal-form {
+
+}
+
+.modal-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .submit-btn {
   background-color: var(--main-accent);
   padding: 1rem 6rem;
