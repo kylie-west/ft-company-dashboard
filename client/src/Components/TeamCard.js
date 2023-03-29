@@ -3,6 +3,7 @@ import { Button, Card } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { appState, projectsState } from "../globalstate";
+import { getProjects } from "../Services/projects";
 
 const TeamCard = ({ id, name, description, teammates }) => {
   const [app, setApp] = useRecoilState(appState);
@@ -10,31 +11,14 @@ const TeamCard = ({ id, name, description, teammates }) => {
 
   const companyId = 5;
 
-  const updateProjects = () =>
-    setProjects(
-      // fetch("/company/" + companyId + "/teams/" + id + "/projects")
-      // .then(response => response.json())
-      // .then((data) => {
-      //   setProjects(data);
-      //   console.log(data);
-      // })
 
-      [
-        {
-          id: 20,
-          name: "Cool Project?",
-          description:
-            "Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim sit amet venenatis urna cursus",
-          active: true,
-          team: {
-            id: 10,
-            name: "Awesome",
-            description: "Among us",
-            users: [{ id: 1 }],
-          },
-        },
-      ]
-    );
+  const updateProjects = async () => {
+    console.log(app.viewCompanyId)
+    console.log(app.viewTeamId)
+    const response = await getProjects(app.viewCompanyId, app.viewTeamId);
+    setProjects(response.data)
+    console.log(response.data)
+  }
 
   const setTeamId = () =>
     setApp({
