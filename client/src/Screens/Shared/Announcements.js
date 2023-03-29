@@ -1,14 +1,23 @@
+import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-
 import NavBar from "../../Components/NavBar";
-import { announcementsState, userState } from "../../globalstate";
+import { announcementsState, appState, userState } from "../../globalstate";
+import { getAnnouncements } from "../../Services/announcements";
 
 const Announcements = ({ openModal }) => {
+  const [app] = useRecoilState(appState);
   const [user] = useRecoilState(userState);
-  const [announcements] = useRecoilState(announcementsState);
+  const [announcements, setAnnouncements] = useRecoilState(announcementsState);
+
+  useEffect(() => {
+    getAnnouncements(app.viewCompanyId).then(res => {
+      console.log(res);
+      setAnnouncements(res);
+    });
+  }, []);
 
   const formatDate = date =>
     date.toLocaleDateString("en-us", {
@@ -17,8 +26,8 @@ const Announcements = ({ openModal }) => {
       year: "numeric"
     });
 
-  const getAuthorName = ({ firstname, lastname }) => {
-    return firstname + " " + lastname[0] + ".";
+  const getAuthorName = ({ firstName, lastName }) => {
+    return firstName + " " + lastName[0] + ".";
   };
 
   const handleClick = e => {

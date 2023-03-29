@@ -9,7 +9,7 @@ import api from "./api";
  */
 export const getAnnouncements = async companyId => {
   const response = await api.get(`/company/${companyId}/announcements`);
-  return response.data;
+  return response.data.map(obj => ({ ...obj, date: new Date(obj.date) }));
 };
 
 /**
@@ -33,6 +33,17 @@ export const createAnnouncement = async requestObj => {
  */
 export const deleteAnnouncement = async (id, credentialsObj) => {
   const response = await api.delete(`/announcements/${id}`, credentialsObj);
+  return response.data;
+};
+
+/**
+ * Updates the values of an announcement in the database
+ * @param {number} id
+ * @param {AnnouncementRequest} requestObj
+ * @returns The updated announcement
+ */
+export const editAnnouncement = async (id, requestObj) => {
+  const response = await api.patch(`/announcements/${id}`, requestObj);
   return response.data;
 };
 

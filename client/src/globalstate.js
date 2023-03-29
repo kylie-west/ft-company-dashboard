@@ -7,9 +7,9 @@ export const appState = atom({
   key: "appState",
   default: {
     viewCompanyId: null,
-    viewTeamId: null,
+    viewTeamId: null
   },
-  effects_UNSTABLE: [persistAtom],
+  effects_UNSTABLE: [persistAtom]
 });
 
 export const userState = atom({
@@ -18,7 +18,7 @@ export const userState = atom({
     isLoggedIn: false,
     isAdmin: false,
     username: "",
-    password: "",
+    password: ""
     // TO BE DELETED IN FINAL!!!!!!!
     // id: 1,
     // profile: {
@@ -78,75 +78,75 @@ export const userState = atom({
     //   },
     // ],
   },
-  effects_UNSTABLE: [persistAtom],
+  effects_UNSTABLE: [persistAtom]
 });
 
 export const announcementsState = atom({
   key: "announcementsState",
   default: [
-    {
-      id: 1,
-      date: new Date(),
-      title: "Announcement 1",
-      message:
-        "Elementum sagittis vitae et leo duis ut diam quam nulla porttitor massa id neque aliquam vestibulum morbi blandit cursus risus at ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget gravida cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies leo integer malesuada nunc",
-      author: {
-        id: 1,
-        profile: {
-          firstname: "John",
-          lastname: "Smith",
-          email: "john.smith@gmail.com",
-          phone: "483-3278-3732",
-        },
-        isAdmin: true,
-        active: true,
-        status: "joined",
-      },
-    },
-    {
-      id: 2,
-      date: new Date(),
-      title: "Announcement 2",
-      message:
-        "Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim sit amet venenatis urna cursus",
-      author: {
-        id: 1,
-        profile: {
-          firstname: "John",
-          lastname: "Smith",
-          email: "john.smith@gmail.com",
-          phone: "483-3278-3732",
-        },
-        isAdmin: true,
-        active: true,
-        status: "joined",
-      },
-    },
-    {
-      id: 3,
-      date: new Date(),
-      title: "Announcement 3",
-      message:
-        "Magna sit amet purus gravida quis blandit turpis cursus in hac habitasse platea dictumst quisque sagittis purus sit amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus mauris a",
-      author: {
-        id: 1,
-        profile: {
-          firstname: "John",
-          lastname: "Smith",
-          email: "john.smith@gmail.com",
-          phone: "483-3278-3732",
-        },
-        isAdmin: true,
-        active: true,
-        status: "joined",
-      },
-    },
-  ],
+    // {
+    //   id: 1,
+    //   date: new Date(),
+    //   title: "Announcement 1",
+    //   message:
+    //     "Elementum sagittis vitae et leo duis ut diam quam nulla porttitor massa id neque aliquam vestibulum morbi blandit cursus risus at ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget gravida cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies leo integer malesuada nunc",
+    //   author: {
+    //     id: 1,
+    //     profile: {
+    //       firstname: "John",
+    //       lastname: "Smith",
+    //       email: "john.smith@gmail.com",
+    //       phone: "483-3278-3732",
+    //     },
+    //     isAdmin: true,
+    //     active: true,
+    //     status: "joined",
+    //   },
+    // },
+    // {
+    //   id: 2,
+    //   date: new Date(),
+    //   title: "Announcement 2",
+    //   message:
+    //     "Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim sit amet venenatis urna cursus",
+    //   author: {
+    //     id: 1,
+    //     profile: {
+    //       firstname: "John",
+    //       lastname: "Smith",
+    //       email: "john.smith@gmail.com",
+    //       phone: "483-3278-3732",
+    //     },
+    //     isAdmin: true,
+    //     active: true,
+    //     status: "joined",
+    //   },
+    // },
+    // {
+    //   id: 3,
+    //   date: new Date(),
+    //   title: "Announcement 3",
+    //   message:
+    //     "Magna sit amet purus gravida quis blandit turpis cursus in hac habitasse platea dictumst quisque sagittis purus sit amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus mauris a",
+    //   author: {
+    //     id: 1,
+    //     profile: {
+    //       firstname: "John",
+    //       lastname: "Smith",
+    //       email: "john.smith@gmail.com",
+    //       phone: "483-3278-3732",
+    //     },
+    //     isAdmin: true,
+    //     active: true,
+    //     status: "joined",
+    //   },
+    // },
+  ]
 });
 
 export const companyState = atom({
   key: "companyState",
-  default: [],
+  default: []
 });
 
 export const allUsersState = atom({
@@ -157,31 +157,31 @@ export const allUsersState = atom({
       email: "uliajkas@jhosk.com",
       active: false,
       admin: true,
-      status: "pending",
+      status: "pending"
     },
     {
       name: "Will Marttala",
       email: "uliajkas@jhosk.com",
       active: true,
       admin: true,
-      status: "joined",
+      status: "joined"
     },
     {
       name: "Kenny Worth",
       email: "uliajkas@jhosk.com",
       active: false,
       admin: false,
-      status: "joined",
-    },
-  ],
+      status: "joined"
+    }
+  ]
 });
 
 export const errorState = atom({
   key: "errorState",
   default: {
     isError: false,
-    message: "",
-  },
+    message: ""
+  }
 });
 
 export const modalState = atom({
@@ -189,8 +189,8 @@ export const modalState = atom({
   default: {
     isOpen: false,
     type: "", // refer to ModalContainer.js for list of types
-    data: {}, // do whatever you want with this
-  },
+    data: {} // do whatever you want with this
+  }
 });
 
 // TO BE DELETED?
@@ -207,8 +207,8 @@ export const projectsState = atom({
         id: 10,
         name: "Awesome",
         description: "Among us",
-        users: [{ id: 1 }],
-      },
+        users: [{ id: 1 }]
+      }
     },
     {
       id: 5,
@@ -220,10 +220,10 @@ export const projectsState = atom({
         id: 20,
         name: "Awesome",
         description: "Among us",
-        users: [{ id: 1 }],
-      },
-    },
-  ],
+        users: [{ id: 1 }]
+      }
+    }
+  ]
 });
 
 export const teamState = atom({
@@ -240,10 +240,10 @@ export const teamState = atom({
             firstname: "John",
             lastname: "Smith",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732",
+            phone: "483-3278-3732"
           },
           active: true,
-          status: "joined",
+          status: "joined"
         },
         {
           id: 2,
@@ -251,12 +251,12 @@ export const teamState = atom({
             firstname: "Steve",
             lastname: "Rogers",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732",
+            phone: "483-3278-3732"
           },
           active: true,
-          status: "joined",
-        },
-      ],
+          status: "joined"
+        }
+      ]
     },
     {
       id: 20,
@@ -269,10 +269,10 @@ export const teamState = atom({
             firstname: "John",
             lastname: "Smith",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732",
+            phone: "483-3278-3732"
           },
           active: true,
-          status: "joined",
+          status: "joined"
         },
         {
           id: 2,
@@ -280,12 +280,12 @@ export const teamState = atom({
             firstname: "Clark",
             lastname: "Kent",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732",
+            phone: "483-3278-3732"
           },
           active: true,
-          status: "joined",
-        },
-      ],
-    },
-  ],
+          status: "joined"
+        }
+      ]
+    }
+  ]
 });
