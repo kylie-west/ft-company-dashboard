@@ -2,11 +2,18 @@ import { Navigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import TeamCard from "../../Components/TeamCard";
 import NavBar from "../../Components/NavBar";
-import { teamState, userState } from "../../globalstate";
+import { appState, teamState, userState } from "../../globalstate";
+import { getTeams } from "../../Services/teams";
 
 const Teams = () => {
+  const [app] = useRecoilState(appState)
   const [user] = useRecoilState(userState);
-  const [teams] = useRecoilState(teamState);
+  const [teams, setTeams] = useRecoilState(teamState);
+
+  const getAllTeams = async () => {
+    const response = await getTeams(app.viewCompanyId);
+    setTeams(response.data)
+  }
 
   const ts = teams.map(({ id, name, description, teammates }) => (
     <TeamCard
@@ -21,7 +28,12 @@ const Teams = () => {
 
   if (!user.isLoggedIn) {
     return <Navigate replace to="/" />;
+  } else if (app.viewCompanyId === undefined) {
+    return <Navigate replace to="/company" />
   } else {
+    if (user.isAdmin) {
+      getAllTeams();
+    }
     return (
       <div className="page">
         <NavBar />
