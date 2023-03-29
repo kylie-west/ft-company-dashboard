@@ -6,6 +6,7 @@ import { getCompanyUsers } from "../../Services/users";
 import { postTeams } from "../../Services/teams";
 import { FormControl, Select, MenuItem } from "@mui/material";
 import StyledTextField from "../StyledTextField";
+import ClearIcon from '@mui/icons-material/Clear';
 
 const CreateTeamModal = () => {
   const [app] = useRecoilState(appState);
@@ -35,7 +36,7 @@ const CreateTeamModal = () => {
   }, []);
 
   const options = availableUsers.map((member) => (
-    <MenuItem key={member.id} value={member.id.toString()}>
+    <MenuItem key={member.id} value={member.id}>
       {member.profile.firstName + " " + member.profile.lastName}
     </MenuItem>
   ));
@@ -48,14 +49,19 @@ const CreateTeamModal = () => {
   };
 
   function handleChange(e) {
+    console.log(e)
     const selectedId = e.target.value;
-    setSelectedUsers([
-      ...selectedUsers,
-      availableUsers.find((user) => {
-        return user.id == selectedId;
-      }),
-    ]);
-    setAvailableUsers(availableUsers.filter((user) => user.id != selectedId));
+    setSelectedUsers([...selectedUsers, availableUsers.find((user) => { 
+      return user.id === selectedId})]);
+    setAvailableUsers(availableUsers.filter(user => user.id !== selectedId))
+  }
+
+  function handleRemove(e) {
+    console.log(e);
+    const selectedId = e.id;
+    setAvailableUsers([...availableUsers, selectedUsers.find((user) => { 
+      return user.id === selectedId})]);
+    setSelectedUsers(selectedUsers.filter(user => user.id !== selectedId))
   }
 
   async function handleSubmit() {
@@ -96,13 +102,19 @@ const CreateTeamModal = () => {
         <FormControl sx={style}>
           <Select value={""} onChange={(event) => handleChange(event)}>
             {options}
-          </Select>
+          </Select>  
         </FormControl>
       )}
+
       <div>
-        {selectedUsers.map((u) => {
-          <span>{u.profile.firstName}</span>;
-        })}
+        Select Team Members
+        {selectedUsers.map((u) => (
+          <div>
+            <span key={u.id}>{u.profile.firstName}</span>
+            <ClearIcon onClick={() => handleRemove(u)} /> 
+          </div>
+
+        ))}
       </div>
       <SubmitButton handleSubmit={handleSubmit} />
     </div>
