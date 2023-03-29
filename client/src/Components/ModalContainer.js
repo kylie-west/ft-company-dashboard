@@ -5,6 +5,7 @@ import EditAnnounceModal from "./Modals/EditAnnounceModal";
 import CreateProjectModal from "./Modals/CreateProjectModal";
 import CreateTeamModal from "./Modals/CreateTeamModal";
 import EditProjectModal from "./Modals/EditProjectModal";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import DeleteAnnounceModal from "./Modals/DeleteAnnounceModal";
 
 const ModalContainer = ({ isOpen, type, closeModal }) => {
@@ -39,9 +40,10 @@ const ModalContainer = ({ isOpen, type, closeModal }) => {
       <div className="modal-overlay" onClick={e => closeModal(e)}></div>
       <div className="modal-container">
         <span className="close-btn-wrapper">
-          <button className="close-modal-btn" onClick={e => closeModal(e)}>
-            ×
-          </button>
+          <HighlightOffIcon
+            className="close-modal-btn"
+            onClick={e => closeModal(e)}
+          />
         </span>
         {currentModal}
       </div>

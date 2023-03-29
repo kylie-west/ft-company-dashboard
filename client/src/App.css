@@ -21,6 +21,16 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-overlay {
@@ -52,16 +62,8 @@ h1 {
 
 .close-modal-btn {
   color: var(--tertiary-accent);
-  border: 3px solid var(--tertiary-accent);
-  border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
-  background-color: transparent;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
+  width: 3.5rem !important;
+  height: 3.5rem !important;
   cursor: pointer;
 }
 
@@ -80,7 +82,11 @@ h1 {
   text-align: center;
 }
 
-.modal-form {
+.modal-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  gap: 3rem;
 }
 
 .modal-row {

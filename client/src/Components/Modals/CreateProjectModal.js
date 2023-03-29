@@ -18,6 +18,7 @@ const CreateProjectModal = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [isEmpty, setIsEmpty] = useState(true);
+  const [attemptedSubmit, setAttemptedSubmit] = useState(false);
 
   useEffect(() => {
     name.length === 0 || description.length === 0
@@ -26,6 +27,8 @@ const CreateProjectModal = () => {
   }, [name, description]);
 
   async function handleSubmit() {
+    setAttemptedSubmit(true);
+    if (isEmpty) return;
     const response = await postProject(
       name,
       description,
@@ -39,19 +42,24 @@ const CreateProjectModal = () => {
 
   return (
     <div className="modal-body">
-      <StyledTextField
-        id="project-name-input"
-        label="Project Name"
-        variant="standard"
-        onChange={(e) => setName(e.target.value)}
-      />
-      <StyledTextField
-        id="description-input"
-        label="Description"
-        variant="standard"
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <SubmitButton handleSubmit={handleSubmit} disabled={isEmpty} />
+      <div className="modal-input-wrapper">
+        <StyledTextField
+          id="project-name-input"
+          label="Project Name"
+          variant="standard"
+          error={attemptedSubmit && name.length === 0}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <StyledTextField
+          id="description-input"
+          label="Description"
+          variant="standard"
+          multiline
+          error={attemptedSubmit && description.length === 0}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </div>
+      <SubmitButton handleSubmit={handleSubmit} />
     </div>
   );
 };
