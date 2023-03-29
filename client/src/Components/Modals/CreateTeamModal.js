@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import SubmitButton from "../SubmitButton";
 import { getCompanyUsers } from "../../Services/users"
 import { postTeams } from "../../Services/teams";
-import { appState, userState, modalState } from "../../globalstate";
+import { appState, userState, modalState, teamState } from "../../globalstate";
 import { FormControl, Select, MenuItem } from "@mui/material";
 import StyledTextField from "../StyledTextField";
 
@@ -11,6 +11,7 @@ const CreateTeamModal = () => {
   const [app] = useRecoilState(appState);
   const [user] = useRecoilState(userState);
   const [modal, setModal] = useRecoilState(modalState);
+  const [teams, setTeams] = useRecoilState(teamState);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("")
   const [isEmpty, setIsEmpty] = useState(true);
@@ -66,7 +67,7 @@ const CreateTeamModal = () => {
       user.password,
       app.viewCompanyId
     );
-    // setProjects([...projects, response]);
+    setTeams([...teams, response]);
     setModal({ isOpen: false, type: "", data: {} });
   }
 
