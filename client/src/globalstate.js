@@ -9,6 +9,7 @@ export const appState = atom({
     viewCompanyId: null,
     viewTeamId: null,
   },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const userState = atom({
