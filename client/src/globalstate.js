@@ -15,68 +15,68 @@ export const appState = atom({
 export const userState = atom({
   key: "userState",
   default: {
-    isLoggedIn: true,
-    isAdmin: true,
+    isLoggedIn: false,
+    isAdmin: false,
     username: "",
     password: "",
     // TO BE DELETED IN FINAL!!!!!!!
-    id: 1,
-    profile: {
-      firstname: "John",
-      lastname: "Smith",
-      email: "john.smith@gmail.com",
-      phone: "483-3278-3732",
-    },
-    active: true,
-    status: "joined",
-    companies: [
-      {
-        id: 2,
-        name: "FastTrack",
-        description: "gotta go fast",
-        teams: [
-          {
-            id: 3,
-            name: "Awesome",
-            description: "Among us",
-            users: [{ id: 1 }],
-          },
-        ],
-        users: [
-          {
-            id: 1,
-            profile: {
-              firstname: "John",
-              lastname: "Smith",
-              email: "john.smith@gmail.com",
-              phone: "483-3278-3732",
-            },
-            active: true,
-            status: "joined",
-          },
-        ],
-      },
-    ],
-    teams: [
-      {
-        id: 3,
-        name: "Awesome",
-        description: "Among us",
-        users: [
-          {
-            id: 1,
-            profile: {
-              firstname: "John",
-              lastname: "Smith",
-              email: "john.smith@gmail.com",
-              phone: "483-3278-3732",
-            },
-            active: true,
-            status: "joined",
-          },
-        ],
-      },
-    ],
+    // id: 1,
+    // profile: {
+    //   firstname: "John",
+    //   lastname: "Smith",
+    //   email: "john.smith@gmail.com",
+    //   phone: "483-3278-3732",
+    // },
+    // active: true,
+    // status: "joined",
+    // companies: [
+    //   {
+    //     id: 2,
+    //     name: "FastTrack",
+    //     description: "gotta go fast",
+    //     teams: [
+    //       {
+    //         id: 3,
+    //         name: "Awesome",
+    //         description: "Among us",
+    //         users: [{ id: 1 }],
+    //       },
+    //     ],
+    //     users: [
+    //       {
+    //         id: 1,
+    //         profile: {
+    //           firstname: "John",
+    //           lastname: "Smith",
+    //           email: "john.smith@gmail.com",
+    //           phone: "483-3278-3732",
+    //         },
+    //         active: true,
+    //         status: "joined",
+    //       },
+    //     ],
+    //   },
+    // ],
+    // teams: [
+    //   {
+    //     id: 3,
+    //     name: "Awesome",
+    //     description: "Among us",
+    //     users: [
+    //       {
+    //         id: 1,
+    //         profile: {
+    //           firstname: "John",
+    //           lastname: "Smith",
+    //           email: "john.smith@gmail.com",
+    //           phone: "483-3278-3732",
+    //         },
+    //         active: true,
+    //         status: "joined",
+    //       },
+    //     ],
+    //   },
+    // ],
   },
   effects_UNSTABLE: [persistAtom],
 });

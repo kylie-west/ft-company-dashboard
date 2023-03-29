@@ -57,6 +57,7 @@ const Login = () => {
     if (!response) {
       setError({ isError: true, message: "No Response From Server" });
     } else if (response) {
+      console.log(response);
       setError({ isError: false, message: "" });
       setUser({
         isLoggedIn: true,
@@ -70,6 +71,8 @@ const Login = () => {
         companies: response.companies,
         teams: response.teams,
       });
+      //   setCompanies(response.companies);
+      //   setTeams(response.teams);
     }
   };
 
