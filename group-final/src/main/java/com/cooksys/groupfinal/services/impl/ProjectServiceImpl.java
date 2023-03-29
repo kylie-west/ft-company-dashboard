@@ -80,11 +80,7 @@ public class ProjectServiceImpl implements ProjectService {
     
     // Can only edit active status if user is an admin
     if (user.get().isAdmin()) {
-    	
-    	// Only edits active status if request body contains the active field
-    	if (projectRequestDto.getActive() != null) {
-    		projectToEdit.setActive(projectRequestDto.getActive());
-    	}
+    	projectToEdit.setActive(projectRequestDto.isActive());
     }
 
     return projectMapper.entityToDto(projectRepository.saveAndFlush(projectToEdit));
