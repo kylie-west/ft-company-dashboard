@@ -1,28 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { appState, projectsState } from "../globalstate";
 import { getProjects } from "../Services/projects";
 
+
 const TeamCard = ({ id, name, description, teammates }) => {
   const [app, setApp] = useRecoilState(appState);
   const [projects, setProjects] = useRecoilState(projectsState);
+  const [projs, setProjs] = useState([{}]);
 
-  const companyId = 5;
 
+  /**
+   * Update local projects on rendering
+   */
+  useEffect(() => {
+    const getProjs = async () => {
+      const response = await getProjects(app.viewCompanyId, id);
+      setProjs(response.data)
+    }
 
-  const updateProjects = async () => {
-    console.log(app.viewCompanyId)
-    console.log(app.viewTeamId)
-    const response = await getProjects(app.viewCompanyId, app.viewTeamId);
-    setProjects(response.data)
-    console.log(response.data)
+    getProjs();
+
+  },[app.viewCompanyId, id, projs]);
+  
+  /**
+   * Update global projects
+   */
+  const updateProjects = () => {
+    setProjects(projs)
   }
 
   const setTeamId = () =>
-    setApp({
+  setApp(
+    Object.assign({}, app, {
       viewTeamId: id,
-    });
+    })
+  );
 
   return (
     <div className="team-card">
@@ -36,7 +50,7 @@ const TeamCard = ({ id, name, description, teammates }) => {
         >
           {name}
         </NavLink>
-        <span># of projects: {4}</span>
+        <span># of projects: {projs.length}</span>
       </div>
       <div className="team-members">
         {teammates.map((member) => (

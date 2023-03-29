@@ -4,16 +4,26 @@ import TeamCard from "../../Components/TeamCard";
 import NavBar from "../../Components/NavBar";
 import { appState, teamState, userState } from "../../globalstate";
 import { getTeams } from "../../Services/teams";
+import { useEffect } from "react";
 
 const Teams = () => {
   const [app] = useRecoilState(appState)
   const [user] = useRecoilState(userState);
   const [teams, setTeams] = useRecoilState(teamState);
 
-  const getAllTeams = async () => {
-    const response = await getTeams(app.viewCompanyId);
-    setTeams(response.data)
-  }
+
+  useEffect(() => {
+    const getAllTeams = async () => {
+      const response = await getTeams(app.viewCompanyId);
+      console.log(response.data)
+      setTeams(response.data)
+    }
+    if (user.isAdmin) {
+      getAllTeams();
+    }
+  }, [app.viewCompanyId, user.isAdmin, setTeams]);
+  
+  
 
   const ts = teams.map(({ id, name, description, teammates }) => (
     <TeamCard
@@ -31,9 +41,6 @@ const Teams = () => {
   } else if (app.viewCompanyId === undefined) {
     return <Navigate replace to="/company" />
   } else {
-    if (user.isAdmin) {
-      getAllTeams();
-    }
     return (
       <div className="page">
         <NavBar />
