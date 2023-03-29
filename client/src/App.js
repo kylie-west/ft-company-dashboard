@@ -41,6 +41,7 @@ function App() {
     if (user) {
       setCompanies(user.companies);
       setTeams(user.teams);
+      console.log(user.teams);
     }
   }, [user]);
 

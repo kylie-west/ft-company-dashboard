@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import TeamCard from "../../Components/TeamCard"
+import TeamCard from "../../Components/TeamCard";
 import NavBar from "../../Components/NavBar";
 import { teamState, userState } from "../../globalstate";
 
@@ -9,7 +9,7 @@ const Teams = () => {
   const [teams] = useRecoilState(teamState);
 
   const ts = teams.map(({ id, name, description, teammates }) => (
-    <TeamCard 
+    <TeamCard
       key={id}
       id={id}
       name={name}
@@ -18,7 +18,7 @@ const Teams = () => {
       teammates={teammates}
     />
   ));
- 
+
   if (!user.isLoggedIn) {
     return <Navigate replace to="/" />;
   } else {
@@ -27,9 +27,7 @@ const Teams = () => {
         <NavBar />
         <div className="page-body">
           <h1>Teams</h1>
-          <div className="team-body">
-            {ts}
-          </div>
+          <div className="team-body">{ts}</div>
         </div>
       </div>
     );

@@ -30,15 +30,15 @@ const TeamCard = ({ id, name, description, teammates }) => {
             id: 10,
             name: "Awesome",
             description: "Among us",
-            users: [{ id: 1 }]
-          }
-        }
+            users: [{ id: 1 }],
+          },
+        },
       ]
     );
 
   const setTeamId = () =>
     setApp({
-      viewTeamId: { id }
+      viewTeamId: { id },
     });
 
   return (
@@ -49,15 +49,16 @@ const TeamCard = ({ id, name, description, teammates }) => {
           onClick={() => {
             setTeamId();
             updateProjects();
-          }}>
+          }}
+        >
           {name}
         </NavLink>
         <span># of projects: {4}</span>
       </div>
       <div className="team-members">
-        {teammates.map(member => (
+        {teammates.map((member) => (
           <div key={member.id} className="team-pill">
-            {member.profile.firstname} {member.profile.lastname}
+            {member.profile.firstName} {member.profile.lastName}
           </div>
         ))}
       </div>
