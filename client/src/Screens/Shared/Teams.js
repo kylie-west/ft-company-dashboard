@@ -2,9 +2,10 @@ import { Navigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import TeamCard from "../../Components/TeamCard";
 import NavBar from "../../Components/NavBar";
-import { teamState, userState } from "../../globalstate";
+import { appState, teamState, userState } from "../../globalstate";
 
 const Teams = () => {
+  const [app] = useRecoilState(appState)
   const [user] = useRecoilState(userState);
   const [teams] = useRecoilState(teamState);
 
@@ -21,6 +22,8 @@ const Teams = () => {
 
   if (!user.isLoggedIn) {
     return <Navigate replace to="/" />;
+  } else if (app.viewCompanyId === undefined) {
+    return <Navigate replace to="/company" />
   } else {
     return (
       <div className="page">
