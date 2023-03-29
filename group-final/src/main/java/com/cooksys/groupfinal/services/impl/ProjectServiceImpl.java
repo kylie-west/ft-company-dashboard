@@ -75,7 +75,7 @@ public class ProjectServiceImpl implements ProjectService {
     if (projectRequestDto.getDescription() != null) {
       projectToEdit.setDescription(projectRequestDto.getDescription());
     }
-//		projectToEdit.setActive(projectRequestDto.isActive());
+		projectToEdit.setActive(projectRequestDto.isActive());
 
     return projectMapper.entityToDto(projectRepository.saveAndFlush(projectToEdit));
   }
