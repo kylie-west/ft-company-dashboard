@@ -1,7 +1,10 @@
 import api from "./api";
 
 export const getProjects = async (companyId, teamId) => {
-  return api.get(`/company/${companyId}/teams/${teamId}/projects`);
+  const response = await api.get(
+    `/company/${companyId}/teams/${teamId}/projects`
+  );
+  return response.data;
 };
 
 export const postProject = async (

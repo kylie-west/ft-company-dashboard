@@ -7,9 +7,9 @@ export const appState = atom({
   key: "appState",
   default: {
     viewCompanyId: null,
-    viewTeamId: null
+    viewTeamId: null,
   },
-  effects_UNSTABLE: [persistAtom]
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const userState = atom({
@@ -18,67 +18,9 @@ export const userState = atom({
     isLoggedIn: false,
     isAdmin: false,
     username: "",
-    password: ""
-    // TO BE DELETED IN FINAL!!!!!!!
-    // id: 1,
-    // profile: {
-    //   firstname: "John",
-    //   lastname: "Smith",
-    //   email: "john.smith@gmail.com",
-    //   phone: "483-3278-3732",
-    // },
-    // active: true,
-    // status: "joined",
-    // companies: [
-    //   {
-    //     id: 2,
-    //     name: "FastTrack",
-    //     description: "gotta go fast",
-    //     teams: [
-    //       {
-    //         id: 3,
-    //         name: "Awesome",
-    //         description: "Among us",
-    //         users: [{ id: 1 }],
-    //       },
-    //     ],
-    //     users: [
-    //       {
-    //         id: 1,
-    //         profile: {
-    //           firstname: "John",
-    //           lastname: "Smith",
-    //           email: "john.smith@gmail.com",
-    //           phone: "483-3278-3732",
-    //         },
-    //         active: true,
-    //         status: "joined",
-    //       },
-    //     ],
-    //   },
-    // ],
-    // teams: [
-    //   {
-    //     id: 3,
-    //     name: "Awesome",
-    //     description: "Among us",
-    //     users: [
-    //       {
-    //         id: 1,
-    //         profile: {
-    //           firstname: "John",
-    //           lastname: "Smith",
-    //           email: "john.smith@gmail.com",
-    //           phone: "483-3278-3732",
-    //         },
-    //         active: true,
-    //         status: "joined",
-    //       },
-    //     ],
-    //   },
-    // ],
+    password: "",
   },
-  effects_UNSTABLE: [persistAtom]
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const announcementsState = atom({
@@ -141,62 +83,47 @@ export const announcementsState = atom({
     //     status: "joined",
     //   },
     // },
-  ]
+  ],
 });
 
 export const companyState = atom({
   key: "companyState",
-  default: []
+  default: [],
 });
 
 export const allUsersState = atom({
   key: "allUsersState",
   default: [
     {
-      id: 68,
-      profile: {
-        firstName: "Chris",
-        lastName: "Purnell",
-        email: "uliajkas@jhosk.com",
-        phone: "(686) 868-6868"
-      },
+      name: "Chris Purnell",
+      email: "uliajkas@jhosk.com",
       active: false,
       admin: true,
-      status: "pending"
+      status: "pending",
     },
     {
-      id: 69,
-      profile: {
-        firstName: "Will",
-        lastName: "Marttala",
-        email: "uliajkas@jhosk.com",
-        phone: "(696) 969-6969"
-      },
+      name: "Will Marttala",
+      email: "uliajkas@jhosk.com",
       active: true,
       admin: true,
-      status: "joined"
+      status: "joined",
     },
     {
-      id: 70,
-      profile: {
-        firstName: "Kenny",
-        lastName: "Worth",
-        email: "uliajkas@jhosk.com",
-        phone: "(707) 070-7070"
-      },
+      name: "Kenny Worth",
+      email: "uliajkas@jhosk.com",
       active: false,
       admin: false,
-      status: "joined"
-    }
-  ]
+      status: "joined",
+    },
+  ],
 });
 
 export const errorState = atom({
   key: "errorState",
   default: {
     isError: false,
-    message: ""
-  }
+    message: "",
+  },
 });
 
 export const modalState = atom({
@@ -204,41 +131,13 @@ export const modalState = atom({
   default: {
     isOpen: false,
     type: "", // refer to ModalContainer.js for list of types
-    data: {} // do whatever you want with this
-  }
+    data: {}, // do whatever you want with this
+  },
 });
 
-// TO BE DELETED?
 export const projectsState = atom({
   key: "projectsState",
-  default: [
-    {
-      id: 4,
-      name: "Cool Project",
-      description:
-        "Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim sit amet venenatis urna cursus",
-      active: true,
-      team: {
-        id: 10,
-        name: "Awesome",
-        description: "Among us",
-        users: [{ id: 1 }]
-      }
-    },
-    {
-      id: 5,
-      name: "Lorem Ipsum",
-      description:
-        "Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim sit amet venenatis urna cursus",
-      active: false,
-      team: {
-        id: 20,
-        name: "Awesome",
-        description: "Among us",
-        users: [{ id: 1 }]
-      }
-    }
-  ]
+  default: [],
 });
 
 export const teamState = atom({
@@ -255,10 +154,10 @@ export const teamState = atom({
             firstname: "John",
             lastname: "Smith",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732"
+            phone: "483-3278-3732",
           },
           active: true,
-          status: "joined"
+          status: "joined",
         },
         {
           id: 2,
@@ -266,12 +165,12 @@ export const teamState = atom({
             firstname: "Steve",
             lastname: "Rogers",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732"
+            phone: "483-3278-3732",
           },
           active: true,
-          status: "joined"
-        }
-      ]
+          status: "joined",
+        },
+      ],
     },
     {
       id: 20,
@@ -284,10 +183,10 @@ export const teamState = atom({
             firstname: "John",
             lastname: "Smith",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732"
+            phone: "483-3278-3732",
           },
           active: true,
-          status: "joined"
+          status: "joined",
         },
         {
           id: 2,
@@ -295,12 +194,12 @@ export const teamState = atom({
             firstname: "Clark",
             lastname: "Kent",
             email: "john.smith@gmail.com",
-            phone: "483-3278-3732"
+            phone: "483-3278-3732",
           },
           active: true,
-          status: "joined"
-        }
-      ]
-    }
-  ]
+          status: "joined",
+        },
+      ],
+    },
+  ],
 });

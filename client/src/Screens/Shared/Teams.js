@@ -7,23 +7,20 @@ import { getTeams } from "../../Services/teams";
 import { useEffect } from "react";
 
 const Teams = () => {
-  const [app] = useRecoilState(appState)
+  const [app] = useRecoilState(appState);
   const [user] = useRecoilState(userState);
   const [teams, setTeams] = useRecoilState(teamState);
 
-
   useEffect(() => {
     const getAllTeams = async () => {
-      const response = await getTeams(app.viewCompanyId);
-      console.log(response.data)
-      setTeams(response.data)
-    }
+      const data = await getTeams(app.viewCompanyId);
+      console.log(data);
+      setTeams(data);
+    };
     if (user.isAdmin) {
       getAllTeams();
     }
   }, [app.viewCompanyId, user.isAdmin, setTeams]);
-  
-  
 
   const ts = teams.map(({ id, name, description, teammates }) => (
     <TeamCard
@@ -39,7 +36,7 @@ const Teams = () => {
   if (!user.isLoggedIn) {
     return <Navigate replace to="/" />;
   } else if (app.viewCompanyId === undefined) {
-    return <Navigate replace to="/company" />
+    return <Navigate replace to="/company" />;
   } else {
     return (
       <div className="page">

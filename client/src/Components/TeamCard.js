@@ -4,32 +4,29 @@ import { useRecoilState } from "recoil";
 import { appState, projectsState } from "../globalstate";
 import { getProjects } from "../Services/projects";
 
-
 const TeamCard = ({ id, name, description, teammates }) => {
   const [app, setApp] = useRecoilState(appState);
   const [projects, setProjects] = useRecoilState(projectsState);
   const [projs, setProjs] = useState([{}]);
-
 
   /**
    * Update local projects on rendering
    */
   useEffect(() => {
     const getProjs = async () => {
-      const response = await getProjects(app.viewCompanyId, id);
-      setProjs(response.data)
-    }
+      const data = await getProjects(app.viewCompanyId, id);
+      setProjs(data);
+    };
 
     getProjs();
+  }, [app.viewCompanyId, id, projs]);
 
-  },[app.viewCompanyId, id, projs]);
-  
   /**
    * Update global projects
    */
   const updateProjects = () => {
-    setProjects(projs)
-  }
+    setProjects(projs);
+  };
 
   const setTeamId = () =>
     setApp(
