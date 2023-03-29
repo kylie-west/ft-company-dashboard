@@ -92,10 +92,15 @@ public class CompanyServiceImpl implements CompanyService {
 			throw new NotFoundException(
 					"A team with id " + teamId + " does not exist at company with id " + companyId + ".");
 		}
+	/*
 		Set<Project> filteredProjects = new HashSet<>();
 		team.getProjects().forEach(filteredProjects::add);
 		filteredProjects.removeIf(project -> !project.isActive());
 		return projectMapper.entitiesToDtos(filteredProjects);
+	*/
+		//Set<Project> allProjects = new HashSet<>();
+		//team.getProjects().forEach(allProjects::add);
+		return projectMapper.entitiesToDtos(team.getProjects());
 	}
 
 }

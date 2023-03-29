@@ -21,7 +21,7 @@ public class Project {
 	
 	private String description;
 	
-	private boolean active;
+	private Boolean active;
 	
 	@ManyToOne
 	private Team team;

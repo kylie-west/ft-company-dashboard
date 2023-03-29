@@ -47,6 +47,8 @@ public class ProjectServiceImpl implements ProjectService {
     if (team.isEmpty()) {
       throw new NotFoundException("A team with the provided id does not exist.");
     }
+    projectToSave.setActive(true);
+   
     projectToSave.setTeam(team.get());
     return projectMapper.entityToDto(projectRepository.saveAndFlush(projectToSave));
   }
@@ -75,7 +77,15 @@ public class ProjectServiceImpl implements ProjectService {
     if (projectRequestDto.getDescription() != null) {
       projectToEdit.setDescription(projectRequestDto.getDescription());
     }
-		projectToEdit.setActive(projectRequestDto.isActive());
+    
+    // Can only edit active status if user is an admin
+    if (user.get().isAdmin()) {
+    	
+    	// Only edits active status if request body contains the active field
+    	if (projectRequestDto.getActive() != null) {
+    		projectToEdit.setActive(projectRequestDto.getActive());
+    	}
+    }
 
     return projectMapper.entityToDto(projectRepository.saveAndFlush(projectToEdit));
   }
