@@ -78,5 +78,30 @@ public class AnnouncementServiceImpl implements AnnouncementService {
             throw new BadRequestException("You are not authorized to delete this announcement");
         }
     }
+    
+    @Override
+    public AnnouncementDto editAnnouncement(Long id, AnnouncementRequestDto announcementRequestDto) {
 
+        User author = userRepository.findByCredentialsUsernameAndActiveTrue(announcementRequestDto.getCredentials().getUsername())
+                .orElseThrow(() -> new NotFoundException("User not found"));
+
+        if (!author.isAdmin() && !author.getCredentials().getPassword().equals(announcementRequestDto.getCredentials().getPassword())) {
+            throw new BadRequestException("Invalid credentials");
+        }
+
+        Announcement announcement = announcementRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Announcement not found"));
+
+        if (author.isAdmin() || author.getId().equals(announcement.getAuthor().getId())) {
+            announcement.setTitle(announcementRequestDto.getTitle());
+            announcement.setMessage(announcementRequestDto.getMessage());
+            
+            Announcement savedAnnouncement = announcementRepository.save(announcement);
+            return announcementMapper.entityToDto(savedAnnouncement);
+        } else {
+            throw new BadRequestException("You are not authorized to edit this announcement");
+        }
+    }
+
+    
 }
