@@ -11,7 +11,7 @@ public class ProjectRequestDto {
 
   private String description;
 
-  private TeamDto Team;
+  private TeamDto team;
   
   private boolean active;
 
