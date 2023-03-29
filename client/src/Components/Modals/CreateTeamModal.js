@@ -6,6 +6,7 @@ import { postTeams } from "../../Services/teams";
 import { appState, userState, modalState, teamState } from "../../globalstate";
 import { FormControl, Select, MenuItem } from "@mui/material";
 import StyledTextField from "../StyledTextField";
+import ClearIcon from '@mui/icons-material/Clear';
 
 const CreateTeamModal = () => {
   const [app] = useRecoilState(appState);
@@ -35,7 +36,7 @@ const CreateTeamModal = () => {
   },[])
 
   const options = availableUsers.map((member) => (
-    <MenuItem key={member.id} value={member.id.toString()}>
+    <MenuItem key={member.id} value={member.id}>
       {member.profile.firstName + " " + member.profile.lastName}
     </MenuItem>
   ));
@@ -49,10 +50,19 @@ const CreateTeamModal = () => {
 
 
   function handleChange(e) {
+    console.log(e)
     const selectedId = e.target.value;
     setSelectedUsers([...selectedUsers, availableUsers.find((user) => { 
-      return user.id == selectedId})]);
-    setAvailableUsers(availableUsers.filter(user => user.id != selectedId))
+      return user.id === selectedId})]);
+    setAvailableUsers(availableUsers.filter(user => user.id !== selectedId))
+  }
+
+  function handleRemove(e) {
+    console.log(e);
+    const selectedId = e.id;
+    setAvailableUsers([...availableUsers, selectedUsers.find((user) => { 
+      return user.id === selectedId})]);
+    setSelectedUsers(selectedUsers.filter(user => user.id !== selectedId))
   }
 
   async function handleSubmit() {
@@ -83,29 +93,32 @@ const CreateTeamModal = () => {
           error={attemptedSubmit && name.length === 0}
           onChange={(e) => setName(e.target.value)}
         />
-        <StyledTextField
-          id="description-input"
-          label="Description"
-          variant="standard"
-          multiline
-          error={attemptedSubmit && description.length === 0}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+      <StyledTextField
+        id="description-input"
+        label="Description"
+        variant="standard"
+        multiline
+        error={attemptedSubmit && description.length === 0}
+        onChange={(e) => setDescription(e.target.value)}
+      />
       {availableUsers.length > 0 && (
-            <FormControl sx={style}>
-              <Select value={""} onChange={(event) => handleChange(event)}>
-                {options}
-              </Select>
-              
-            </FormControl>
-          )}
+        <FormControl sx={style}>
+          <Select value={""} onChange={(event) => handleChange(event)}>
+            {options}
+          </Select>  
+        </FormControl>
+      )}
 
+      <div>
+        Select Team Members
+        {selectedUsers.map((u) => (
           <div>
-            {selectedUsers.map((u) => {
-              <span>{u.profile.firstName}</span>
-            })}
+            <span key={u.id}>{u.profile.firstName}</span>
+            <ClearIcon onClick={() => handleRemove(u)} /> 
           </div>
 
+        ))}
+      </div>
       <SubmitButton handleSubmit={handleSubmit} />
     </div>
   );

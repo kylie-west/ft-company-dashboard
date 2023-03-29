@@ -50,7 +50,7 @@ const Teams = ( { openModal } ) => {
           <h1>Teams</h1>
           <div className="team-body">
             {ts}
-            <AddCircleOutlineIcon className="" onClick={handleClick}/>
+            <AddCircleOutlineIcon className="add-team-icon" onClick={handleClick}/>
           </div>
         </div>
       </div>
