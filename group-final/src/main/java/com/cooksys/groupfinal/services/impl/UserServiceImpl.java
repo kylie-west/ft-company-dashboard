@@ -1,17 +1,12 @@
 package com.cooksys.groupfinal.services.impl;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
 
 import com.cooksys.groupfinal.dtos.BasicUserDto;
-import com.cooksys.groupfinal.dtos.CompanyDto;
 import com.cooksys.groupfinal.dtos.CredentialsDto;
 import com.cooksys.groupfinal.dtos.FullUserDto;
 import com.cooksys.groupfinal.dtos.UserAddRequestDto;
@@ -72,10 +67,9 @@ public class UserServiceImpl implements UserService {
 
 	/**
 	 * verifyLogin private method checks that a credentialsDto with username and
-	 * password values exists,
-	 * searches the database by for a matching user and returns the user if username
-	 * and password match.
-	 * Throws a NotAuthorizedException otherwise.
+	 * password values exists, searches the database by for a matching user and
+	 * returns the user if username and password match. Throws a
+	 * NotAuthorizedException otherwise.
 	 * 
 	 * @param credentialsDto with a username and password to check against the
 	 *                       database
@@ -96,9 +90,9 @@ public class UserServiceImpl implements UserService {
 
 	/**
 	 * verifyAdmin private method calls other private methods to find a user and
-	 * verify login credentials,
-	 * then checks if the found user is an admin and returns the user.
-	 * If the user is not an admin a NotAuthorizedException is thrown.
+	 * verify login credentials, then checks if the found user is an admin and
+	 * returns the user. If the user is not an admin a NotAuthorizedException is
+	 * thrown.
 	 * 
 	 * @param credentialsDto with a username and password to check against the
 	 *                       database
@@ -114,9 +108,8 @@ public class UserServiceImpl implements UserService {
 
 	/**
 	 * login method takes in a credentialsDto, searches for a user with a matching
-	 * username and compares the stored
-	 * user password the the passed in credential. If matching a user object is
-	 * returned.
+	 * username and compares the stored user password the the passed in credential.
+	 * If matching a user object is returned.
 	 */
 	@Override
 	public FullUserDto login(CredentialsDto credentialsDto) {
@@ -130,9 +123,8 @@ public class UserServiceImpl implements UserService {
 
 	/**
 	 * editUser method takes in a userAddRequestDto and an id. After verifying the
-	 * user credentials and admin
-	 * privilege any existing fields are checked for validity and assigned as values
-	 * to an user found by the passed in id.
+	 * user credentials and admin privilege any existing fields are checked for
+	 * validity and assigned as values to an user found by the passed in id.
 	 */
 	@Override
 	public FullUserDto editUser(UserAddRequestDto userAddRequestDto, long id) {
@@ -154,7 +146,7 @@ public class UserServiceImpl implements UserService {
 				} else {
 					throw new BadRequestException("Given Username is already in use.");
 				}
-			}
+			}			
 		}
 
 		if (userAddRequestDto.getUser().getCredentials().getPassword() != null) {
@@ -195,53 +187,71 @@ public class UserServiceImpl implements UserService {
 		return fullUserMapper.entityToFullUserDto(userRepository.saveAndFlush(userToEdit));
 	}
 
-	// check if credentials exist and correspond
-	private void validateAdminCredentials(CredentialsDto credentialsDto) {
-		if (credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
-			throw new BadRequestException("User credentials must be supplied for this request.");
-		}
-		User associatedUser = findUser(credentialsDto.getUsername());
-		if (!associatedUser.getCredentials().getPassword().equals(credentialsDto.getPassword())) {
-			throw new NotAuthorizedException("User credentials are invalid.");
-		}
-		// check for is admin
-		// throws not authorized
-		if (!associatedUser.isAdmin()) {
-			throw new NotAuthorizedException("User is not authorized for this request.");
-		}
-	}
-
-	// private void validateUser(CredentialsDto credentialsDto, BasicUserDto
-	// basicUserDto) {
-	// validateCredentials(credentialsDto);
-	// if(credentialsDto.getUsername() !=
-	// findUser(basicUserDto.getId()).getCredentials().getUsername()) {
-	// throw new NotAuthorizedException("Invalid user credentials offered.");
-	// }
-	// }
-
 	@Override
 	public BasicUserDto createUser(UserAddRequestDto userAddRequestDto, Long companyId) {
-		validateAdminCredentials(userAddRequestDto.getCredentials());
-
+		verifyAdmin(userAddRequestDto.getCredentials());
+		
+		if(userAddRequestDto.getUser().getCredentials().getUsername() == null || userAddRequestDto.getUser().getCredentials().getPassword() == null) {
+			throw new BadRequestException("A username and password for the new user are required.");
+		}
+		
 		User userToAdd = fullUserMapper.requestDtoToEntity(userAddRequestDto.getUser());
+
+		// Check that the request has a username to change to
+		if (userAddRequestDto.getUser().getCredentials().getUsername() != null) {
+
+			if (userRepository.findByCredentialsUsername(userAddRequestDto.getUser().getCredentials().getUsername())
+					.isEmpty()) {
+				userToAdd.getCredentials().setUsername(userAddRequestDto.getUser().getCredentials().getUsername());
+			} else {
+				throw new BadRequestException("Given Username is already in use.");
+			}
+		}
+
+		if (userAddRequestDto.getUser().getProfile().getEmail() != null) {
+
+			String regex = "^(.+)@(.+)$";
+			Pattern pattern = Pattern.compile(regex);
+			Matcher matcher = pattern.matcher((CharSequence) userAddRequestDto.getUser().getProfile().getEmail());
+
+			if (matcher.matches()) {
+				userToAdd.getProfile().setEmail(userAddRequestDto.getUser().getProfile().getEmail());
+			} else {
+				throw new BadRequestException("Properly formatted email addresses with '@' and '.' are required.");
+			}
+
+		}
+		if (userAddRequestDto.getUser().getProfile().getPhone() != null) {
+
+			// Check phone number given has 10 digits
+			if (userAddRequestDto.getUser().getProfile().getPhone().length() == 10) {
+
+				// Format phone number before saving to database with format (xxx) xxx-xxxx
+				userToAdd.getProfile().setPhone(String.valueOf(userAddRequestDto.getUser().getProfile().getPhone())
+						.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3"));
+			} else {
+				throw new BadRequestException("Phone Numbers require 10 digits.");
+			}
+		}
+		userToAdd.setActive(true);
 		userToAdd.setStatus("PENDING");
 		Optional<Company> optionalCompany = companyRepository.findById(companyId);
 		if (optionalCompany == null) {
 			throw new NotFoundException("No company has id " + companyId + ".");
 		}
 		Company company = optionalCompany.get();
+
 		User userToReturn = userRepository.saveAndFlush(userToAdd);
 		company.getEmployees().add(userToReturn);
 		companyRepository.saveAndFlush(company);
+
 		return basicUserMapper.entityToBasicUserDto(userToReturn);
 	}
 
 	/**
 	 * deleteUser method takes in credentials and an id. The credentials are
-	 * verified along with admin status and the
-	 * id is used to search for a user. If no active user is found an exception is
-	 * thrown. If found the active boolean
+	 * verified along with admin status and the id is used to search for a user. If
+	 * no active user is found an exception is thrown. If found the active boolean
 	 * is set to false and the user is returned.
 	 */
 	@Override
