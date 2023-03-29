@@ -7,3 +7,7 @@ export const login = async (username, password) => {
   });
   return response.data;
 };
+
+export const getCompanyUsers = async (companyId) => {
+  return api.get(`/company/${companyId}/users`);
+};
