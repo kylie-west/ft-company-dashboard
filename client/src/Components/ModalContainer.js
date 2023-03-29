@@ -20,11 +20,11 @@ const ModalContainer = ({ isOpen, type, closeModal }) => {
       case "delete-announcement":
         return <DeleteAnnounceModal closeModal={closeModal} />;
       case "create-project":
-        return <CreateProjectModal />;
+        return <CreateProjectModal closeModal={closeModal} />;
       case "edit-project":
-        return <EditProjectModal />;
+        return <EditProjectModal closeModal={closeModal} />;
       case "create-team":
-        return <CreateTeamModal />;
+        return <CreateTeamModal closeModal={closeModal} />;
       default:
         return <>Invalid or empty modal type</>;
     }
@@ -37,12 +37,12 @@ const ModalContainer = ({ isOpen, type, closeModal }) => {
 
   return (
     <div className="modal">
-      <div className="modal-overlay" onClick={e => closeModal(e)}></div>
+      <div className="modal-overlay" onClick={(e) => closeModal(e)}></div>
       <div className="modal-container">
         <span className="close-btn-wrapper">
           <HighlightOffIcon
             className="close-modal-btn"
-            onClick={e => closeModal(e)}
+            onClick={(e) => closeModal(e)}
           />
         </span>
         {currentModal}

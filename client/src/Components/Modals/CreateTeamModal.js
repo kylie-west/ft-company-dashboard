@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import SubmitButton from "../SubmitButton";
-import { getCompanyUsers } from "../../Services/users"
-import { postTeams } from "../../Services/teams";
 import { appState, userState, modalState, teamState } from "../../globalstate";
+import SubmitButton from "../SubmitButton";
+import { getCompanyUsers } from "../../Services/users";
+import { postTeams } from "../../Services/teams";
 import { FormControl, Select, MenuItem } from "@mui/material";
 import StyledTextField from "../StyledTextField";
 import ClearIcon from '@mui/icons-material/Clear';
@@ -14,10 +14,10 @@ const CreateTeamModal = () => {
   const [modal, setModal] = useRecoilState(modalState);
   const [teams, setTeams] = useRecoilState(teamState);
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("")
+  const [description, setDescription] = useState("");
   const [isEmpty, setIsEmpty] = useState(true);
-  const [availableUsers, setAvailableUsers] = useState([])
-  const [selectedUsers, setSelectedUsers] = useState([])
+  const [availableUsers, setAvailableUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState([]);
   const [attemptedSubmit, setAttemptedSubmit] = useState(false);
 
   useEffect(() => {
@@ -28,12 +28,12 @@ const CreateTeamModal = () => {
 
   useEffect(() => {
     const getAllUsers = async () => {
-      const response = await getCompanyUsers(app.viewCompanyId)
-      setAvailableUsers(response.data)
-    }
+      const response = await getCompanyUsers(app.viewCompanyId);
+      setAvailableUsers(response.data);
+    };
 
-    getAllUsers()
-  },[])
+    getAllUsers();
+  }, []);
 
   const options = availableUsers.map((member) => (
     <MenuItem key={member.id} value={member.id}>
@@ -47,7 +47,6 @@ const CreateTeamModal = () => {
     fontSize: "16px",
     minWidth: "120px",
   };
-
 
   function handleChange(e) {
     console.log(e)
@@ -81,18 +80,16 @@ const CreateTeamModal = () => {
     setModal({ isOpen: false, type: "", data: {} });
   }
 
-
-
   return (
     <div className="modal-body">
       create team
       <StyledTextField
-          id="project-name-input"
-          label="Project Name"
-          variant="standard"
-          error={attemptedSubmit && name.length === 0}
-          onChange={(e) => setName(e.target.value)}
-        />
+        id="project-name-input"
+        label="Project Name"
+        variant="standard"
+        error={attemptedSubmit && name.length === 0}
+        onChange={(e) => setName(e.target.value)}
+      />
       <StyledTextField
         id="description-input"
         label="Description"
