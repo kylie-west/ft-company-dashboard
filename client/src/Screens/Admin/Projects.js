@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userState } from "../../globalstate";
@@ -13,6 +13,7 @@ const Projects = ({ openModal }) => {
   const [app] = useRecoilState(appState);
   const [user] = useRecoilState(userState);
   const [projects, setProjects] = useRecoilState(projectsState);
+  const [team, setTeam] = useState("");
 
   function openAddModal() {
     openModal("create-project");
@@ -40,6 +41,8 @@ const Projects = ({ openModal }) => {
           setProjects(data)
         );
       }
+    } else {
+      setTeam(projects[0].team?.name);
     }
   }, []);
 
@@ -54,7 +57,7 @@ const Projects = ({ openModal }) => {
             <Link to="/teams" className="go-back">
               {"<"} Back
             </Link>
-            <h1>Projects for Team dfsjgjks</h1>
+            <h1>Projects for Team {team}</h1>
           </div>
 
           <div className="project-list">

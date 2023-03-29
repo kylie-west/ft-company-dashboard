@@ -2,6 +2,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userState, companyState, appState } from "../../globalstate";
 import NavBar from "../../Components/NavBar";
+import { Select, MenuItem, FormControl } from "@mui/material";
 const CompanyScreen = () => {
   const [app, setAppState] = useRecoilState(appState);
   const [user, setUser] = useRecoilState(userState);
@@ -10,15 +11,22 @@ const CompanyScreen = () => {
   //const companyList = ["Fed-ex", "Google", "Cook Systems"];
 
   const options = companies.map((company) => (
-    <option key={company.id} value={company.id}>
+    <MenuItem key={company.id} value={company.id.toString()}>
       {company.name}
-    </option>
+    </MenuItem>
   ));
 
   function handleChange(e) {
     setAppState(Object.assign({}, app, { viewCompanyId: e.target.value }));
     navigate("/announcements");
   }
+
+  const style = {
+    backgroundColor: "white",
+    borderRadius: "6px",
+    fontSize: "16px",
+    minWidth: "120px",
+  };
 
   if (!user.isLoggedIn) {
     return <Navigate replace to="/" />;
@@ -31,15 +39,13 @@ const CompanyScreen = () => {
         <div className="page-body">
           <h1>Select Company</h1>
 
-          <div>
-            <select
-              value={companies.filter((c) => c.id === app.viewCompanyId)[0]}
-              onChange={(event) => handleChange(event)}
-            >
-              <option value="Pick A Company" />
-              {options}
-            </select>
-          </div>
+          {companies.length > 0 && (
+            <FormControl sx={style}>
+              <Select value={""} onChange={(event) => handleChange(event)}>
+                {options}
+              </Select>
+            </FormControl>
+          )}
         </div>
       </div>
     );
