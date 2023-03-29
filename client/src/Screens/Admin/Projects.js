@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userState } from "../../globalstate";
@@ -8,12 +8,15 @@ import { Link } from "react-router-dom";
 import NavBar from "../../Components/NavBar";
 import ProjectCard from "../../Components/ProjectCard";
 import { getProjects } from "../../Services/projects";
+import { useLocation } from "react-router-dom";
 
 const Projects = ({ openModal }) => {
   const [app] = useRecoilState(appState);
   const [user] = useRecoilState(userState);
   const [projects, setProjects] = useRecoilState(projectsState);
-  const [team, setTeam] = useState("");
+  const location = useLocation();
+  const team =
+    location.state?.name || (projects[0] && projects[0].team?.name) || "Team";
 
   function openAddModal() {
     openModal("create-project");
@@ -41,8 +44,6 @@ const Projects = ({ openModal }) => {
           setProjects(data)
         );
       }
-    } else {
-      setTeam(projects[0].team?.name);
     }
   }, []);
 

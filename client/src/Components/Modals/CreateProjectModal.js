@@ -42,6 +42,7 @@ const CreateProjectModal = () => {
 
   return (
     <div className="modal-body">
+      <h2 style={{ fontWeight: 300 }}>Create new project</h2>
       <div className="modal-input-wrapper">
         <StyledTextField
           id="project-name-input"
