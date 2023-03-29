@@ -85,6 +85,13 @@ h1 {
   cursor: pointer;
 }
 
+.editForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: right;
+}
+
 .header-wrapper {
   position: relative;
   display: flex;
@@ -92,6 +99,17 @@ h1 {
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.header-w-subtitle-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: var(--main-accent);
+  font-size: 14px;
 }
 
 .go-back {
@@ -138,6 +156,45 @@ h1 {
   font-size: 1.8rem;
 }
 
+.user-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: min(800px, 100vw);
+}
+
+.user-table {
+  border: solid;
+  border-color: var(--secondary-accent);
+  width: 100%;
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+  border-radius: 10px;
+}
+
+.user-card,
+.user-header-card {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-top: 1px solid var(--secondary-accent);
+  gap: 4rem;
+  padding: 2.5rem 0;
+}
+
+.user-card {
+  color: var(--secondary-accent);
+}
+
+.row-with-5-columns {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+  text-align: center;
+  padding: 3rem;
+  font-size: 20px;
+}
+
 .active {
   color: var(--active);
 }
@@ -154,7 +211,8 @@ h1 {
 }
 
 .edit-btn,
-.new-project-btn {
+.new-project-btn,
+.add-user-btn {
   border: none;
   padding: 0.8rem 4rem;
   border-radius: 10px;
@@ -172,6 +230,13 @@ h1 {
   color: white;
   background-color: var(--main-accent);
   margin: 3rem 0;
+}
+
+.add-user-btn {
+  color: white;
+  background-color: var(--main-accent);
+  width: 15rem;
+  align-self: flex-start;
 }
 
 .team-body {
@@ -209,15 +274,15 @@ h1 {
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
   padding: 3rem;
-  text-align: center;
   border-bottom: 1px solid var(--secondary-accent);
 }
 
 .announce-top h1 {
+  grid-column: 2 / 3;
+  margin: 0;
+  text-align: center;
   font-size: 3rem;
   font-weight: 400;
-  margin: 0;
-  grid-column: 2 / 3;
 }
 
 .announce-btn {
@@ -263,9 +328,19 @@ h1 {
   font-weight: 300;
 }
 
+.announce-card p {
+  white-space: pre-wrap;
+}
+
 .announce-info {
   display: flex;
   justify-content: space-between;
   margin-top: 0.5rem;
   color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-device-width: 750px) {
+  .announce-top h1 {
+    grid-column: 1 / 2;
+  }
 }

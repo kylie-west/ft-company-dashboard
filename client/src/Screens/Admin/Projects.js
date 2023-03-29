@@ -82,7 +82,7 @@ const Projects = ({ openModal }) => {
             {projs}
           </div>
         </div>
-      </div>
+      
     );
   }
 };

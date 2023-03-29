@@ -11,7 +11,7 @@ const ModalContainer = ({ isOpen, type, closeModal }) => {
       case "add-user":
         return <AddUserModal />;
       case "create-announcement":
-        return <CreateAnnounceModal />;
+        return <CreateAnnounceModal closeModal={closeModal} />;
       case "create-project":
         return <CreateProjectModal />;
       case "edit-project":
@@ -30,10 +30,10 @@ const ModalContainer = ({ isOpen, type, closeModal }) => {
 
   return (
     <div className="modal">
-      <div className="modal-overlay" onClick={(e) => closeModal(e)}></div>
+      <div className="modal-overlay" onClick={e => closeModal(e)}></div>
       <div className="modal-container">
         <span className="close-btn-wrapper">
-          <button className="close-modal-btn" onClick={(e) => closeModal(e)}>
+          <button className="close-modal-btn" onClick={e => closeModal(e)}>
             ×
           </button>
         </span>
