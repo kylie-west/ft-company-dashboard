@@ -15,6 +15,7 @@ import com.cooksys.groupfinal.dtos.ProjectResponseDto;
 import com.cooksys.groupfinal.dtos.TeamDto;
 import com.cooksys.groupfinal.entities.Announcement;
 import com.cooksys.groupfinal.entities.Company;
+import com.cooksys.groupfinal.entities.Project;
 import com.cooksys.groupfinal.entities.Team;
 import com.cooksys.groupfinal.entities.User;
 import com.cooksys.groupfinal.exceptions.NotFoundException;
@@ -96,7 +97,10 @@ public class CompanyServiceImpl implements CompanyService {
     if (!company.getTeams().contains(team)) {
       throw new NotFoundException("A team with id " + teamId + " does not exist at company with id " + companyId + ".");
     }
-    return projectMapper.entitiesToDtos(team.getProjects());
+    Set<Project> filteredProjects = new HashSet<>();
+    team.getProjects().forEach(filteredProjects::add);
+    filteredProjects.removeIf(project -> project.isDeleted());
+    return projectMapper.entitiesToDtos(filteredProjects);
   }
 
 }
