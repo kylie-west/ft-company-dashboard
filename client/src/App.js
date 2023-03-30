@@ -2,7 +2,13 @@ import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Route, Routes } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { modalState, userState, companyState, teamState } from "./globalstate";
+import {
+  appState,
+  modalState,
+  userState,
+  companyState,
+  teamState,
+} from "./globalstate";
 import "./App.css";
 import Announcements from "./Screens/Shared/Announcements";
 import Login from "./Screens/Shared/Login";
@@ -13,6 +19,7 @@ import Teams from "./Screens/Shared/Teams";
 import ModalContainer from "./Components/ModalContainer";
 
 function App() {
+  const [app, setAppState] = useRecoilState(appState);
   const [modal, setModal] = useRecoilState(modalState);
   const [user] = useRecoilState(userState);
   const [companies, setCompanies] = useRecoilState(companyState);
@@ -34,6 +41,12 @@ function App() {
       console.log("User:", user);
       setCompanies(user.companies);
       setTeams(user.teams);
+      // skip company screen
+      if (!user.isAdmin && user.companies) {
+        setAppState(
+          Object.assign({}, app, { viewCompanyId: user.companies[0].id })
+        );
+      }
     }
   }, [user]);
 

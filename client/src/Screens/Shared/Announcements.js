@@ -14,10 +14,12 @@ const Announcements = ({ openModal }) => {
   const [sortedAnnouncements, setSortedAnnouncements] = useState([]);
 
   useEffect(() => {
-    getAnnouncements(app.viewCompanyId).then((res) => {
-      //console.log(res);
-      setAnnouncements(res);
-    });
+    if (app.viewCompanyId) {
+      getAnnouncements(app.viewCompanyId).then((res) => {
+        //console.log(res);
+        setAnnouncements(res);
+      });
+    }
   }, []);
 
   useEffect(() => {
