@@ -228,11 +228,12 @@ h1 {
   color: var(--inactive);
 }
 
-.edit-btn-wrapper {
+.project-btn-wrapper {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   width: min-content;
+  gap: 1rem;
 }
 
 .edit-btn,
@@ -249,6 +250,17 @@ h1 {
 .edit-btn {
   color: black;
   background-color: var(--secondary-accent);
+}
+
+.delete-btn {
+  color: var(--tertiary-accent);
+  width: 3rem !important;
+  height: 3rem !important;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  color: white;
 }
 
 .new-project-btn {

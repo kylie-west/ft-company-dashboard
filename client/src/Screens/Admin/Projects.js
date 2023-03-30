@@ -22,16 +22,26 @@ const Projects = ({ openModal }) => {
     openModal("create-project");
   }
 
-  function openEditModal(projectId) {
-   
-     const data = {
-      id: projectId.id,
-      title: projectId.title,
-      message: projectId.message,
-      active: projectId.active,
-      teamObj: projectId.teamObj
+  function openEditModal(project) {
+    const data = {
+      id: project.id,
+      title: project.title,
+      message: project.message,
+      active: project.active,
+      teamObj: project.teamObj,
     };
     openModal("edit-project", data);
+  }
+
+  function openDeleteModal(project) {
+    const data = {
+      id: project.id,
+      credentials: {
+        username: user.username,
+        password: user.password,
+      },
+    };
+    openModal("delete-project", data);
   }
 
   const projs = projects.map((p) => (
@@ -40,7 +50,16 @@ const Projects = ({ openModal }) => {
       name={p.name}
       description={p.description}
       active={p.active}
-      openEditModal={() => openEditModal({ id: p.id, title:p.name, message: p.description, active:p.active })}
+      openEditModal={() =>
+        openEditModal({
+          id: p.id,
+          title: p.name,
+          message: p.description,
+          active: p.active,
+        })
+      }
+      openDeleteModal={() => openDeleteModal({ id: p.id })}
+      isAdmin={user.isAdmin}
     />
   ));
 

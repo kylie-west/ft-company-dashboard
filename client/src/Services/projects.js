@@ -50,3 +50,10 @@ export const patchProject = async (
     .catch((err) => console.log(err));
   return response.data;
 };
+
+export const deleteProject = async (projectId, credentials) => {
+  const response = await api
+    .delete(`/projects/${projectId}`, { data: credentials })
+    .catch((err) => console.log(err));
+  return response.data;
+};

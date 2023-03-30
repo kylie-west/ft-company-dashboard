@@ -7,6 +7,7 @@ import CreateTeamModal from "./Modals/CreateTeamModal";
 import EditProjectModal from "./Modals/EditProjectModal";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import DeleteAnnounceModal from "./Modals/DeleteAnnounceModal";
+import DeleteProjectModal from "./Modals/DeleteProjectModal";
 
 const ModalContainer = ({ isOpen, type, closeModal }) => {
   function getModal() {
@@ -23,6 +24,8 @@ const ModalContainer = ({ isOpen, type, closeModal }) => {
         return <CreateProjectModal closeModal={closeModal} />;
       case "edit-project":
         return <EditProjectModal closeModal={closeModal} />;
+      case "delete-project":
+        return <DeleteProjectModal closeModal={closeModal} />;
       case "create-team":
         return <CreateTeamModal closeModal={closeModal} />;
       default:
