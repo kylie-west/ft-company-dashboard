@@ -48,7 +48,7 @@ const Users = ({ openModal }) => {
     return (
       <div className="page">
         <NavBar />
-        <div className="page-body">
+        <div className="page-body users">
           <div className="header-w-subtitle-wrapper">
             <h1>User Registry</h1>
             <h2>A general view of all your members in your organization</h2>

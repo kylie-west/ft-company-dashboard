@@ -73,7 +73,12 @@ const NavBar = () => {
           <ListItem
             key={text}
             disablePadding
-            sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              borderBottom: "1px solid rgba(27, 160, 152, 0.3)",
+            }}
           >
             <Link
               to={"/" + text.toLowerCase()}
@@ -132,25 +137,32 @@ const NavBar = () => {
               alt="logo"
               style={{ display: "block", width: "40px", height: "40px" }}
             />
-            {user.isAdmin ? (
-              <h1
-                style={{
-                  color: "#F24E1E",
-                  fontSize: "2rem",
-                  fontWeight: "400",
-                }}
-              >
-                ADMIN
-              </h1>
-            ) : null}
+            <h1
+              style={{
+                color: "#F24E1E",
+                fontSize: "2rem",
+                fontWeight: "400",
+              }}
+            >
+              {user.profile.firstName + " " + user.profile.lastName[0] + "."}
+              {user.isAdmin && " | ADMIN"}
+            </h1>
           </div>
           {toggled ? (
             <Button onClick={toggleDrawer(anchor, true)}>
-              <MenuIcon style={{ height: "5vh", width: "5vw" }} />
+              <MenuIcon
+                style={{ height: "5vh", width: "5vw", color: "#1ba098" }}
+              />
             </Button>
           ) : (
             <Button onClick={toggleDrawer(anchor, false)}>
-              <CloseIcon style={{ height: "5vh", width: "5vw" }} />
+              <CloseIcon
+                style={{
+                  height: "5vh",
+                  width: "5vw",
+                  color: "#1ba098",
+                }}
+              />
             </Button>
           )}
         </div>
@@ -198,24 +210,9 @@ const NavBar = () => {
                   fontWeight: "400",
                 }}
               >
-                {user.isAdmin
-                  ? "ACTING AS ADMIN"
-                  : user.profile.firstName +
-                    " " +
-                    user.profile.lastName.slice(0, 1) +
-                    "."}
+                {user.profile.firstName + " " + user.profile.lastName[0] + "."}
+                {user.isAdmin && " | ADMIN"}
               </h1>
-              {/* {user.isAdmin ? (
-                <h1
-                  style={{
-                    color: "#F24E1E",
-                    fontSize: "2rem",
-                    fontWeight: "400",
-                  }}
-                >
-                  ACTING AS ADMIN
-                </h1>
-              ) : null} */}
             </div>
             <List
               style={{ textAlign: "center", background: "#051622" }}

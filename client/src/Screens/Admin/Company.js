@@ -2,7 +2,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userState, companyState, appState } from "../../globalstate";
 import NavBar from "../../Components/NavBar";
-import { Select, MenuItem, FormControl } from "@mui/material";
+import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 const CompanyScreen = () => {
   const [app, setAppState] = useRecoilState(appState);
   const [user] = useRecoilState(userState);
@@ -30,6 +30,10 @@ const CompanyScreen = () => {
     fontSize: "16px",
     minWidth: "140px",
   };
+  const labelStyle = {
+    fontSize: "14px",
+    "&.Mui-focused": { display: "none" },
+  };
 
   if (!user.isLoggedIn) {
     return <Navigate replace to="/" />;
@@ -44,7 +48,16 @@ const CompanyScreen = () => {
 
           {companies.length > 0 && (
             <FormControl sx={style}>
-              <Select value={""} onChange={(event) => handleChange(event)}>
+              <InputLabel
+                sx={labelStyle}
+                id="demo-simple-select-standard-label"
+              >
+                Pick a Company
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                onChange={(event) => handleChange(event)}
+              >
                 {options}
               </Select>
             </FormControl>
