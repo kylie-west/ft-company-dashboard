@@ -6,14 +6,12 @@ import SubmitButton from "../SubmitButton";
 import { announcementsState, appState, modalState } from "../../globalstate";
 import { editAnnouncement } from "../../Services/announcements";
 
-/**
- * @todo Form validation/error handling
- */
 const EditAnnounceModal = ({ closeModal }) => {
   const [announcements, setAnnouncements] = useRecoilState(announcementsState);
   const [app] = useRecoilState(appState);
   const [modal] = useRecoilState(modalState);
   const [form, setForm] = useState({ title: "", message: "" });
+  const [attemptedSubmit, setAttemptedSubmit] = useState(false);
 
   const { id, credentials, title, message } = modal.data;
 
@@ -22,16 +20,21 @@ const EditAnnounceModal = ({ closeModal }) => {
   }, []);
 
   function handleChange(e) {
+    setAttemptedSubmit(false);
     setForm({ ...form, [e.target.id]: e.target.value });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (
-      !form.title.length ||
-      !form.message.length ||
-      (form.title === title && form.message === message)
-    ) {
+    setAttemptedSubmit(true);
+
+    if (!form.title.length || !form.message.length) {
+      return;
+    }
+
+    // If no changes, close modal without making API call
+    if (form.title === title && form.message === message) {
+      closeModal(e);
       return;
     }
 
@@ -39,15 +42,13 @@ const EditAnnounceModal = ({ closeModal }) => {
       credentials,
       title: form.title,
       message: form.message,
-      companyId: app.viewCompanyId,
+      companyId: app.viewCompanyId
     };
 
-    editAnnouncement(id, requestObj).then((res) => {
-      //console.log("New announcement:", res);
-
+    editAnnouncement(id, requestObj).then(res => {
       // Replace old version in announcement state array
       const filteredAnnouncements = announcements.filter(
-        (announcement) => announcement.id !== id
+        announcement => announcement.id !== id
       );
       setAnnouncements([...filteredAnnouncements, res]);
     });
@@ -64,6 +65,7 @@ const EditAnnounceModal = ({ closeModal }) => {
           value={form.title}
           label="title"
           variant="standard"
+          error={attemptedSubmit && !form.title.length}
           onChange={handleChange}
         />
         <StyledTextField
@@ -71,6 +73,7 @@ const EditAnnounceModal = ({ closeModal }) => {
           value={form.message}
           label="message"
           variant="standard"
+          error={attemptedSubmit && !form.message.length}
           multiline
           onChange={handleChange}
         />
@@ -87,5 +90,5 @@ const formStyle = {
   flexDirection: "column",
   gap: "20px",
   width: "clamp(20vw, 300px, 90vw)",
-  padding: "30px 30px 50px 30px",
+  padding: "30px 30px 50px 30px"
 };
