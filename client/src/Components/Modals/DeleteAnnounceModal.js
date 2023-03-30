@@ -11,12 +11,12 @@ const DeleteAnnounceModal = ({ closeModal }) => {
 
   function handleClick(e) {
     e.preventDefault();
-    deleteAnnouncement(id, credentials).then(res => {
+    deleteAnnouncement(id, credentials).then((res) => {
       const filteredAnnouncements = announcements.filter(
-        announcement => announcement.id !== id
+        (announcement) => announcement.id !== id
       );
       setAnnouncements(filteredAnnouncements);
-      console.log("Deleted announcement:", res);
+      //console.log("Deleted announcement:", res);
     });
     closeModal(e);
   }

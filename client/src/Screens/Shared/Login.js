@@ -19,14 +19,13 @@ const Login = () => {
       return;
     }
 
-    const response = await login(username, password).catch(err => {
+    const response = await login(username, password).catch((err) => {
       setError({ isError: true, message: "Invalid username or password" });
     });
 
     if (!response) {
       setError({ isError: true, message: "No Response From Server" });
     } else if (response) {
-      console.log(response);
       setError({ isError: false, message: "" });
       setUser({
         isLoggedIn: true,
@@ -38,10 +37,8 @@ const Login = () => {
         active: response.active,
         status: response.status,
         companies: response.companies,
-        teams: response.teams
+        teams: response.teams,
       });
-      //   setCompanies(response.companies);
-      //   setTeams(response.teams);
     }
   };
 
@@ -58,8 +55,9 @@ const Login = () => {
           height: "100vh",
           padding: "50px 0",
           background: "#051622",
-          color: "#1ba098"
-        }}>
+          color: "#1ba098",
+        }}
+      >
         <header style={headerStyle}>
           <Avatar style={avatarStyle} src={logo}></Avatar>
           <h1 style={{ margin: 0, fontWeight: 300 }}>COOK SYSTEMS</h1>
@@ -68,7 +66,7 @@ const Login = () => {
         <Paper elevation={10} style={paperStyle}>
           <StyledTextField
             value={username}
-            onChange={e => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             sx={{ width: "50%" }}
             id="username"
             label="Username"
@@ -81,7 +79,7 @@ const Login = () => {
           <br />
           <StyledTextField
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             sx={{ width: "50%" }}
             label="Password"
             placeholder="Enter password"
@@ -95,7 +93,8 @@ const Login = () => {
             type="submit"
             color="primary"
             variant="contained"
-            onClick={() => handleLogin()}>
+            onClick={() => handleLogin()}
+          >
             Login
           </button>
           {error.isError ? (
@@ -115,7 +114,7 @@ const headerStyle = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  gap: "10px"
+  gap: "10px",
 };
 const paperStyle = {
   justifyContent: "center",
@@ -127,9 +126,9 @@ const paperStyle = {
   border: "1px solid #deb992",
   borderRadius: "10px",
   display: "flex",
-  flexDirection: "column"
+  flexDirection: "column",
 };
 const avatarStyle = {
   height: "100px",
-  width: "100px"
+  width: "100px",
 };

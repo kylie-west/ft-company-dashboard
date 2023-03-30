@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import NavBar from "../../Components/NavBar";
 import { userState } from "../../globalstate";
 
+// unused
 const Project = () => {
   const [user] = useRecoilState(userState);
 

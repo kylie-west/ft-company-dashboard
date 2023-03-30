@@ -30,11 +30,11 @@ const CreateAnnounceModal = ({ closeModal }) => {
       credentials,
       title: form.title,
       message: form.message,
-      companyId
+      companyId,
     };
 
-    createAnnouncement(requestObj).then(res => {
-      console.log("New announcement:", res);
+    createAnnouncement(requestObj).then((res) => {
+      //console.log("New announcement:", res);
       setAnnouncements([...announcements, res]);
     });
 
@@ -73,5 +73,5 @@ const formStyle = {
   flexDirection: "column",
   gap: "20px",
   width: "clamp(20vw, 300px, 90vw)",
-  padding: "30px 30px 50px 30px"
+  padding: "30px 30px 50px 30px",
 };

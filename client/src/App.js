@@ -2,13 +2,7 @@ import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Route, Routes } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import {
-  appState,
-  modalState,
-  userState,
-  companyState,
-  teamState,
-} from "./globalstate";
+import { modalState, userState, companyState, teamState } from "./globalstate";
 import "./App.css";
 import Announcements from "./Screens/Shared/Announcements";
 import Login from "./Screens/Shared/Login";
@@ -16,11 +10,9 @@ import CompanyScreen from "./Screens/Admin/Company";
 import Projects from "./Screens/Admin/Projects";
 import Users from "./Screens/Admin/Users";
 import Teams from "./Screens/Shared/Teams";
-import Project from "./Screens/Worker/Project";
 import ModalContainer from "./Components/ModalContainer";
 
 function App() {
-  const [app] = useRecoilState(appState);
   const [modal, setModal] = useRecoilState(modalState);
   const [user] = useRecoilState(userState);
   const [companies, setCompanies] = useRecoilState(companyState);
@@ -42,13 +34,8 @@ function App() {
       console.log("User:", user);
       setCompanies(user.companies);
       setTeams(user.teams);
-      console.log(user.teams);
     }
   }, [user]);
-
-  useEffect(() => {
-    console.log("Company id: " + app.viewCompanyId);
-  }, [app.viewCompanyId]);
 
   return (
     <div>

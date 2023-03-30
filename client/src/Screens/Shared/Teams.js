@@ -15,7 +15,7 @@ const Teams = ({ openModal }) => {
   useEffect(() => {
     const getAllTeams = async () => {
       const data = await getTeams(app.viewCompanyId);
-      console.log(data);
+      //console.log(data);
       setTeams(data);
     };
     if (user.isAdmin) {
@@ -34,7 +34,7 @@ const Teams = ({ openModal }) => {
     />
   ));
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     openModal("create-team");
   };
 

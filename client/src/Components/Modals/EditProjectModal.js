@@ -9,7 +9,7 @@ import { patchProject } from "../../Services/projects";
 
 const EditProjectModal = ({ closeModal }) => {
   const [projects, setProjects] = useRecoilState(projectsState);
-  const [modal, setModal] = useRecoilState(modalState);
+  const [modal] = useRecoilState(modalState);
   const [form, setForm] = useState({ title: "", message: "" });
   const [select, setSelect] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
