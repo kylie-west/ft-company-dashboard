@@ -83,7 +83,10 @@ public class CompanyServiceImpl implements CompanyService {
   @Override
   public Set<TeamDto> getAllTeams(Long id) {
     Company company = findCompany(id);
-    return teamMapper.entitiesToDtos(company.getTeams());
+    Set<Team> filteredTeams = new HashSet<>();
+    company.getTeams().forEach(filteredTeams::add);
+    filteredTeams.removeIf(team -> !team.isActive());
+    return teamMapper.entitiesToDtos(filteredTeams);
   }
 
   @Override
