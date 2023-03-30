@@ -71,6 +71,9 @@ public class ProjectServiceImpl implements ProjectService {
 		if (user.isEmpty()) {
 			throw new NotFoundException("Could not find user");
 		}
+		if (!projectRequestDto.getCredentials().getPassword().equals(user.get().getCredentials().getPassword())) {
+			throw new BadRequestException("Invalid Credentials");
+		}
 
 		Optional<Project> project = projectRepository.findById(projectId);
 		if (project.isEmpty()) {
