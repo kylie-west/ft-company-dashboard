@@ -11,9 +11,9 @@ public class ProjectRequestDto {
 
   private String description;
 
+  private TeamDto team;
+  
   private boolean active;
-
-  private TeamDto Team;
 
   private CredentialsDto credentials;
 
