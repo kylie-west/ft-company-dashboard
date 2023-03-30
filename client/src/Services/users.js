@@ -14,28 +14,10 @@ export const getCompanyUsers = async (companyId) => {
 
 export const postUser = async (
     companyId,
-    addUserRequestDto = {
-        user: {
-            credentials: {
-                username: newUsername,
-                password: newPassword
-            },
-            profile: {
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                phone: phone
-            },
-            admin: isAdmin
-        },
-        credentials: {
-            username: adminUsername,
-            password: adminPassword
-        }
-    }
+    addUserRequestDto = {}
 ) => {
     const response = await api
-        .post(`/users/${companyId}`, {addUserRequestDto})
+        .post(`/users/${companyId}`, {...addUserRequestDto})
         .catch((err) => console.log(err));
     return response.data;
 };
