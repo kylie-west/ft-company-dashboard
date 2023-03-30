@@ -27,7 +27,10 @@ const AddUserModal = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
   const [isSamePassword, setIsSamePassword] = useState(false);
+  const [isValidPhone, setIsValidPhone] = useState(false);
   const [attemptedSubmit, setAttemptedSubmit] = useState(false);
+
+  const PHONE_REGEX = /^([+]\d{2})?\d{10}$/;
 
   useEffect(() => {
     firstName.length === 0 ||
@@ -46,6 +49,10 @@ const AddUserModal = () => {
       ? setIsSamePassword(true)
       : setIsSamePassword(false);
   }, [password, confirmPassword]);
+
+  useEffect(() => {
+    phone.match(PHONE_REGEX) ? setIsValidPhone(true) : setIsValidPhone(false);
+  }, [phone]);
 
   async function handleSubmit() {
     setAttemptedSubmit(true);
@@ -113,6 +120,7 @@ const AddUserModal = () => {
           />
         </div>
         <StyledTextField
+          type="email"
           variant="standard"
           id="user-email-input"
           label="*Email"
@@ -120,10 +128,11 @@ const AddUserModal = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <StyledTextField
+          type="tel"
           variant="standard"
           id="user-phone-input"
           label="*Phone Number"
-          error={attemptedSubmit && phone.length === 0}
+          error={attemptedSubmit && (phone.length === 0 || !isValidPhone)}
           onChange={(e) => setPhone(e.target.value)}
         />
         <StyledTextField

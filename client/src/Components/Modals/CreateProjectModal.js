@@ -21,7 +21,6 @@ const CreateProjectModal = ({ closeModal }) => {
   }, [name, description]);
 
   async function handleSubmit(e) {
-    closeModal(e);
     setAttemptedSubmit(true);
     if (isEmpty) return;
     const response = await postProject(
@@ -32,6 +31,7 @@ const CreateProjectModal = ({ closeModal }) => {
       user.password
     );
     setProjects([response, ...projects]);
+    closeModal(e);
   }
 
   return (
