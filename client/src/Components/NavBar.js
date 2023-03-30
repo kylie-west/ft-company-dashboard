@@ -66,7 +66,10 @@ const NavBar = () => {
         style={{ textAlign: "center", background: "#051622" }}
         sx={{ width: "100%" }}
       >
-        {["Announcements", "Projects", "Teams", "Users"].map((text, index) => (
+        {(user.isAdmin
+          ? ["Announcements", "Projects", "Teams", "Users"]
+          : ["Announcements", "Projects", "Teams"]
+        ).map((text, index) => (
           <ListItem
             key={text}
             disablePadding
