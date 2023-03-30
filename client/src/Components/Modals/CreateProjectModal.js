@@ -31,7 +31,7 @@ const CreateProjectModal = ({ closeModal }) => {
       user.username,
       user.password
     );
-    setProjects([...projects, response]);
+    setProjects([response, ...projects]);
   }
 
   return (
