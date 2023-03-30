@@ -35,7 +35,7 @@ const Teams = ({ openModal }) => {
     />
   ));
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     openModal("create-team");
   };
 
@@ -51,10 +51,12 @@ const Teams = ({ openModal }) => {
           <h1>Teams</h1>
           <div className="team-body">
             {ts}
-            <div className="add-team-btn" onClick={handleClick} role="button">
-              <AddCircleOutlineIcon className="add-team-icon" />
-              <span>New Team</span>
-            </div>
+            {user.isAdmin && (
+              <div className="add-team-btn" onClick={handleClick} role="button">
+                <AddCircleOutlineIcon className="add-team-icon" />
+                <span>New Team</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
