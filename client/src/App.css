@@ -121,6 +121,7 @@ h1 {
   justify-content: center;
   align-items: center;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .header-w-subtitle-wrapper {
@@ -146,7 +147,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: min(800px, 100vw);
+  width: min(800px, 100%);
 }
 
 .project-card {
@@ -168,6 +169,7 @@ h1 {
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .project-details {
@@ -182,7 +184,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: min(800px, 100vw);
+  width: min(800px, 100%);
 }
 
 .user-table {
@@ -215,6 +217,7 @@ h1 {
   text-align: center;
   padding: 3rem;
   font-size: 20px;
+  overflow-x: auto;
 }
 
 .active {
@@ -489,12 +492,16 @@ h1 {
 }
 
 @media (max-width: 750px) {
+  .go-back {
+    display: none;
+  }
+
   .announce-top h1 {
     grid-column: 1 / 2;
   }
 
   .page-body {
-    padding: 0;
+    /* padding: 0; */
   }
 
   .team-body {
