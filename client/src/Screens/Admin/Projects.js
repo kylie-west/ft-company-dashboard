@@ -23,7 +23,15 @@ const Projects = ({ openModal }) => {
   }
 
   function openEditModal(projectId) {
-    openModal("edit-project", projectId);
+   
+     const data = {
+      id: projectId.id,
+      title: projectId.title,
+      message: projectId.message,
+      active: projectId.active,
+      teamObj: projectId.teamObj
+    };
+    openModal("edit-project", data);
   }
 
   const projs = projects.map((p) => (
@@ -32,7 +40,7 @@ const Projects = ({ openModal }) => {
       name={p.name}
       description={p.description}
       active={p.active}
-      openEditModal={() => openEditModal({ id: p.id })}
+      openEditModal={() => openEditModal({ id: p.id, title:p.name, message: p.description, active:p.active })}
     />
   ));
 
