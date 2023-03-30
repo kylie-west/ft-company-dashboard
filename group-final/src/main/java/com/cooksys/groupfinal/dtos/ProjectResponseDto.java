@@ -14,6 +14,8 @@ public class ProjectResponseDto {
     private String description;
 
     private boolean active;
+    
+    private boolean deleted;
 
     private TeamDto team;
 

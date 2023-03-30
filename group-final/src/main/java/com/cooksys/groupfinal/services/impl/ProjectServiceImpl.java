@@ -125,7 +125,7 @@ public class ProjectServiceImpl implements ProjectService {
 		if (projectToDelete == null) {
 			throw new NotFoundException("Project with id " + projectId + " does not exist.");
 		}
-		projectToDelete.setActive(false);
+		projectToDelete.setDeleted(true);
 		projectRepository.saveAndFlush(projectToDelete);
 		return projectMapper.entityToDto(projectToDelete);
 	}
