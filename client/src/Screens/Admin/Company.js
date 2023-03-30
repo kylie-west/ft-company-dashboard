@@ -31,7 +31,8 @@ const CompanyScreen = () => {
     minWidth: "140px",
   };
   const labelStyle = {
-    fontSize: "14px"
+    fontSize: "14px",
+    "&.Mui-focused": { display: "none" },
   };
 
   if (!user.isLoggedIn) {
@@ -46,10 +47,17 @@ const CompanyScreen = () => {
           <h1>Select Company</h1>
 
           {companies.length > 0 && (
-            <FormControl  sx={style}> 
-             <InputLabel sx={labelStyle}id="demo-simple-select-standard-label"> Pick a Company</InputLabel>
-              <Select  labelId="demo-simple-select-standard-label" onChange={(event) => handleChange(event)}>
-                
+            <FormControl sx={style}>
+              <InputLabel
+                sx={labelStyle}
+                id="demo-simple-select-standard-label"
+              >
+                Pick a Company
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                onChange={(event) => handleChange(event)}
+              >
                 {options}
               </Select>
             </FormControl>

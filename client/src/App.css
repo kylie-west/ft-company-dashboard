@@ -11,6 +11,11 @@ h1 {
   margin: 3rem;
 }
 
+h1,
+h2 {
+  font-weight: 400;
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -133,6 +138,10 @@ h1 {
   width: 100%;
   color: var(--main-accent);
   font-size: 14px;
+}
+
+.header-w-subtitle-wrapper h1 {
+  margin-bottom: 10px;
 }
 
 .go-back {
@@ -393,7 +402,6 @@ h1 {
   grid-column: 2 / 3;
   margin: 0;
   text-align: center;
-  font-size: 3rem;
   font-weight: 400;
 }
 
@@ -525,6 +533,15 @@ h1 {
 @media (max-width: 750px) {
   .go-back {
     display: none;
+  }
+
+  .page-body.users {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin: 3rem 0;
   }
 
   .announce-top h1 {
