@@ -5,13 +5,16 @@ import NavBar from "../../Components/NavBar";
 import { Select, MenuItem, FormControl } from "@mui/material";
 const CompanyScreen = () => {
   const [app, setAppState] = useRecoilState(appState);
-  const [user, setUser] = useRecoilState(userState);
-  const [companies, setCompanies] = useRecoilState(companyState);
+  const [user] = useRecoilState(userState);
+  const [companies] = useRecoilState(companyState);
   const navigate = useNavigate();
-  //const companyList = ["Fed-ex", "Google", "Cook Systems"];
 
   const options = companies.map((company) => (
-    <MenuItem key={company.id} value={company.id.toString()}>
+    <MenuItem
+      sx={{ fontSize: "16px" }}
+      key={company.id}
+      value={company.id.toString()}
+    >
       {company.name}
     </MenuItem>
   ));
@@ -25,12 +28,12 @@ const CompanyScreen = () => {
     backgroundColor: "white",
     borderRadius: "6px",
     fontSize: "16px",
-    minWidth: "120px",
+    minWidth: "140px",
   };
 
   if (!user.isLoggedIn) {
     return <Navigate replace to="/" />;
-  } else if (!user.isAdmin) {
+  } else if (!user.isAdmin && app.viewCompanyId) {
     return <Navigate replace to="/announcements" />;
   } else {
     return (

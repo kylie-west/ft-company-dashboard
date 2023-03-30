@@ -5,44 +5,13 @@ import logo from "../../Assets/logo.png";
 import { Navigate } from "react-router-dom";
 import { errorState, userState } from "../../globalstate";
 import { login } from "../../Services/users";
+import StyledTextField from "../../Components/StyledTextField";
+
 const Login = () => {
   const [user, setUser] = useRecoilState(userState);
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [error, setError] = useRecoilState(errorState);
-
-  const paperStyle = {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-    height: "40vh",
-    width: "30vw",
-    color: "#1ba098",
-    background: "#051622",
-    border: "1px solid #deb992",
-    borderRadius: "5px",
-    display: "flex",
-    flexDirection: "column",
-  };
-  const avatarStyle = {
-    backgroundColor: "#1bbd7e",
-    height: "80px",
-    width: "80px",
-  };
-  const btnstyle = {
-    margin: "8px 0",
-    background: "#051622",
-    color: "#1ba098",
-    border: "1px solid #1ba098",
-    borderRadius: "5%",
-    width: "10vw",
-  };
-  const inputStyle = {
-    background: "#051622",
-    borderBottom: "1px solid #deb992",
-    marginBottom: "10px",
-    textAlign: "center",
-  };
 
   const handleLogin = async () => {
     if (username === "" || password === "") {
@@ -57,7 +26,6 @@ const Login = () => {
     if (!response) {
       setError({ isError: true, message: "No Response From Server" });
     } else if (response) {
-      console.log(response);
       setError({ isError: false, message: "" });
       setUser({
         isLoggedIn: true,
@@ -71,8 +39,6 @@ const Login = () => {
         companies: response.companies,
         teams: response.teams,
       });
-      //   setCompanies(response.companies);
-      //   setTeams(response.teams);
     }
   };
 
@@ -80,63 +46,89 @@ const Login = () => {
     return <Navigate replace to="/company" />;
   } else {
     return (
-      <Grid
+      <div
         style={{
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          background: "#051622",
-          color: "#1ba098",
           display: "flex",
           flexDirection: "column",
+          alignItems: "center",
+          gap: "50px",
+          height: "100vh",
+          padding: "50px 0",
+          background: "#051622",
+          color: "#1ba098",
         }}
       >
-        <Grid align="center">
+        <header style={headerStyle}>
           <Avatar style={avatarStyle} src={logo}></Avatar>
-          <h2>Cook Systems</h2>
-          <h3>A Final App</h3>
-        </Grid>
+          <h1 style={{ margin: 0, fontWeight: 300 }}>COOK SYSTEMS</h1>
+          <h2 style={{ fontSize: "2rem", fontWeight: 400 }}>A FINAL APP</h2>
+        </header>
         <Paper elevation={10} style={paperStyle}>
-          <TextField
+          <StyledTextField
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            sx={{ input: { color: "#1ba098" }, label: { color: "#1ba098" } }}
+            sx={{ width: "50%" }}
             id="username"
             label="Username"
             placeholder="Enter username"
             type="text"
+            variant="standard"
+            autoComplete="off"
             required
-            style={inputStyle}
           />
           <br />
-          <TextField
+          <StyledTextField
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            sx={{ input: { color: "#1ba098" }, label: { color: "#1ba098" } }}
+            sx={{ width: "50%" }}
             label="Password"
             placeholder="Enter password"
             type="password"
+            variant="standard"
             required
-            style={inputStyle}
           />
           <br />
-          <Button
+          <button
+            className="login-btn"
             type="submit"
             color="primary"
             variant="contained"
-            style={btnstyle}
-            pill="true"
             onClick={() => handleLogin()}
           >
             Login
-          </Button>
+          </button>
           {error.isError ? (
-            <p style={{ color: "red" }}>{error.message}</p>
+            <p style={{ color: "red", fontSize: "1.4rem", marginTop: "5px" }}>
+              {error.message}
+            </p>
           ) : null}
         </Paper>
-      </Grid>
+      </div>
     );
   }
 };
 
 export default Login;
+
+const headerStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "10px",
+};
+const paperStyle = {
+  justifyContent: "center",
+  alignItems: "center",
+  width: "clamp(30%, 400px, 90vw)",
+  padding: "100px 0",
+  color: "#1ba098",
+  background: "#051622",
+  border: "1px solid #deb992",
+  borderRadius: "10px",
+  display: "flex",
+  flexDirection: "column",
+};
+const avatarStyle = {
+  height: "100px",
+  width: "100px",
+};

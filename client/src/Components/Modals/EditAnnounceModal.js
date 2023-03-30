@@ -39,15 +39,15 @@ const EditAnnounceModal = ({ closeModal }) => {
       credentials,
       title: form.title,
       message: form.message,
-      companyId: app.viewCompanyId
+      companyId: app.viewCompanyId,
     };
 
-    editAnnouncement(id, requestObj).then(res => {
-      console.log("New announcement:", res);
+    editAnnouncement(id, requestObj).then((res) => {
+      //console.log("New announcement:", res);
 
       // Replace old version in announcement state array
       const filteredAnnouncements = announcements.filter(
-        announcement => announcement.id !== id
+        (announcement) => announcement.id !== id
       );
       setAnnouncements([...filteredAnnouncements, res]);
     });
@@ -87,5 +87,5 @@ const formStyle = {
   flexDirection: "column",
   gap: "20px",
   width: "clamp(20vw, 300px, 90vw)",
-  padding: "30px 30px 50px 30px"
+  padding: "30px 30px 50px 30px",
 };

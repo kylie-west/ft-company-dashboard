@@ -121,6 +121,7 @@ h1 {
   justify-content: center;
   align-items: center;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .header-w-subtitle-wrapper {
@@ -146,7 +147,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: min(800px, 100vw);
+  width: min(800px, 100%);
 }
 
 .project-card {
@@ -168,6 +169,7 @@ h1 {
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .project-details {
@@ -182,7 +184,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: min(800px, 100vw);
+  width: min(800px, 100%);
 }
 
 .user-table {
@@ -215,6 +217,7 @@ h1 {
   text-align: center;
   padding: 3rem;
   font-size: 20px;
+  overflow-x: auto;
 }
 
 .active {
@@ -341,6 +344,12 @@ h1 {
 .add-team-icon {
   font-size: 5rem !important;
   color: var(--secondary-accent);
+}
+
+.delete-member-icon {
+  font-size: 2.5rem !important;
+  color: var(--tertiary-accent);
+  cursor: pointer;
 }
 
 /* Announcements */
@@ -474,6 +483,25 @@ h1 {
   background: var(--tertiary-accent);
 }
 
+/* Login Page */
+
+.login-btn {
+  min-width: 150px;
+  padding: 10px 20px;
+  margin-top: 50px;
+  background: #051622;
+  font-size: 1.6rem;
+  color: white;
+  border: 1px solid var(--main-accent);
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: var(--main-accent);
+  color: white;
+}
+
 /* Media Queries */
 
 @media (max-width: 1860px) {
@@ -483,12 +511,16 @@ h1 {
 }
 
 @media (max-width: 750px) {
+  .go-back {
+    display: none;
+  }
+
   .announce-top h1 {
     grid-column: 1 / 2;
   }
 
   .page-body {
-    padding: 0;
+    /* padding: 0; */
   }
 
   .team-body {

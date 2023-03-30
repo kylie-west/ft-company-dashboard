@@ -17,8 +17,9 @@ import {
   Toolbar,
   Typography,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import logo from "../Assets/logo.png";
 
@@ -29,19 +30,21 @@ const NavBar = () => {
     top: false,
     left: false,
     bottom: false,
-    right: false
+    right: false,
   });
   const anchor = "top";
   const [toggled, setToggled] = React.useState(true);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const navigate = useNavigate();
 
   const logOut = () => {
     setUser({});
     setApp({});
+    navigate("/");
   };
 
-  const toggleDrawer = (anchor, open) => event => {
+  const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -57,18 +60,22 @@ const NavBar = () => {
     <Box
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
       <List
         style={{ textAlign: "center", background: "#051622" }}
-        sx={{ width: "100%" }}>
+        sx={{ width: "100%" }}
+      >
         {["Announcements", "Projects", "Teams", "Users"].map((text, index) => (
           <ListItem
             key={text}
             disablePadding
-            sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+            sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+          >
             <Link
               to={"/" + text.toLowerCase()}
-              style={{ textDecoration: "none", color: "black" }}>
+              style={{ textDecoration: "none", color: "black" }}
+            >
               <ListItemButton sx={{ width: "100%" }}>
                 <ListItemText
                   style={{ color: "#1ba098" }}
@@ -82,10 +89,12 @@ const NavBar = () => {
         <ListItem
           key={"logout"}
           disablePadding
-          sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+        >
           <ListItemButton
             sx={{ width: "100%", textAlign: "center" }}
-            onClick={logOut}>
+            onClick={logOut}
+          >
             <ListItemText
               style={{ color: "#1ba098" }}
               primary="Logout"
@@ -111,8 +120,9 @@ const NavBar = () => {
             height: "8vh",
             color: "#1ba098",
             background: "#051622",
-            padding: "0 1rem 0 2rem"
-          }}>
+            padding: "0 1rem 0 2rem",
+          }}
+        >
           <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
             <img
               src={logo}
@@ -124,8 +134,9 @@ const NavBar = () => {
                 style={{
                   color: "#F24E1E",
                   fontSize: "2rem",
-                  fontWeight: "400"
-                }}>
+                  fontWeight: "400",
+                }}
+              >
                 ADMIN
               </h1>
             ) : null}
@@ -144,7 +155,8 @@ const NavBar = () => {
           sx={{ transform: anchor === "top" && "translateY(8vh)" }}
           anchor={anchor}
           open={state[anchor]}
-          onClose={toggleDrawer(anchor, false)}>
+          onClose={toggleDrawer(anchor, false)}
+        >
           {list(anchor)}
         </Drawer>
       </>
@@ -160,15 +172,17 @@ const NavBar = () => {
               display: "flex",
               justifyContent: "space-between",
               height: "90px",
-              padding: "0"
-            }}>
+              padding: "0",
+            }}
+          >
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 gap: "2rem",
-                marginLeft: "2rem"
-              }}>
+                marginLeft: "2rem",
+              }}
+            >
               <img
                 src={logo}
                 alt="logo"
@@ -178,8 +192,9 @@ const NavBar = () => {
                 style={{
                   color: "#F24E1E",
                   fontSize: "2rem",
-                  fontWeight: "400"
-                }}>
+                  fontWeight: "400",
+                }}
+              >
                 {user.isAdmin
                   ? "ACTING AS ADMIN"
                   : user.profile.firstName +
@@ -205,8 +220,9 @@ const NavBar = () => {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-evenly",
-                maxHeight: "70px"
-              }}>
+                maxHeight: "70px",
+              }}
+            >
               {(user.isAdmin
                 ? ["Home", "Company", "Teams", "Users"]
                 : ["Home", "Teams"]
@@ -218,7 +234,8 @@ const NavBar = () => {
                         ? "/announcements"
                         : "/" + text.toLowerCase()
                     }
-                    style={{ textDecoration: "none", color: "black" }}>
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
                     <ListItemButton>
                       <ListItemText
                         style={{ color: "#1ba098" }}
@@ -233,9 +250,10 @@ const NavBar = () => {
                 <ListItemButton
                   sx={{
                     width: "100%",
-                    textAlign: "center"
+                    textAlign: "center",
                   }}
-                  onClick={logOut}>
+                  onClick={logOut}
+                >
                   <ListItemText
                     style={{ color: "#1ba098" }}
                     primaryTypographyProps={{ fontSize: "2rem" }}
