@@ -269,7 +269,9 @@ h1 {
   justify-content: center;
   justify-items: center;
   gap: 50px;
-  width: 70vw;
+  min-width: 50vw;
+  width: fit-content;
+  max-width: 70vw;
   margin: auto;
 }
 
@@ -278,6 +280,7 @@ h1 {
   background-color: var(--card-body);
   border-radius: 10px;
   width: clamp(30%, 400px, 90vw);
+  min-height: 300px;
 }
 
 .team-header {
@@ -304,7 +307,6 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
-  min-height: 200px;
   padding: 20px 40px;
   margin: 5px;
 }
@@ -315,6 +317,30 @@ h1 {
   text-align: center;
   background-color: var(--main-accent);
   border-radius: 15px;
+}
+
+.add-team-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: clamp(30%, 400px, 90vw);
+  height: 300px;
+  border: 1px solid var(--secondary-accent);
+  border-radius: 10px;
+  font-size: 1.6rem;
+  color: var(--secondary-accent);
+  cursor: pointer;
+}
+
+.add-team-btn:hover {
+  background: rgba(222, 185, 146, 0.1);
+}
+
+.add-team-icon {
+  font-size: 5rem !important;
+  color: var(--secondary-accent);
 }
 
 /* Announcements */

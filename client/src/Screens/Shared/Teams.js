@@ -5,10 +5,10 @@ import NavBar from "../../Components/NavBar";
 import { appState, teamState, userState } from "../../globalstate";
 import { getTeams } from "../../Services/teams";
 import { useEffect } from "react";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
-const Teams = ( { openModal } ) => {
-  const [app] = useRecoilState(appState)
+const Teams = ({ openModal }) => {
+  const [app] = useRecoilState(appState);
   const [user] = useRecoilState(userState);
   const [teams, setTeams] = useRecoilState(teamState);
 
@@ -35,8 +35,8 @@ const Teams = ( { openModal } ) => {
   ));
 
   const handleClick = e => {
-    openModal('create-team')
-  }
+    openModal("create-team");
+  };
 
   if (!user.isLoggedIn) {
     return <Navigate replace to="/" />;
@@ -50,7 +50,10 @@ const Teams = ( { openModal } ) => {
           <h1>Teams</h1>
           <div className="team-body">
             {ts}
-            <AddCircleOutlineIcon className="add-team-icon" onClick={handleClick}/>
+            <div className="add-team-btn" onClick={handleClick} role="button">
+              <AddCircleOutlineIcon className="add-team-icon" />
+              <span>New Team</span>
+            </div>
           </div>
         </div>
       </div>
