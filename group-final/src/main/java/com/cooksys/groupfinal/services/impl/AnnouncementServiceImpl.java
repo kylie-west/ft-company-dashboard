@@ -32,8 +32,10 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
     @Override
     public Set<AnnouncementDto> getAllAnnouncements() {
-        return announcementMapper.entitiesToDtos(new HashSet<>(announcementRepository.findAll()));
+        return announcementMapper.entitiesToDtos(new HashSet<>(announcementRepository.findAllByDeletedFalse()));
     }
+
+
 
     @Override
     public AnnouncementDto createAnnouncement(AnnouncementRequestDto announcementRequestDto) {
@@ -42,7 +44,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
                 .findByCredentialsUsernameAndActiveTrue(announcementRequestDto.getCredentials().getUsername())
                 .orElseThrow(() -> new NotFoundException("User not found"));
 
-        if (!author.getCredentials().getPassword().equals(announcementRequestDto.getCredentials().getPassword())) {
+        if (!author.isAdmin() || !author.getCredentials().getPassword().equals(announcementRequestDto.getCredentials().getPassword())) {
             throw new BadRequestException("Invalid credentials");
         }
 
@@ -57,27 +59,25 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         return announcementMapper.entityToDto(savedAnnouncement);
     }
 
+
     @Override
     public AnnouncementDto deleteAnnouncement(Long id, CredentialsDto credentialsDto) {
 
         User author = userRepository.findByCredentialsUsernameAndActiveTrue(credentialsDto.getUsername())
                 .orElseThrow(() -> new NotFoundException("User not found"));
 
-        if (!author.isAdmin() && !author.getCredentials().getPassword().equals(credentialsDto.getPassword())) {
+        if (!author.isAdmin() || !author.getCredentials().getPassword().equals(credentialsDto.getPassword())) {
             throw new BadRequestException("Invalid credentials");
         }
 
         Announcement announcement = announcementRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Announcement not found"));
 
-        if (author.isAdmin() || author.getId().equals(announcement.getAuthor().getId())) {
-            announcement.setDeleted(true);
-            Announcement savedAnnouncement = announcementRepository.save(announcement);
-            return announcementMapper.entityToDto(savedAnnouncement);
-        } else {
-            throw new BadRequestException("You are not authorized to delete this announcement");
-        }
+        announcement.setDeleted(true);
+        Announcement savedAnnouncement = announcementRepository.save(announcement);
+        return announcementMapper.entityToDto(savedAnnouncement);
     }
+
     
     @Override
     public AnnouncementDto editAnnouncement(Long id, AnnouncementRequestDto announcementRequestDto) {
@@ -85,23 +85,18 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         User author = userRepository.findByCredentialsUsernameAndActiveTrue(announcementRequestDto.getCredentials().getUsername())
                 .orElseThrow(() -> new NotFoundException("User not found"));
 
-        if (!author.isAdmin() && !author.getCredentials().getPassword().equals(announcementRequestDto.getCredentials().getPassword())) {
+        if (!author.isAdmin() || !author.getCredentials().getPassword().equals(announcementRequestDto.getCredentials().getPassword())) {
             throw new BadRequestException("Invalid credentials");
         }
 
         Announcement announcement = announcementRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Announcement not found"));
 
-        if (author.isAdmin() || author.getId().equals(announcement.getAuthor().getId())) {
-            announcement.setTitle(announcementRequestDto.getTitle());
-            announcement.setMessage(announcementRequestDto.getMessage());
-            
-            Announcement savedAnnouncement = announcementRepository.save(announcement);
-            return announcementMapper.entityToDto(savedAnnouncement);
-        } else {
-            throw new BadRequestException("You are not authorized to edit this announcement");
-        }
+        announcement.setTitle(announcementRequestDto.getTitle());
+        announcement.setMessage(announcementRequestDto.getMessage());
+
+        Announcement savedAnnouncement = announcementRepository.save(announcement);
+        return announcementMapper.entityToDto(savedAnnouncement);
     }
 
-    
 }
