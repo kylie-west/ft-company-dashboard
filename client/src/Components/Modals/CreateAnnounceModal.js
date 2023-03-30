@@ -6,22 +6,23 @@ import SubmitButton from "../SubmitButton";
 import { announcementsState, modalState } from "../../globalstate";
 import { createAnnouncement } from "../../Services/announcements";
 
-/**
- * @todo Form validation/error handling
- */
 const CreateAnnounceModal = ({ closeModal }) => {
   const [announcements, setAnnouncements] = useRecoilState(announcementsState);
   const [modal] = useRecoilState(modalState);
   const [form, setForm] = useState({ title: "", message: "" });
+  const [attemptedSubmit, setAttemptedSubmit] = useState(false);
 
   const { credentials, companyId } = modal.data;
 
   function handleChange(e) {
+    setAttemptedSubmit(false);
     setForm({ ...form, [e.target.id]: e.target.value });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
+    setAttemptedSubmit(true);
+
     if (!form.title.length || !form.message.length) {
       return;
     }
@@ -30,11 +31,10 @@ const CreateAnnounceModal = ({ closeModal }) => {
       credentials,
       title: form.title,
       message: form.message,
-      companyId,
+      companyId
     };
 
-    createAnnouncement(requestObj).then((res) => {
-      //console.log("New announcement:", res);
+    createAnnouncement(requestObj).then(res => {
       setAnnouncements([...announcements, res]);
     });
 
@@ -50,6 +50,7 @@ const CreateAnnounceModal = ({ closeModal }) => {
           value={form.title}
           label="title"
           variant="standard"
+          error={attemptedSubmit && !form.title.length}
           onChange={handleChange}
         />
         <StyledTextField
@@ -57,6 +58,7 @@ const CreateAnnounceModal = ({ closeModal }) => {
           value={form.message}
           label="message"
           variant="standard"
+          error={attemptedSubmit && !form.message.length}
           multiline
           onChange={handleChange}
         />
@@ -73,5 +75,5 @@ const formStyle = {
   flexDirection: "column",
   gap: "20px",
   width: "clamp(20vw, 300px, 90vw)",
-  padding: "30px 30px 50px 30px",
+  padding: "30px 30px 50px 30px"
 };
