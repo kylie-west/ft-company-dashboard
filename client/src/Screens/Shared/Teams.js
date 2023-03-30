@@ -13,6 +13,7 @@ const Teams = ({ openModal }) => {
   const [teams, setTeams] = useRecoilState(teamState);
 
   useEffect(() => {
+    if (!app.viewCompanyId) return;
     const getAllTeams = async () => {
       const data = await getTeams(app.viewCompanyId);
       //console.log(data);

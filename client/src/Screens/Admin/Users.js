@@ -13,6 +13,7 @@ const Users = ({ openModal }) => {
   const [users, setUsers] = useRecoilState(allUsersState);
 
   useEffect(() => {
+    if (!app.viewCompanyId) return;
     const getAllUsers = async () => {
       const response = await getCompanyUsers(app.viewCompanyId);
       setUsers(response.data);
