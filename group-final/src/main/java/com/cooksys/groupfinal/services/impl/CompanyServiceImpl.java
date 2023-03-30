@@ -96,12 +96,6 @@ public class CompanyServiceImpl implements CompanyService {
     if (!company.getTeams().contains(team)) {
       throw new NotFoundException("A team with id " + teamId + " does not exist at company with id " + companyId + ".");
     }
-    /*
-     * Set<Project> filteredProjects = new HashSet<>();
-     * team.getProjects().forEach(filteredProjects::add);
-     * filteredProjects.removeIf(project -> !project.isActive()); return
-     * projectMapper.entitiesToDtos(filteredProjects);
-     */
     return projectMapper.entitiesToDtos(team.getProjects());
   }
 
