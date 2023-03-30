@@ -35,34 +35,34 @@ const CreateTeamModal = () => {
     getAllUsers();
   }, []);
 
-  const options = availableUsers.map(member => (
-    <MenuItem key={member.id} value={member.id} style={{ fontSize: "1.6rem" }}>
+  const options = availableUsers.map((member) => (
+    <MenuItem key={member.id} value={member.id} style={{ fontSize: "1.4rem" }}>
       {member.profile.firstName + " " + member.profile.lastName}
     </MenuItem>
   ));
 
   function handleChange(e) {
-    console.log(e);
+    //console.log(e);
     const selectedId = e.target.value;
     setSelectedUsers([
       ...selectedUsers,
-      availableUsers.find(user => {
+      availableUsers.find((user) => {
         return user.id === selectedId;
-      })
+      }),
     ]);
-    setAvailableUsers(availableUsers.filter(user => user.id !== selectedId));
+    setAvailableUsers(availableUsers.filter((user) => user.id !== selectedId));
   }
 
   function handleRemove(e) {
-    console.log(e);
+    //console.log(e);
     const selectedId = e.id;
     setAvailableUsers([
       ...availableUsers,
-      selectedUsers.find(user => {
+      selectedUsers.find((user) => {
         return user.id === selectedId;
-      })
+      }),
     ]);
-    setSelectedUsers(selectedUsers.filter(user => user.id !== selectedId));
+    setSelectedUsers(selectedUsers.filter((user) => user.id !== selectedId));
   }
 
   async function handleSubmit() {
@@ -90,7 +90,7 @@ const CreateTeamModal = () => {
           label="Team Name"
           variant="standard"
           error={attemptedSubmit && name.length === 0}
-          onChange={e => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
           style={{ width: "100%" }}
         />
         <StyledTextField
@@ -99,20 +99,22 @@ const CreateTeamModal = () => {
           variant="standard"
           multiline
           error={attemptedSubmit && description.length === 0}
-          onChange={e => setDescription(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
           style={{ width: "100%" }}
         />
         <label
           style={{ fontSize: "2rem", color: "#deb992", marginTop: "20px" }}
-          for="members">
+          htmlFor="members"
+        >
           Select Members
         </label>
         {availableUsers.length > 0 && (
           <Select
             name="members"
             value={""}
-            onChange={event => handleChange(event)}
-            sx={selectStyle}>
+            onChange={(event) => handleChange(event)}
+            sx={selectStyle}
+          >
             {options}
           </Select>
         )}
@@ -124,9 +126,10 @@ const CreateTeamModal = () => {
           flexDirection: "column",
           gap: "10px",
           marginBottom: "50px",
-          width: "200px"
-        }}>
-        {selectedUsers.map(u => (
+          width: "200px",
+        }}
+      >
+        {selectedUsers.map((u) => (
           <div style={selectedUserStyle}>
             <div className="team-pill">
               <span key={u.id}>
@@ -154,18 +157,18 @@ const formStyle = {
   alignItems: "center",
   gap: "20px",
   width: "clamp(20vw, 300px, 90vw)",
-  padding: "30px"
+  padding: "30px",
 };
 
 const selectStyle = {
   width: "200px",
   backgroundColor: "white",
   borderRadius: "10px",
-  fontSize: "1.6rem"
+  fontSize: "1.6rem",
 };
 
 const selectedUserStyle = {
   display: "flex",
   alignItems: "center",
-  gap: "5px"
+  gap: "5px",
 };

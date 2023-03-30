@@ -10,7 +10,11 @@ const CompanyScreen = () => {
   const navigate = useNavigate();
 
   const options = companies.map((company) => (
-    <MenuItem key={company.id} value={company.id.toString()}>
+    <MenuItem
+      sx={{ fontSize: "16px" }}
+      key={company.id}
+      value={company.id.toString()}
+    >
       {company.name}
     </MenuItem>
   ));
@@ -24,7 +28,7 @@ const CompanyScreen = () => {
     backgroundColor: "white",
     borderRadius: "6px",
     fontSize: "16px",
-    minWidth: "120px",
+    minWidth: "140px",
   };
 
   if (!user.isLoggedIn) {
