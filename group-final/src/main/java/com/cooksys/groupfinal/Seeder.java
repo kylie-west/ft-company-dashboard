@@ -256,7 +256,7 @@ public class Seeder implements CommandLineRunner {
 		company2.setName("Cook Systems");
 		company2.setDescription("We are Cook Systems.");
 		company2.setAnnouncements(new HashSet<Announcement>(Arrays.asList(announcement3)));
-		company2.setEmployees(new HashSet<User>(Arrays.asList(user10, user11, user12)));
+		company2.setEmployees(new HashSet<User>(Arrays.asList(user10, user11, user12, user6)));
 		company2.setTeams(new HashSet<Team>(Arrays.asList(team7)));
 
 		project1.setName("Brightstar Theme Park Expansion");
@@ -289,13 +289,13 @@ public class Seeder implements CommandLineRunner {
 		team3.setName("Team 3");
 		team3.setDescription("Roman & Gerri");
 		team3.setCompany(company1);
-		team3.setTeammates(new HashSet<User>(Arrays.asList(user4, user9)));
+		team3.setTeammates(new HashSet<User>(Arrays.asList(user4, user9, user6)));
 		team3.setProjects(new HashSet<Project>(Arrays.asList(project3)));
 
 		team4.setName("Team 4");
 		team4.setDescription("Greg & Kendall");
 		team4.setCompany(company1);
-		team4.setTeammates(new HashSet<User>(Arrays.asList(user1, user3)));
+		team4.setTeammates(new HashSet<User>(Arrays.asList(user1, user3, user6)));
 
 		team5.setName("Team 5");
 		team5.setDescription("Logan & Marcia");
@@ -329,7 +329,7 @@ public class Seeder implements CommandLineRunner {
 		user5.setCompanies(new HashSet<Company>(Arrays.asList(company1)));
 		user5.setTeams(new HashSet<Team>(Arrays.asList(team2, team6)));
 
-		user6.setCompanies(new HashSet<Company>(Arrays.asList(company1)));
+		user6.setCompanies(new HashSet<Company>(Arrays.asList(company1, company2)));
 		user6.setTeams(new HashSet<Team>(Arrays.asList(team5)));
 
 		user7.setCompanies(new HashSet<Company>(Arrays.asList(company1)));
