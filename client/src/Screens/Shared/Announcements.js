@@ -82,6 +82,8 @@ const Announcements = ({ openModal }) => {
 
   if (!user.isLoggedIn) {
     return <Navigate replace to="/" />;
+  } else if (!app.viewCompanyId) {
+    return <Navigate replace to="/company" />;
   } else {
     return (
       <div className="page">
