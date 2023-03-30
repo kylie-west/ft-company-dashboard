@@ -146,7 +146,7 @@ public class UserServiceImpl implements UserService {
 				} else {
 					throw new BadRequestException("Given Username is already in use.");
 				}
-			}			
+			}
 		}
 
 		if (userAddRequestDto.getUser().getCredentials().getPassword() != null) {
@@ -190,11 +190,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public BasicUserDto createUser(UserAddRequestDto userAddRequestDto, Long companyId) {
 		verifyAdmin(userAddRequestDto.getCredentials());
-		
-		if(userAddRequestDto.getUser().getCredentials().getUsername() == null || userAddRequestDto.getUser().getCredentials().getPassword() == null) {
+
+		if (userAddRequestDto.getUser().getCredentials().getUsername() == null
+				|| userAddRequestDto.getUser().getCredentials().getPassword() == null) {
 			throw new BadRequestException("A username and password for the new user are required.");
 		}
-		
+
 		User userToAdd = fullUserMapper.requestDtoToEntity(userAddRequestDto.getUser());
 
 		// Check that the request has a username to change to

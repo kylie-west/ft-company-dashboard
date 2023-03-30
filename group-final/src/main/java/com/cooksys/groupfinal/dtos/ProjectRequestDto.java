@@ -12,7 +12,7 @@ public class ProjectRequestDto {
   private String description;
 
   private TeamDto team;
-  
+
   private boolean active;
 
   private CredentialsDto credentials;

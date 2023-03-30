@@ -35,8 +35,6 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         return announcementMapper.entitiesToDtos(new HashSet<>(announcementRepository.findAllByDeletedFalse()));
     }
 
-
-
     @Override
     public AnnouncementDto createAnnouncement(AnnouncementRequestDto announcementRequestDto) {
 
@@ -44,7 +42,8 @@ public class AnnouncementServiceImpl implements AnnouncementService {
                 .findByCredentialsUsernameAndActiveTrue(announcementRequestDto.getCredentials().getUsername())
                 .orElseThrow(() -> new NotFoundException("User not found"));
 
-        if (!author.isAdmin() || !author.getCredentials().getPassword().equals(announcementRequestDto.getCredentials().getPassword())) {
+        if (!author.isAdmin() || !author.getCredentials().getPassword()
+                .equals(announcementRequestDto.getCredentials().getPassword())) {
             throw new BadRequestException("Invalid credentials");
         }
 
@@ -58,7 +57,6 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         Announcement savedAnnouncement = announcementRepository.save(announcement);
         return announcementMapper.entityToDto(savedAnnouncement);
     }
-
 
     @Override
     public AnnouncementDto deleteAnnouncement(Long id, CredentialsDto credentialsDto) {
@@ -78,14 +76,15 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         return announcementMapper.entityToDto(savedAnnouncement);
     }
 
-    
     @Override
     public AnnouncementDto editAnnouncement(Long id, AnnouncementRequestDto announcementRequestDto) {
 
-        User author = userRepository.findByCredentialsUsernameAndActiveTrue(announcementRequestDto.getCredentials().getUsername())
+        User author = userRepository
+                .findByCredentialsUsernameAndActiveTrue(announcementRequestDto.getCredentials().getUsername())
                 .orElseThrow(() -> new NotFoundException("User not found"));
 
-        if (!author.isAdmin() || !author.getCredentials().getPassword().equals(announcementRequestDto.getCredentials().getPassword())) {
+        if (!author.isAdmin() || !author.getCredentials().getPassword()
+                .equals(announcementRequestDto.getCredentials().getPassword())) {
             throw new BadRequestException("Invalid credentials");
         }
 

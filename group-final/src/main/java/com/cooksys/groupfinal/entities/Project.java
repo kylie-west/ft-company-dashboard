@@ -12,17 +12,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Project {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String name;
-	
+
 	private String description;
-	
+
 	private boolean active = true;
-	
+
 	@ManyToOne
 	private Team team;
 

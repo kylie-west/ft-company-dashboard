@@ -43,12 +43,11 @@ public class AnnouncementController {
 			@RequestBody CredentialsDto credentialsDto) {
 		return ResponseEntity.ok(announcementService.deleteAnnouncement(id, credentialsDto));
 	}
-	
+
 	@PatchMapping("/{id}")
-	public ResponseEntity<AnnouncementDto> editAnnouncement(@PathVariable Long id, @RequestBody AnnouncementRequestDto announcementRequestDto) {
-	    return ResponseEntity.ok(announcementService.editAnnouncement(id, announcementRequestDto));
+	public ResponseEntity<AnnouncementDto> editAnnouncement(@PathVariable Long id,
+			@RequestBody AnnouncementRequestDto announcementRequestDto) {
+		return ResponseEntity.ok(announcementService.editAnnouncement(id, announcementRequestDto));
 	}
-
-
 
 }

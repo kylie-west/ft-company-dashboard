@@ -72,7 +72,7 @@ public class CompanyServiceImpl implements CompanyService {
     Company company = findCompany(id);
     List<Announcement> sortedList = new ArrayList<>();
     company.getAnnouncements().forEach(e -> {
-      if(e.isDeleted() == false)
+      if (e.isDeleted() == false)
         sortedList.add(e);
     });
     sortedList.sort(Comparator.comparing(Announcement::getDate).reversed());

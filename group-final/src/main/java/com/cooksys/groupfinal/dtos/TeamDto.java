@@ -8,15 +8,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class TeamDto {
-	
-	private Long id;
-    
+
+    private Long id;
+
     private String name;
-    
+
     private String description;
-    
+
     private boolean active;
-    
+
     private Set<BasicUserDto> teammates;
 
 }
