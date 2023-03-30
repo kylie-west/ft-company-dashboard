@@ -5,6 +5,7 @@ import StyledTextField from "../StyledTextField";
 import {postUser} from "../../Services/users";
 import {useRecoilState} from "recoil";
 import {allUsersState, appState, modalState, userState} from "../../globalstate";
+import {MenuItem, Select} from "@mui/material";
 
 const AddUserModal = () => {
     const [app] = useRecoilState(appState);
@@ -64,6 +65,13 @@ const AddUserModal = () => {
         setUsers([...users, response]);
         setModal({isOpen: false, type: "", data: {}});
     }
+
+    const selectStyle = {
+        backgroundColor: "white",
+        borderRadius: "6px",
+        fontSize: "1.4rem",
+        minWidth: "120px",
+    };
 
     return (
         <div className="modal-body">
@@ -134,13 +142,30 @@ const AddUserModal = () => {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                 </div>
-            </FormControl>
-            {/*<label>Make user an admin role?</label>
+                {/*<label>Make user an admin role?</label>
             <select>
                 <option value="" disabled selected hidden>Pick an option</option>
                 <option>true</option>
                 <option>false</option>
             </select>*/}
+                <h3>Make user an admin role?</h3>
+                <Select
+                    defaultValue={isAdmin}
+                    onChange={(e) => {
+                        setIsAdmin(e.target.value);
+                    }}
+                    sx={selectStyle}
+                >
+                    <MenuItem sx={{fontSize: "1.4rem"}} value={true}>
+                        {" "}
+                        true
+                    </MenuItem>
+                    <MenuItem sx={{fontSize: "1.4rem"}} value={false}>
+                        {" "}
+                        false
+                    </MenuItem>
+                </Select>
+            </FormControl>
             <SubmitButton handleSubmit={handleSubmit}/>
         </div>
     );
