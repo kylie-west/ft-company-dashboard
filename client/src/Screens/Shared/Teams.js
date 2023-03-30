@@ -40,7 +40,7 @@ const Teams = ({ openModal }) => {
 
   if (!user.isLoggedIn) {
     return <Navigate replace to="/" />;
-  } else if (app.viewCompanyId === undefined) {
+  } else if (!app.viewCompanyId) {
     return <Navigate replace to="/company" />;
   } else {
     return (
