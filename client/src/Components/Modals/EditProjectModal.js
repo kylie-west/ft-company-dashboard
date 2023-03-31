@@ -20,6 +20,7 @@ const EditProjectModal = ({ closeModal }) => {
 
   useEffect(() => {
     setForm({ title, message });
+    setSelect(active);
   }, []);
 
   useEffect(() => {
@@ -100,11 +101,9 @@ const EditProjectModal = ({ closeModal }) => {
               sx={selectStyle}
             >
               <MenuItem sx={{ fontSize: "1.4rem" }} value={true}>
-                {" "}
                 Yes
               </MenuItem>
               <MenuItem sx={{ fontSize: "1.4rem" }} value={false}>
-                {" "}
                 No
               </MenuItem>
             </Select>

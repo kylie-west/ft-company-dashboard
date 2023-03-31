@@ -242,6 +242,7 @@ h2 {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  align-self: flex-end;
   width: min-content;
   gap: 1rem;
 }
