@@ -67,8 +67,8 @@ const NavBar = () => {
         sx={{ width: "100%" }}
       >
         {(user.isAdmin
-          ? ["Announcements", "Projects", "Teams", "Users"]
-          : ["Announcements", "Projects", "Teams"]
+          ? ["Home", "Company", "Teams", "Users"]
+          : ["Home", "Teams"]
         ).map((text, index) => (
           <ListItem
             key={text}
@@ -81,7 +81,11 @@ const NavBar = () => {
             }}
           >
             <Link
-              to={"/" + text.toLowerCase()}
+              to={
+                text.toLowerCase() === "home"
+                  ? "/announcements"
+                  : "/" + text.toLowerCase()
+              }
               style={{ textDecoration: "none", color: "black" }}
             >
               <ListItemButton sx={{ width: "100%" }}>

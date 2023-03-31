@@ -549,6 +549,10 @@ h2 {
     grid-column: 1 / 2;
   }
 
+  .announce-top.not-admin {
+    display: block;
+  }
+
   .page-body {
     /* padding: 0; */
   }

@@ -27,7 +27,7 @@ const Announcements = ({ openModal }) => {
     //console.log("After sorting:", sortedAnnouncements);
   }, [announcements]);
 
-  const sortByDate = arr => {
+  const sortByDate = (arr) => {
     const array = [...arr];
 
     function compare(a, b) {
@@ -43,40 +43,40 @@ const Announcements = ({ openModal }) => {
     return array.sort(compare);
   };
 
-  const formatDate = date =>
+  const formatDate = (date) =>
     date.toLocaleDateString("en-us", {
       month: "long",
       day: "numeric",
-      year: "numeric"
+      year: "numeric",
     });
 
   const getAuthorName = ({ firstName, lastName }) => {
     return firstName + " " + lastName[0] + ".";
   };
 
-  const handleClickNew = e => {
+  const handleClickNew = (e) => {
     e.preventDefault();
     const data = {
       credentials: { username: user.username, password: user.password },
-      companyId: app.viewCompanyId
+      companyId: app.viewCompanyId,
     };
     openModal("create-announcement", data);
   };
 
-  const handleClickEdit = announcement => {
+  const handleClickEdit = (announcement) => {
     const data = {
       id: announcement.id,
       credentials: { username: user.username, password: user.password },
       title: announcement.title,
-      message: announcement.message
+      message: announcement.message,
     };
     openModal("edit-announcement", data);
   };
 
-  const handleClickDelete = announcement => {
+  const handleClickDelete = (announcement) => {
     const data = {
       id: announcement.id,
-      credentials: { username: user.username, password: user.password }
+      credentials: { username: user.username, password: user.password },
     };
     openModal("delete-announcement", data);
   };
@@ -90,7 +90,7 @@ const Announcements = ({ openModal }) => {
       <div className="page">
         <NavBar />
         <div className="announce-wrapper">
-          <div className="announce-top">
+          <div className={`announce-top${!user.isAdmin ? " not-admin" : ""}`}>
             <h1>Announcements</h1>
             {user.isAdmin && (
               <button onClick={handleClickNew} className="announce-btn">
@@ -99,12 +99,13 @@ const Announcements = ({ openModal }) => {
             )}
           </div>
           <div className="announce-list">
-            {sortedAnnouncements.map(announcement => (
+            {sortedAnnouncements.map((announcement) => (
               <article
                 key={announcement.id}
                 className={`announce-card${
                   user.id === announcement.author.id ? " isAuthor" : ""
-                }`}>
+                }`}
+              >
                 {user.id === announcement.author.id ? (
                   <div className="announce-options">
                     <EditIcon
