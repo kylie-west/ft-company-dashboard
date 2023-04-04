@@ -16,15 +16,12 @@ const Announcements = ({ openModal }) => {
   useEffect(() => {
     if (!app.viewCompanyId) return;
     getAnnouncements(app.viewCompanyId).then((res) => {
-      //console.log(res);
       setAnnouncements(res);
     });
   }, []);
 
   useEffect(() => {
     setSortedAnnouncements(sortByDate(announcements));
-    //console.log("Before sorting:", announcements);
-    //console.log("After sorting:", sortedAnnouncements);
   }, [announcements]);
 
   const sortByDate = (arr) => {
